@@ -191,10 +191,19 @@ body {
 }
 
 @media print {
+  .sidebar{
+    width: 0px!important;
+    height: 0px!important;
+    overflow: hidden !important;
+    display: none !important;
+  }
   #sidenav {
     width: 0 !important;
     height: 0 !important;
     overflow: hidden !important;
     display: none !important;
+  }
+  .page-content-panel-inner{
+    width: 100%!important;
   }
 }
