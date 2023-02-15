@@ -1,0 +1,186 @@
+<!-- <div class="row">
+    <div class="col-md-12 p-3">
+        <button type="submit" class="back-btn btn mr-2 mt-2 mb-2" [routerLink]="'/booking-user/bookings'"> <i class="fa fa-arrow-left" aria-hidden="true"></i> Back to list</button>
+    </div>
+</div> -->
+
+<section class="hero-header-user">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 col-sm-12 col-xs-12">
+        <div class="header-title wow fadeInUp">
+          <button type="submit" class="back-btn btn mr-2 mt-2 mb-2 float-right" [routerLink]="'/booking-user/bookings'">
+            <i class="fa fa-arrow-left" aria-hidden="true"></i> Back to list</button>
+          <h1>Booking Reference: {{booking.pnr}}</h1>
+        </div>
+      </div>
+      <!-- <div *ngIf="isBack" class="col-lg-2 col-sm-2 col-xs-2">
+                <div class="header-title wow fadeInUp">
+                    <button [routerLinkActive]="['active']" (click)="setTitle('Bookings')" [routerLink]="['/booking-user/bookings']">Back</button>
+                </div>
+            </div> -->
+    </div>
+  </div>
+</section>
+<div class="main-content">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="row">
+        <div class="col-md grid">
+          <span class="font-weight-bold">Booking Date</span> : {{booking.createdOn | date:'longDate'}}
+        </div>
+        <div class="col-md grid">
+          <span class="font-weight-bold">Lead Passenger</span> : {{trip.contactInfo.firstName}}
+          {{trip.contactInfo.lastName}}
+        </div>
+        <div class="col-md grid">
+          <span class="font-weight-bold">Booking Stage</span> : {{getBookingStatus(booking.status)}}
+        </div>
+        <div class="col-md grid">
+          <span class="font-weight-bold">Payment Method</span> : {{getPaymentType(booking.paymentType)}}
+        </div>
+        <div class="col-md grid">
+          <span class="font-weight-bold">Payment Status</span> : {{getPaymentStatus(booking.paymentStatus)}}
+        </div>
+        <div class="col-md-12">
+          <button type="submit" class="custom-sign-btn btn mr-2 mt-2 mb-2" (click)="requestClick()"> Request Reschedule
+          </button>
+          <button type="submit" class="custom-sign-btn btn mr-2 mt-2 mb-2" (click)="requestClick()"> Request Cancelation
+          </button>
+          <button type="submit" class="custom-sign-btn btn mr-2 mt-2 mb-2" (click)="requestClick()"> Add Payment
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12 flights-detail">
+      <p>Flight Details</p>
+    </div>
+  </div>
+
+  <div class="table-responsive">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">Airline</th>
+          <th scope="col">Departure</th>
+          <th scope="col">Arrival</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let flight of flightSegments; let in = index">
+          <td>
+            {{trip.airline}}
+          </td>
+          <td>
+            {{flight.departureDateTime | date:'medium'}}
+          </td>
+          <td>
+            {{flight.arrivalDateTime | date:'medium'}}
+          </td>
+        </tr>
+        <!-- <tr>
+                    <td>Turkish Airline</td>
+                    <td>13 May 2020 - 13:05</td>
+                    <td>13 May 2020 - 18:05</td>
+                </tr> -->
+      </tbody>
+    </table>
+  </div>
+  <div class="row">
+    <div class="col-md-12 flights-detail">
+      <p>Traveler Details</p>
+    </div>
+  </div>
+  <div class="table-responsive mb-5">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">Full Name</th>
+          <th scope="col">Gender</th>
+          <th scope="col">Phone</th>
+          <th scope="col">Date of birth</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let passenger of trip.passengerInfos; let in = index">
+          <td>
+            {{passenger.firstName}} {{passenger.lastName}}
+          </td>
+          <td>
+            {{passenger.gender}}
+          </td>
+          <td>
+            {{passenger.phone}}
+          </td>
+          <td>
+            {{passenger.dateOfBirth | date:'longDate'}}
+          </td>
+        </tr>
+        <!-- <tr>
+                    <th>Manoj Tyagi</th>
+                    <td>Male</td>
+                    <td>+1 999-999-9999</td>
+                    <td>01/01/1990</td>
+                </tr> -->
+      </tbody>
+    </table>
+  </div>
+  <!-- <div class="row">
+        <div class="col-12">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Airline</th>
+                        <th>Departure</th>
+                        <th>Arrival</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let flight of trip.flightSegments; let in = index">
+                        <td>
+                            {{flight.airline}}
+                        </td>
+                        <td>
+                            {{flight.departureDateTime}}
+                        </td>
+                        <td>
+                            {{flight.arrivalDateTime}}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="row">
+            <div class="col-12">
+
+
+                <table>
+                    <thead>
+                        <th>Name</th>
+                        <th>Gender</th>
+                        <th>Phone</th>
+                        <th>Date of birth</th>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let passenger of trip.passengerInfos; let in = index">
+                            <td>
+                                {{passenger.firstName}}
+                            </td>
+                            <td>
+                                {{passenger.gender}}
+                            </td>
+                            <td>
+                                {{passenger.dateOfBirth}}
+                            </td>
+                            <td>
+                                {{passenger.dateOfBirth}}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div> -->

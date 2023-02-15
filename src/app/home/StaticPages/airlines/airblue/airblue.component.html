@@ -1,0 +1,404 @@
+<app-shared-search-results (searchResultEvent)="searchResultss($event)" ></app-shared-search-results>
+<div class="content hero-blog2" *ngIf="isShowContent">
+  <div class="container">
+    <h1 class="text-center pt-3" >
+      <strong>Airblue Best Offers</strong>
+    </h1>
+    <div class="row" *ngFor="let flight of searchResult.flights | slice:0:1;let i=index">
+      <div class="flt-details wow fadeIn">
+        <div class="flight-logo">
+          <h2 class="text-center" style="color: #57b957" *ngIf="!flight?.airlineLogo">
+            {{ flight?.airline }}
+          </h2>
+          <img [src]="'assets/images/search/' + flight?.airlineLogo" class="img-fluid" alt=""
+            *ngIf="flight?.airlineLogo" />
+        </div>
+        <div class="flight-cont">
+          <div class="flt-cont-box">
+            <div class="flt-date">
+              <h5>
+                {{ flight?.flightMini.departure.departureDateTimeFormat }}
+              </h5>
+              <p>{{ flight?.flightMini.departure.originLocation }}</p>
+              <p>{{ flight?.flightMini.departure.departureDateFormat }}</p>
+            </div>
+            <div class="flt-arrow">
+              <p>{{ flight?.elapsedTime }}</p>
+              <img src="assets/images/search/arrow-first.png" class="img-fluid" alt=""
+                pTooltip="{{flight?.flightMini.departure.changePlanesNote}}" />
+              <p>{{ flight?.flightMini.departure.travelRoute }}</p>
+            </div>
+            <div class="flt-date">
+              <h5>
+                {{ flight?.flightMini.departure.arrivalDateTimeFormat }}
+              </h5>
+              <p>{{ flight?.flightMini.departure.destinationLocation }}</p>
+              <p>{{ flight?.flightMini.departure.arrivalDateFormat }}</p>
+            </div>
+          </div>
+          <div class="flt-cont-box flt-cont-box-2"
+            *ngIf="flight?.tripType == 'Return' && flight?.flightMini.return">
+            <div class="flt-date">
+              <h5>
+                {{ flight?.flightMini.return.departureDateTimeFormat }}
+              </h5>
+              <p>{{ flight?.flightMini.return.originLocation }}</p>
+              <p>{{ flight?.flightMini.return.departureDateFormat }}</p>
+            </div>
+            <div class="flt-arrow">
+              <p>{{ flight?.flightMini.return.totalDuration }}</p>
+              <img src="assets/images/search/arrow-second.png" class="img-fluid" alt="" />
+              <p>{{ flight?.flightMini.return.travelRoute }}</p>
+            </div>
+            <div class="flt-date">
+              <h5>{{ flight?.flightMini.return.arrivalDateTimeFormat }}</h5>
+              <p>{{ flight?.flightMini.return.destinationLocation }}</p>
+              <p>{{ flight?.flightMini.return.arrivalDateFormat }}</p>
+            </div>
+          </div>
+        </div>
+        <div class="flt-pkr">
+          <h5>{{ flight?.currencyCode }} {{ flight?.totalFare | number }}</h5>
+          <div *ngIf="flight.airlineType ==='sabre'">
+            <div class="flt-pkr-btn" >
+              <a (click)="reviewBooking(flight,-1)" style="cursor: pointer">Book Now</a>
+              <div class="flt-arrowbtn">
+                <svg width="8" height="14" viewBox="0 0 8 14" xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd" clip-rule="evenodd"
+                    d="M0.292893 1.70712C-0.0976311 1.3166 -0.0976311 0.683433 0.292893 0.292909C0.683418 -0.0976158 1.31658 -0.0976158 1.70711 0.292909L7.70711 6.29291C8.09763 6.68343 8.09763 7.3166 7.70711 7.70712L1.70711 13.7071C1.31658 14.0976 0.683417 14.0976 0.292893 13.7071C-0.0976316 13.3166 -0.0976316 12.6834 0.292893 12.2929L5.58579 7.00002L0.292893 1.70712Z" />
+                </svg>
+              </div>
+            </div>
+            <div class="flt-pkr-btn switch" *ngIf="flight?.childs?.length > 0">
+              <a data-toggle="collapse" href="#collapseExample{{i}}"
+                style="cursor: pointer">{{flight?.childs?.length}} more
+                option available
+              </a>
+            </div>
+          </div>                
+            <div class="flt-pkr-btn switch" *ngIf="flight.airlineType === 'LCC'">
+              <a data-toggle="collapse" href="#collapseBudgetAirline{{i}}"
+                style="cursor: pointer">View Prices
+              </a>
+              <div class="flt-arrowbtn">
+                <svg width="8" height="14" viewBox="0 0 8 14" xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd" clip-rule="evenodd"
+                    d="M0.292893 1.70712C-0.0976311 1.3166 -0.0976311 0.683433 0.292893 0.292909C0.683418 -0.0976158 1.31658 -0.0976158 1.70711 0.292909L7.70711 6.29291C8.09763 6.68343 8.09763 7.3166 7.70711 7.70712L1.70711 13.7071C1.31658 14.0976 0.683417 14.0976 0.292893 13.7071C-0.0976316 13.3166 -0.0976316 12.6834 0.292893 12.2929L5.58579 7.00002L0.292893 1.70712Z" />
+                </svg>
+              </div>
+
+            </div>
+        </div>
+      </div>
+      <div class="col-md-12 collapse p-0" id="collapseBudgetAirline{{i}}">
+        <div class="flt-details wow fadeIn child" *ngFor="let farePrice of flight.farePrices;let i = index">
+          <div class="flight-logo">
+            <h1 style="color: #57b957;" >
+              <img [src]="'assets/images/search/' + flight?.airlineLogo" class="img-fluid" alt=""
+                *ngIf="flight?.airlineLogo" />
+            </h1>
+          </div>
+          <div class="flight-cont">
+            <h3>
+              {{ farePrice.familyName }}
+            </h3> 
+            <!-- <p>{{ farePrice.familyDescription }}</p> -->
+          </div>
+          <div class="flt-pkr">
+            <h5>{{ farePrice.currencyCode }} {{ farePrice.grandTotal | number }}</h5>
+            <div class="flt-pkr-btn">
+              <a (click)="reviewBooking(flight,i)" style="cursor: pointer">Book Now</a>
+              <div class="flt-arrowbtn">
+                <svg width="8" height="14" viewBox="0 0 8 14" xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd" clip-rule="evenodd"
+                    d="M0.292893 1.70712C-0.0976311 1.3166 -0.0976311 0.683433 0.292893 0.292909C0.683418 -0.0976158 1.31658 -0.0976158 1.70711 0.292909L7.70711 6.29291C8.09763 6.68343 8.09763 7.3166 7.70711 7.70712L1.70711 13.7071C1.31658 14.0976 0.683417 14.0976 0.292893 13.7071C-0.0976316 13.3166 -0.0976316 12.6834 0.292893 12.2929L5.58579 7.00002L0.292893 1.70712Z" />
+                </svg>
+              </div>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+      <div class="col-md-12 collapse p-0 " id="collapseExample{{i}}">
+        <div class="flt-details wow fadeIn child" *ngFor="let child of flight?.childs">
+          <div class="flight-logo">
+            <h2 class="text-center" style="color: #57b957" *ngIf="!child.airlineLogo">
+              {{ child.airline }}
+            </h2>
+            <img [src]="'assets/images/search/' + child.airlineLogo" class="img-fluid-Logo" alt=""
+              *ngIf="child.airlineLogo" />
+          </div>
+          <div class="flight-cont">
+            <div class="flt-cont-box">
+              <div class="flt-date">
+                <h5>
+                  {{ child.flightMini.departure.departureDateTimeFormat }}
+                </h5>
+                <p>{{ child.flightMini.departure.originLocation }}</p>
+                <p>{{ child.flightMini.departure.departureDateFormat }}</p>
+              </div>
+              <div class="flt-arrow">
+                <p>{{ child.flightMini.departure.totalDuration }}</p>
+                <img src="assets/images/search/arrow-first.png" class="img-fluid" alt="" />
+                <p>{{ child.flightMini.departure.travelRoute }}</p>
+              </div>
+              <div class="flt-date">
+                <h5>
+                  {{ child.flightMini.departure.arrivalDateTimeFormat }}
+                </h5>
+                <p>{{ child.flightMini.departure.destinationLocation }}</p>
+                <p>{{ child.flightMini.departure.arrivalDateFormat }}</p>
+              </div>
+            </div>
+            <div class="flt-cont-box flt-cont-box-2"
+              *ngIf="child.tripType == 'Return' && child.flightMini.return">
+              <div class="flt-date">
+                <h5>
+                  {{ child.flightMini.return.departureDateTimeFormat }}
+                </h5>
+                <p>{{ child.flightMini.return.originLocation }}</p>
+                <p>{{ child.flightMini.return.departureDateFormat }}</p>
+              </div>
+              <div class="flt-arrow">
+                <p>{{ child.flightMini.return.totalDuration }}</p>
+                <img src="assets/images/search/arrow-second.png" class="img-fluid" alt="" />
+                <p>{{ child.flightMini.return.travelRoute }}</p>
+              </div>
+              <div class="flt-date">
+                <h5>{{ child.flightMini.return.arrivalDateTimeFormat }}</h5>
+                <p>{{ child.flightMini.return.destinationLocation }}</p>
+                <p>{{ child.flightMini.return.arrivalDateFormat }}</p>
+              </div>
+            </div>
+          </div>
+          <div class="flt-pkr">
+            <h5>{{ child.currencyCode }} {{ child.totalFare | number }}</h5>
+            <div class="flt-pkr-btn">
+              <a (click)="reviewBooking(child,-1)" style="cursor: pointer">Book Now</a>
+              <div class="flt-arrowbtn">
+                <svg width="8" height="14" viewBox="0 0 8 14" xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd" clip-rule="evenodd"
+                    d="M0.292893 1.70712C-0.0976311 1.3166 -0.0976311 0.683433 0.292893 0.292909C0.683418 -0.0976158 1.31658 -0.0976158 1.70711 0.292909L7.70711 6.29291C8.09763 6.68343 8.09763 7.3166 7.70711 7.70712L1.70711 13.7071C1.31658 14.0976 0.683417 14.0976 0.292893 13.7071C-0.0976316 13.3166 -0.0976316 12.6834 0.292893 12.2929L5.58579 7.00002L0.292893 1.70712Z" />
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <P>Airblue Limited is the well-known name of a private aviation company in Pakistan. It is the most trusted and
+      low-cost airline that claims to offer world-class services to passengers at the most affordable rates. The
+      headquarters of the company is located on the Islamabad stock exchange. It runs various domestic and international
+      flights to UAE, Saudi Arabia, and to other middle cities too on a regular basis</P>
+    <p>The airline commenced operations in 2003. From the beginning of its operations, they have offered stiff
+      competition to other aviation companies in the country with its unrivaled services. Self-check-in kiosks,
+      e-ticketing, and other modern conveniences are the initiatives introduced by this airline in Pakistan.</p>
+    <p>The popularity of the airline was undeniable from its very first year - allowing it to compete directly with the
+      government carrier, Pakistan International Airlines (PIA), as well as two other private carriers, carrying over
+      400,000 passengers with a load factor of over 90%.</p>
+    <p>This success made the company scale and expands its services in other cities of Pakistan, including Peshawar,
+      Quetta, and Nawabshah.</p>
+    <p>Although it became a popular aviation company in its first, still the beginning was not that easy. As we can see,
+      it took it one year to start operating their regular flights in different directions.</p>
+    <p>The airline began flying on the Karachi-Lahore and Karachi-Islamabad routes with a leased Airbus A320-200, which
+      was launched by Pakistan's then-prime minister, Zafarullah Khan Jamali.</p>
+    <p>As the first aviation firm to launch numerous modern services, it captured the hearts of the general public and
+      became a vital competitor for Pakistan's largest airlines. It began with internal flights before announcing the
+      launch of its first international flight from Karachi to Dubai in 2005. As a result, it soon became one of
+      Pakistan's most popular airlines.</p>
+    <h3><strong>Airblue Online Ticket</strong></h3>
+    <p>Airblue, known for its inexpensive fares, promises to suit the needs of all of its passengers. The cost of a
+      ticket, like that of other airlines, fluctuates according to the date of travel. There is a price difference on
+      weekends over weekdays.</p>
+    <p>Similarly, the closer a flight gets to its departure date, the more expensive it is. So, book ahead of time to get
+      the best deals on Airblue flights. Due to the huge distances involved, international flights may be more expensive
+      than domestic flights. However, if you wish to find yourself the best deal, companies like Sastaticket.pk can
+      offer a plethora of prices to choose the best one for your travel.</p>
+    <h3><strong>Airblue Popular Domestic Flights</strong></h3>
+    <table style="width:100%">
+      <tr>
+        <th>Route</th>
+        <th>Price</th>
+      </tr>
+      <tr>
+        <td>Karachi to Islamabad</td>
+        <td>17,160</td>
+      </tr>
+      <tr>
+        <td>Karachi to Lahore</td>
+        <td>17,160</td>
+      </tr>
+      <tr>
+        <td>Karachi to Peshawar</td>
+        <td>14,113</td>
+      </tr>
+    </table>
+    <h3><strong>Airblue Popular International Flights</strong></h3>
+    <table style="width:100%;">
+      <tr>
+        <th>Route</th>
+        <th>Price</th>
+      </tr>
+      <tr>
+        <td>Karachi to Dubai</td>
+        <td>35,582</td>
+      </tr>
+      <tr>
+        <td>Lahore to Dubai</td>
+        <td>49,153</td>
+      </tr>
+      <tr>
+        <td>Dubai to Islamabad</td>
+        <td>19,856</td>
+      </tr>
+      <tr>
+        <td>Islamabad to Jeddah</td>
+        <td>83,198</td>
+      </tr>
+    </table>
+    <h3><strong>Airblue Latest Updates</strong></h3>
+    <p>Airblue now has a new addition to its already popular aviation services. A321neo aircraft is the new fleet leased
+      from GE Capital Aviation Services. As has always been the trendsetter for aviation companies in Pakistan, this is
+      also happening for time, and air blue is the first operator of an Airbus neo in Pakistan.</p>
+    
+      <!-- <a href="javascript:void(0)" (click)="searchFlight()"><img src="assets/images/flights/airblue-image.png"></a> -->
+    <p><strong>Airblue’s A321neo has CFM International’s LEAP-1A engines. It will offer</strong></p>
+    <li>235 seats in an all-economy class cabin</li>
+    <li>Widest cabin among any single-aisle aircraft</li>
+    <p>Along with the strong economic and environmental performance, the A321 neo engine provides significantly greater
+      fuel efficiency as compared to existing competitors, lowering Air Blue's operational costs. The spacious cabin
+      provides greater floor area flexibility and maximizes seating capacity.</p>
+    <p>Currently it conducts both domestic and international flights from Pakistan. As a result of this decision, it is
+      estimated to generate more profitability and market share.</p>
+    <p>As flights are resuming, it is now more mandatory to follow proper SOPs while traveling. This is to combat the
+      ongoing pandemic while continuing to live a normal life. As a result, it has developed a quarantine package for
+      customers who want to visit Riyadh or Jeddah in the near future.</p>
+    <p>There are numerous packages available, ranging from a single dose to a five-star bundle. Travelers to Saudi Arabia
+      will only be quarantined for five days, rather than fourteen. The package is also available through its sales
+      office.</p>
+    <p>It has resumed international flights to the UAE after receiving authorization from the Pakistani and UAE
+      governments. It also intends to return all stranded Pakistanis and fly to major cities in the UAE and Saudi
+      Arabia. The first flight from Dubai to Karachi was on January 15, 2022.</p>
+    <p>This is a significant step forward, considering the flight occurred after a five-year wait. Because of the high
+      demand, the flight will be operated on a daily basis. And it will operate 56 weekly flights from three major
+      airports in the UAE. There are 28 weekly flights from Dubai, 16 weekly flights from Sharjah, and 12 weekly flights
+      from Abu Dhabi.</p>
+    <p>Flexi passengers can transport up to 30 kg in one piece, while Xtra passengers can transport up to 50 kg in two
+      pieces. This applies exclusively to flights to Sharjah and Dubai.</p>
+    <p>Following recent developments, the NCOC has ordered the suspension of in-flight meals until further notice.
+      Airblue, on the other hand, believes in giving its customers the best service possible regardless of the
+      conditions. They've added a new tasty delicacy to their menu: the Paratha Roll. It will be served as soon as the
+      ban is lifted.</p>
+    <p>Airblue along with Flydubai has resumed flights to Quetta, which had been suspended since November 2021. Airblue
+      will operate twice-weekly flights from Karachi. FlyDubai, on the other hand, will only operate one flight every
+      week. Flights were temporarily canceled owing to technical and operational concerns. The Travel Agents Association
+      of Pakistan (TAAP) is happy that the flights have started, as they have been facing huge losses in the business.</p>
+    <h3><strong>Airblue Baggage Information</strong></h3>
+    <p>As a Pakistan's biggest airline,it has a generous baggage policy for passengers, and it urge travelers to
+      double-check their baggage policy before arriving at the airport. The free checked baggage allowance on economy
+      premium class tickets is two bags per person; on economy standard class tickets, the free checked baggage allowed
+      is one bag per person.</p>
+    <p>The check-in baggage weight limit is 30 kg, and the luggage must be within 54 inches in length and width. Airblue
+      allows passengers to bring one piece of carry-on luggage weighing no more than 7 kg. Also, the dimensions of the
+      carry-on luggage must not exceed 45 inches, and if the weight exceeds that, you may be charged for the excess
+      weight.</p>
+    <p>Moreover, the company has established itself as one of Pakistan's leading domestic airlines, offering good service
+      to its passengers. This time, the airline has provided a specific baggage allowance to its customers as a new
+      incentive. Passengers can now add up to 15kg of extra luggage to their ticket without paying anything extra. This
+      great price is only accessible if the buyer chooses to fly from Pakistan to the United Arab Emirates, as well as
+      all domestic flights.</p>
+    <h3><strong>Airblue Flight Status</strong></h3>
+    <p>Airblue has a great record of on-time departures and to adhere to the timings and schedules, they have a
+      foolproof process. However, for the customers to check flight status, they need to follow the process below:</p>
+    <li>Go to the official Airblue website and log in.</li>
+    <li>You'll find the 'Flight Status' option in the footer. Click on it.</li>
+    <li>Or directly use this link on Airblue's official website.</li>
+    <li>Both departures and arrivals are listed on this link.</li>
+    <li>You can check the flight number, destination, dates, and status on it.</li>
+    <h3><strong>Airblue Web check-in</strong></h3>
+    <p>Passengers can now reserve a seat of their choice from any location via web check-in. You won't have to stand in
+      line at the airport or arrive early to secure your preferred seat.</p>
+    <p> You only need your booking reference (PNR) and one of the passengers' first/last names to web check-in with .
+      Individual PNRs for each passenger are not generated; instead, a single PNR is generated for the entire booking.
+      For a little price, you can choose your desired seat.</p>
+    <p><strong>web check in,</strong></p>
+    <li>Visit Airblue website for reservations.</li>
+    <li>Fill in your ticket information.</li>
+    <li>Select 'Retrieve my reservation' from the drop-down menu.</li>
+    <li>You can web check-in within 24 hours to 2 hours before departure.</li>
+    <li>It also provides a mobile check-in app.</li>
+    <li>You can either print your boarding card or utilize the e-boarding pass that was in your email.</li>
+    <h3><strong>Airblue Cancellation & Reimbursement Policies</strong></h3>
+    <p>The company recognizes that plans are subject to change. Because of this, you have the option of canceling your
+      flight reservation. To complete the request, you will only need to pay a cancellation fee. After you send your
+      CNIC through email, your reimbursement will be handled. This is for the sake of security. You can cancel and get a
+      refund by following these simple steps:</p>
+    <li>Log in to your Airblue account to view your reservation's booking details.</li>
+    <li>To calculate a refund, go to 'Refund Tickets' and then 'Calculate refund.'</li>
+    <li>Re-enter your login password.</li>
+    <li>To cancel your tickets, tap Process Refund.</li>
+    <li>For reimbursement, passengers must email their CNIC to Airblue at wearelistening@airblue.com</li>
+    <li>If you do not see this option, call Travel Counselors at 111-247-258.</li>
+    <table style="width:100%;">
+      <tr>
+        <th>Cancellation window</th>
+        <th>Cancellation fee</th>
+      </tr>
+      <tr>
+        <td>Within 48 hours</td>
+        <td>Rs 5000</td>
+      </tr>
+      <tr>
+        <td>Before 48 hours</td>
+        <td>Rs 3000</td>
+      </tr>
+    </table>
+    <h3><strong>Airblue Customer Care/Contact Number</strong></h3>
+    <p>Airblue provides 24-hour help for any questions about your reservations, reviews, and more. You can use the
+      information below to respond to your questions.</p>
+    <h4><strong>Address of HQ:</strong></h4>
+    <h4><strong>Airblue (Head Office)</strong></h4>
+    <h4><strong>12th & 1st Floor, ISE Towers,</strong></h4>
+    <h4><strong>55-B Jinnah Avenue,</strong></h4>
+    <h4><strong>Islamabad.</strong></h4>
+    <h4><strong>UAN: 111-247-258</strong></h4>
+    <h3><strong>Airblue Offers and Discounts</strong></h3>
+    <p>Airblue's tickets are reasonably priced and tailored for economical travel. For added convenience, they have
+      various deals on select tickets. They recently announced flexible ticket and baggage pricing. </p>
+    <p>Pricing and timetables are available from a number of online ticket sources. On their websites, you can see what
+      they have to offer as well as the most recent costs.</p>
+    <p>They can also have some attractive offers and discounts that will help you save money. Using discount codes
+      throughout the checkout process can help you save even more money. Before you pay, you'll see the discounted fare.</p>
+    <h3><strong>Airblue Frequent Flyer Program</strong></h3>
+    <p>As a top air service provider in Pakistan, it has launched an intriguing reward program that will help you save
+      money while traveling. The frequent flyer program was a successful idea that helped to gain popularity in
+      Pakistan.</p>
+    <p>It's a one-of-a-kind program that rewards loyal consumers who fly with the airline on a regular basis. If you
+      want to fly with Airblue, make sure to look into their frequent flyer program and redeem your points online.</p>
+    <p>If you need to travel by air for work or pleasure on a regular basis, why not choose Airblue every time to take
+      advantage of exclusive discounts and cashback through its frequent flyer program?</p>
+    <h3><strong>Airblue Travel Insurance</strong></h3>
+    <p>Take out travel insurance on your Airblue ticket to protect your trip and prepare for the unexpected. When
+      booking through a third-party ticket service provider, you will be given the option to purchase travel insurance.
+      This option is available during or after you book your flight with them.</p>
+    <h3><strong>Airblue PNR status/Ticket Status</strong></h3>
+    <p>The PNR, or Passenger Name Record, informs you of the status of your ticket, whether it is confirmed or on hold.
+      You can follow the process or steps below to know your status:</p>
+    <li>Click to https://www.airblue.com/reservations</li>
+    <li>enter the relevant information</li>
+    <li>Click on “Retrieve My reservation”</li>
+    <li>It will direct you to the page where you can see your PNR number along with the status details.</li>
+    <h4><strong>Why must you choose Airblue for the next flight?</strong></h4>
+    <p>Airblue is committed to offering the highest level of comfort to all of its passengers from the moment they
+      arrive at the airport until they claim their bags after the flight has landed. To make this feasible, they have a
+      number of amenities at airports and flights. This varies with each flight, as well as the domestic and
+      international routes followed. Please contact Airblue for more details</p>
+    <p><strong>Some of their amenities include</strong></p>
+    <li>Halal meals</li>
+    <li>Personal video screens</li>
+    <li>Comfortable lounges with WiFi</li>
+    <li>In-flight entertainment</li>
+    <p>The airline takes pride in offering affordable and high-class services. If you want to book a flight, you know
+      how to do it.</p>
+  </div>
+</div>

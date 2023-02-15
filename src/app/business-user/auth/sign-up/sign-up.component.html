@@ -1,0 +1,156 @@
+<section class="hero-signup">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 col-sm-12 col-xs-12">
+        <div class="signup-boxes">
+          <div class="signup-box">
+            <ng-container *ngIf="!isVerification">
+              <div class="signup-title">
+                <h2>Sign Up</h2>
+                <!-- <p>Create an account now to access member only deals</p> -->
+              </div>
+              <div class="signup-form">
+                <form [formGroup]="registerForm">
+                  <div class="alert alert-danger" *ngIf="isError">
+                    {{ errorMsg }}
+                  </div>
+                  <div class="alert alert-success" *ngIf="isSuccess">
+                    {{ successMsg }}
+                  </div>
+                  <label>First Name<span class="required-star">*</span></label>
+                  <input type="text" class="sign-input" placeholder="First Name" formControlName="firstName"
+                    #firstNameInput
+                    [ngClass]="{ 'is-invalid': (submitted || registerForm.get('firstName').touched) && registerForm.get('firstName').errors }"
+                    required>
+                  <div
+                    *ngIf="registerForm.get('firstName').errors && (submitted || registerForm.get('firstName').touched)"
+                    class="invalid-feedback">
+                    <div *ngIf="registerForm.get('firstName').errors.required">First Name is required.</div>
+                    <div *ngIf="registerForm.get('firstName').errors.maxlength">The First Name must be at max 50
+                      characters long.</div>
+                  </div>
+                  <label>Last Name<span class="required-star">*</span></label>
+                  <input type="text" class="sign-input" placeholder="Last Name" formControlName="lastName"
+                    [ngClass]="{ 'is-invalid': (submitted || registerForm.get('lastName').touched) && registerForm.get('lastName').errors }"
+                    required>
+                  <div
+                    *ngIf="registerForm.get('lastName').errors && (submitted || registerForm.get('lastName').touched)"
+                    class="invalid-feedback">
+                    <div *ngIf="registerForm.get('lastName').errors.required">Last Name is required.</div>
+                    <div *ngIf="registerForm.get('lastName').errors.maxlength">The Last Name must be at max 50
+                      characters long.</div>
+                  </div>
+                  <label>Email<span class="required-star">*</span></label>
+                  <input type="text" class="sign-input" placeholder="Email" formControlName="email" #emailInput
+                    [ngClass]="{ 'is-invalid': (submitted || registerForm.get('email').touched) && registerForm.get('email').errors }"
+                    required>
+                  <div *ngIf="registerForm.get('email').errors && (submitted || registerForm.get('email').touched)"
+                    class="invalid-feedback">
+                    <div *ngIf="registerForm.get('email').errors.required">Email is required.</div>
+                    <div *ngIf="registerForm.get('email').errors.email">Enter a valid email.</div>
+                  </div>
+                  <label>Password<span class="required-star">*</span></label>
+                  <input type="password" class="sign-input" placeholder="Password" formControlName="password"
+                    [ngClass]="{ 'is-invalid': (submitted || registerForm.get('password').touched) && registerForm.get('password').errors }"
+                    required>
+                  <div
+                    *ngIf="registerForm.get('password').errors && (submitted || registerForm.get('password').touched)"
+                    class="invalid-feedback">
+                    <div *ngIf="registerForm.get('password').errors.required">Password is required.</div>
+                    <div *ngIf="registerForm.get('password').errors.minlength">Password must be at least 8 characters.
+                    </div>
+                    <div *ngIf="registerForm.get('password').errors.maxlength">Password must be at max 25 characters.
+                    </div>
+                  </div>
+                  <label>Confirm Password<span class="required-star">*</span></label>
+                  <input type="password" class="sign-input" placeholder="Confirm Password"
+                    formControlName="passwordConfirm"
+                    [ngClass]="{ 'is-invalid': (submitted || registerForm.get('passwordConfirm').touched) && registerForm.get('passwordConfirm').errors }"
+                    required>
+                  <div
+                    *ngIf="registerForm.get('passwordConfirm').errors && (submitted || registerForm.get('passwordConfirm').touched)"
+                    class="invalid-feedback">
+                    <div *ngIf="registerForm.get('passwordConfirm').errors.required">Password is required.</div>
+                    <div *ngIf="registerForm.get('passwordConfirm').errors.passwordsNotMatching">Passwords must match.
+                    </div>
+                  </div>
+                  <label>Phone Number<span class="required-star">*</span></label>
+                  <input type="text" class="sign-input" placeholder="Phone Number" formControlName="phoneNumber"
+                    #firstNameInput
+                    [ngClass]="{ 'is-invalid': (submitted || registerForm.get('phoneNumber').touched) && registerForm.get('phoneNumber').errors }"
+                    required>
+                  <div
+                    *ngIf="registerForm.get('phoneNumber').errors && (submitted || registerForm.get('phoneNumber').touched)"
+                    class="invalid-feedback">
+                    <div *ngIf="registerForm.get('phoneNumber').errors.required">Phone Number is required.</div>
+                  </div>
+                  <label>City<span class="required-star">*</span></label>
+                  <input type="text" class="sign-input" placeholder="City" formControlName="city" #firstNameInput
+                    [ngClass]="{ 'is-invalid': (submitted || registerForm.get('city').touched) && registerForm.get('city').errors }"
+                    required>
+                  <div *ngIf="registerForm.get('city').errors && (submitted || registerForm.get('city').touched)"
+                    class="invalid-feedback">
+                    <div *ngIf="registerForm.get('city').errors.required">City is required.</div>
+                  </div>
+                  <label class="mt-2">Are you currently working as Travel Partners</label>
+                  <div class="flight-select">
+                    <div class="tool-check fliht-check">
+                      <input type="radio" name="is-business-user" class="tool-input" id="Yes" [value]="1"
+                        [ngModelOptions]="{standalone: true}" [(ngModel)]="isBusinessUser">
+                      <label for="Yes"></label>
+                      <span>Yes</span>
+                    </div>
+                    <div class="tool-check fliht-check">
+                      <input type="radio" name="is-business-user" class="tool-input" id="No" [value]="0"
+                        [ngModelOptions]="{standalone: true}" [(ngModel)]="isBusinessUser">
+                      <label for="No"></label>
+                      <span>No</span>
+                    </div>
+                  </div>
+                  <div *ngIf="isBusinessUser">
+                    <label>Travel Agency Name<span class="required-star">*</span></label>
+                    <input type="text" class="sign-input" placeholder="Travel Agency Name"
+                      formControlName="travelAgencyName" #travelAgencyName
+                      [ngClass]="{ 'is-invalid': (submitted || registerForm.get('travelAgencyName').touched) && registerForm.get('travelAgencyName').errors }">
+                    <div
+                      *ngIf="registerForm.get('travelAgencyName').errors && (submitted || registerForm.get('travelAgencyName').touched)"
+                      class="invalid-feedback">
+                      <div *ngIf="registerForm.get('travelAgencyName').errors.required">Travel agency name is required.
+                      </div>
+                    </div>
+                  </div>
+                  <!-- <div class="agree-box">
+                    <div class="agree-icon">
+                      <div class="tool-check fliht-check">
+                        <input type="checkbox" id="agree" class="tool-input" [(ngModel)]="isAcceptedTermsAndConditions" [ngModelOptions]="{standalone: true}">
+                        <label for="agree"></label>
+                      </div>
+                    </div>
+                    <div class="agree-cont">
+                      <p>I understand and agree with the Fare Rules , the Visa Rules , the Privacy Policy , the User Agreement and Terms of Service of <a href="javascript:void(0);"> Mehman.pk</a></p>
+                    </div>
+                  </div> -->
+                  <!-- <div *ngIf="submitted && !isAcceptedTermsAndConditions" class="invalid-feedback">
+                    <div>Please accept terms & conditions.</div>
+                  </div> -->
+                  <button type="submit" class="custom-sign-btn btn" (click)="register()"
+                    [disabled]="(registerForm.invalid || !isAcceptedTermsAndConditions) && submitted">
+                    Sign Up
+                  </button>
+                </form>
+              </div>
+              <div class="have-account">
+                <div class="account-cont">
+                  <h5>Alreay have an account?</h5>
+                </div>
+                <div class="have-btn">
+                  <a [routerLink]="['/business-user/auth/signin']">Sign In</a>
+                </div>
+              </div>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

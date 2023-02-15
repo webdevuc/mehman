@@ -1,0 +1,926 @@
+<section class="hero-headermain">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 col-sm-12 col-xs-12">
+        <div class="review-booking-box wow fadeIn">
+          <div class="header-title booking-title">
+            <h1>Traveller Details</h1>
+          </div>
+          <div class="booking-rang-slider">
+            <div class="slider-nmbr">
+              <ul>
+                <li class="check-icon"><img src="assets/images/search/check.png" class="img-fluid" alt=""></li>
+                <li class="check-icon"><img src="assets/images/search/check.png" class="img-fluid" alt=""></li>
+                <li>3</li>
+                <li>4</li>
+              </ul>
+            </div>
+            <div class="rang-slider">
+              <div class="inline-slider step-2"></div>
+            </div>
+            <div class="slider-list">
+              <ul>
+                <li>Flight Selected</li>
+                <li>Review</li>
+                <li>Traveler Details</li>
+                <li>Make Payment</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- start traveller details -->
+<section class="hero-contact hero-contact-2">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-xs-12 col-xs-12">
+        <div class="contact-box">
+          <div class="contact-header wow fadeInUp">
+            <h2>Traveller Details</h2>
+          </div>
+          <div class="travellers-body">
+            <ng-container *ngIf="isFlightFound">
+              <div class="traveller-form wow fadeIn">
+                <form [formGroup]="travellersForm">
+                  <ng-container *ngIf="adultCount && adultCount > 0">
+                    <ng-container
+                      *ngFor="let adultFormGroup of travellersForm.get('adultForms')['controls']; let i = index">
+                      <h2 style="margin-left: 15px;"> Adult {{ i + 1 }}</h2>
+                      <div [formGroup]="adultFormGroup">
+                        <div class="travel-form-box row">
+                          <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
+                            <div class="form-group">
+                              <label class="control-label travel-form-box-lable">Title<span aria-hidden="true"
+                                  class="required">*</span></label>
+                              <p-dropdown [options]="titles" formControlName="title" optionLabel="name"
+                                optionValue="value"  placeholder="..." required>
+                              </p-dropdown>
+                              <div
+                              *ngIf="adultFormGroup.get('title').errors && (submitted || adultFormGroup.get('title').touched)"
+                              class="invalid-feedback">
+                              <div *ngIf="adultFormGroup.get('title').errors.required">Title is required.
+                              </div>
+                            </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="travel-form-box row">
+                          <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                            <div class="form-group">
+                              <label class="control-label travel-form-box-lable">First & Middle Name<span
+                                  aria-hidden="true" class="required">*</span></label>
+                              <input type="text" pInputText placeholder="First & Middle Name"
+                                formControlName="firstName" (keypress)="keyPressAlphaNumericWithCharacters($event)"
+                                [ngClass]="{ 'is-invalid': (submitted || adultFormGroup.get('firstName').touched) && adultFormGroup.get('firstName').errors }" />
+
+                              <!-- <dx-text-box mode="text" placeholder="First & Middle Name" [showClearButton]="true" formControlName="firstName" [ngClass]="{ 'is-invalid': (submitted || adultFormGroup.get('firstName').touched) && adultFormGroup.get('firstName').errors }">
+                                                            </dx-text-box> -->
+                              <div
+                                *ngIf="adultFormGroup.get('firstName').errors && (submitted || adultFormGroup.get('firstName').touched)"
+                                class="invalid-feedback">
+                                <div *ngIf="adultFormGroup.get('firstName').errors.required">First & Middle Name is
+                                  required.
+                                </div>
+                                <div *ngIf="adultFormGroup.get('firstName').errors.maxlength">First & Middle Name must
+                                  be at max 50 characters.</div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                            <div class="form-group">
+                              <label class="control-label travel-form-box-lable">Last Name<span aria-hidden="true"
+                                  class="required">*</span></label>
+                              <input type="text" pInputText placeholder="Last Name" formControlName="lastName"
+                                (keypress)="keyPressAlphaNumericWithCharacters($event)"
+                                [ngClass]="{ 'is-invalid': (submitted || adultFormGroup.get('lastName').touched) && adultFormGroup.get('lastName').errors }" />
+                              <!-- <dx-text-box mode="text" placeholder="Last Name" [showClearButton]="true" formControlName="lastName" [ngClass]="{ 'is-invalid': (submitted || adultFormGroup.get('lastName').touched) && adultFormGroup.get('lastName').errors }">
+                                                            </dx-text-box> -->
+                              <div
+                                *ngIf="adultFormGroup.get('lastName').errors && (submitted || adultFormGroup.get('lastName').touched)"
+                                class="invalid-feedback">
+                                <div *ngIf="adultFormGroup.get('lastName').errors.required">Last Name is required.</div>
+                                <div *ngIf="adultFormGroup.get('lastName').errors.maxlength">Last Name must be at max 50
+                                  characters.
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="travel-form-box row">
+                          <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                            <div class="form-group">
+                              <label class="control-label travel-form-box-lable">Date of Birth (DD/MM/YYYY)<span
+                                  aria-hidden="true" class="required">*</span></label>
+                              <input class="form-control" placeholder="Date of Birth" formControlName="dateOfBirth"
+                                bsDatepicker [maxDate]="maxAdultDateOfBirth"
+                                [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY', showClearButton: true, clearPosition: 'right',showWeekNumbers: false }">
+                              <!-- <dx-date-box type="date" [showClearButton]="true" #AdultDateOfBirth
+                                placeholder="Date of Birth" formControlName="dateOfBirth" [max]="maxAdultDateOfBirth"
+                                displayFormat="dd/MM/yyyy"
+                                [ngClass]="{ 'is-invalid': (submitted || adultFormGroup.get('dateOfBirth').touched) && adultFormGroup.get('dateOfBirth').errors }"
+                                (onValueChanged)="changeAdultsDateOfBirth()" (focusout)="changeAdultsDateOfBirth()">
+                              </dx-date-box> -->
+                              <div
+                                *ngIf="adultFormGroup.get('dateOfBirth').errors && (submitted || adultFormGroup.get('dateOfBirth').touched)"
+                                class="invalid-feedback">
+                                <div *ngIf="adultFormGroup.get('dateOfBirth').errors.required">Date of Birth is
+                                  required.
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                            <div class="form-group">
+                              <label class="control-label travel-form-box-lable">Gender<span aria-hidden="true"
+                                  class="required">*</span></label>
+                              <!-- <div *ngFor="let gender of genders" class="p-field-genders">
+                                <span>{{'adult'+ i + 1+'-' + gender.id}}</span>
+                                <p-radioButton [inputId]="'adult'+ i + 1+'-' + gender.id" name="gender_adult"
+                                  [value]="gender.value" formControlName="gender_adult"></p-radioButton>
+                                <label [for]="'adult'+i + 1+'-' + gender.id" class="ml-1"> {{gender.name}}</label>
+                              </div> -->
+                              <p-dropdown [options]="genders" formControlName="gender_adult" optionLabel="name"
+                                optionValue="value" [showClear]="true" placeholder="Select a Gender">
+                              </p-dropdown>
+                              <!-- <dx-radio-group [items]="genders" layout="horizontal" formControlName="gender_adult">
+                                                            </dx-radio-group> -->
+                              <div
+                                *ngIf="adultFormGroup.get('gender_adult').errors && (submitted || adultFormGroup.get('gender_adult').touched)"
+                                class="invalid-feedback">
+                                <div *ngIf="adultFormGroup.get('gender_adult').errors.required">Gender is required.
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="travel-form-box row">
+                          <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                            <div class="form-group">
+                              <label class="control-label travel-form-box-lable">Passport No/CNIC No</label>
+                              <input type="text" pInputText placeholder="Passport No/CNIC No"
+                                formControlName="passportNumber"
+                                [ngClass]="{ 'is-invalid': (submitted || adultFormGroup.get('passportNumber').touched) && adultFormGroup.get('passportNumber').errors }" />
+                              <!-- <dx-text-box mode="text" placeholder="Passport No" [showClearButton]="true" formControlName="passportNumber" [ngClass]="{ 'is-invalid': (submitted || adultFormGroup.get('passportNumber').touched) && adultFormGroup.get('passportNumber').errors }">
+                                                            </dx-text-box> -->
+                              <div
+                                *ngIf="adultFormGroup.get('passportNumber').errors && (submitted || adultFormGroup.get('passportNumber').touched)"
+                                class="invalid-feedback">
+                                <div *ngIf="adultFormGroup.get('passportNumber').errors.maxlength">Passport No must be
+                                  at max 50 characters.</div>                                  
+                                  <div *ngIf="adultFormGroup.get('passportNumber').errors.required">Passport is required.
+                                  </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                            <div class="form-group">
+                              <label class="control-label travel-form-box-lable">Passport Issuing Country</label>
+                              <p-dropdown [options]="passportIssuingCountries" formControlName="passportIssuingCountry"
+                                optionLabel="name" optionValue="code" [showClear]="true" placeholder="Select a Country"
+                                [filter]="true" filterBy="name" required
+                                [ngClass]="{ 'is-invalid': (submitted || adultFormGroup.get('passportIssuingCountry').touched) && adultFormGroup.get('passportIssuingCountry').errors }">
+                              </p-dropdown>
+                              <div
+                                *ngIf="adultFormGroup.get('passportIssuingCountry').errors && (submitted || adultFormGroup.get('passportIssuingCountry').touched)"
+                                class="invalid-feedback">
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="travel-form-box row">
+                          <div class="col-lg-6 col- md-6 col-sm-12 col-xs-12">
+                            <div class="form-group">
+                              <label class="control-label travel-form-box-lable">CNIC/Passport Expiry</label>
+                              <input class="form-control" placeholder="Passport Expiry" formControlName="passportExpiry"
+                                bsDatepicker required
+                                [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY', showClearButton: true, clearPosition: 'right',showWeekNumbers: false }">
+                              <div
+                                *ngIf="adultFormGroup.get('passportExpiry').errors && (submitted || adultFormGroup.get('passportExpiry').touched)"
+                                class="invalid-feedback">
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                            <div class="form-group">
+                              <label class="control-label travel-form-box-lable">Meal</label>
+                              <p-dropdown [options]="mealPreferences" formControlName="mealPreference"
+                                optionLabel="name" optionValue="value" [showClear]="true"
+                                placeholder="Select a Preference">
+                              </p-dropdown>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </ng-container>
+                  </ng-container>
+                  <ng-container *ngIf="childCount && childCount > 0">
+                    <ng-container
+                      *ngFor="let childFormGroup of travellersForm.get('childForms')['controls']; let i = index">
+                      <h2 style="margin-left: 15px;"> Child {{ i + 1 }}</h2>
+                      <div [formGroup]="childFormGroup">
+                        <div class="travel-form-box row">
+                          <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                            <div class="form-group">
+                              <label class="control-label travel-form-box-lable">First & Middle Name<span
+                                  aria-hidden="true" class="required">*</span></label>
+                              <input type="text" pInputText placeholder="First & Middle Name"
+                                formControlName="firstName" (keypress)="keyPressAlphaNumericWithCharacters($event)"
+                                [ngClass]="{ 'is-invalid': (submitted || childFormGroup.get('firstName').touched) && childFormGroup.get('firstName').errors }" />
+                              <!-- <dx-text-box mode="text" placeholder="First & Middle Name" [showClearButton]="true" formControlName="firstName" [ngClass]="{ 'is-invalid': (submitted || childFormGroup.get('firstName').touched) && childFormGroup.get('firstName').errors }">
+                                                            </dx-text-box> -->
+                              <div
+                                *ngIf="childFormGroup.get('firstName').errors && (submitted || childFormGroup.get('firstName').touched)"
+                                class="invalid-feedback">
+                                <div *ngIf="childFormGroup.get('firstName').errors.required">First & Middle Name is
+                                  required.
+                                </div>
+                                <div *ngIf="childFormGroup.get('firstName').errors.maxlength">First & Middle Name must
+                                  be at max 50 characters.</div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                            <div class="form-group">
+                              <label class="control-label travel-form-box-lable">Last Name<span aria-hidden="true"
+                                  class="required">*</span></label>
+                              <input type="text" pInputText placeholder="Last Name" formControlName="lastName"
+                                (keypress)="keyPressAlphaNumericWithCharacters($event)"
+                                [ngClass]="{ 'is-invalid': (submitted || childFormGroup.get('lastName').touched) && childFormGroup.get('lastName').errors }" />
+                              <!-- <dx-text-box mode="text" placeholder="Last Name" [showClearButton]="true" formControlName="lastName" [ngClass]="{ 'is-invalid': (submitted || childFormGroup.get('lastName').touched) && childFormGroup.get('lastName').errors }">
+                                                            </dx-text-box> -->
+                              <div
+                                *ngIf="childFormGroup.get('lastName').errors && (submitted || childFormGroup.get('lastName').touched)"
+                                class="invalid-feedback">
+                                <div *ngIf="childFormGroup.get('lastName').errors.required">Last Name is required.</div>
+                                <div *ngIf="childFormGroup.get('lastName').errors.maxlength">Last Name must be at max 50
+                                  characters.
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="travel-form-box row">
+                          <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                            <div class="form-group">
+                              <label class="control-label travel-form-box-lable">Date of Birth<span aria-hidden="true"
+                                  class="required">*</span></label>
+                              <input class="form-control" placeholder="Date of Birth" formControlName="dateOfBirth"
+                                bsDatepicker [minDate]="minChildDateOfBirth" [maxDate]="maxChildDateOfBirth"
+                                [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY', showClearButton: true, clearPosition: 'right',showWeekNumbers: false }">
+                              <!-- <dx-date-box type="date" [showClearButton]="true" #ChildDateOfBirth
+                                placeholder="Date of Birth" formControlName="dateOfBirth" [min]="minChildDateOfBirth"
+                                [max]="maxChildDateOfBirth" displayFormat="dd/MM/yyyy"
+                                [ngClass]="{ 'is-invalid': (submitted || childFormGroup.get('dateOfBirth').touched) && childFormGroup.get('dateOfBirth').errors }"
+                                (onValueChanged)="changeChildsDateOfBirth()" (focusout)="changeChildsDateOfBirth()">
+                              </dx-date-box> -->
+                              <div
+                                *ngIf="childFormGroup.get('dateOfBirth').errors && (submitted || childFormGroup.get('dateOfBirth').touched)"
+                                class="invalid-feedback">
+                                <div *ngIf="childFormGroup.get('dateOfBirth').errors.required">Date of Birth is
+                                  required.
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                            <div class="form-group">
+                              <label class="control-label travel-form-box-lable">Gender<span aria-hidden="true"
+                                  class="required">*</span></label>
+                              <div *ngFor="let gender of genders" class="p-field-genders">
+                                <p-radioButton [inputId]="'child-' + gender.id" name="gender_child"
+                                  [value]="gender.value" formControlName="gender_child"></p-radioButton>
+                                <label [for]="'child-' + gender.id" class="ml-1"> {{gender.name}}</label>
+                              </div>
+                              <!-- <dx-radio-group [items]="genders" layout="horizontal" formControlName="gender_child">
+                                                            </dx-radio-group> -->
+                              <div
+                                *ngIf="childFormGroup.get('gender_child').errors && (submitted || childFormGroup.get('gender_child').touched)"
+                                class="invalid-feedback">
+                                <div *ngIf="childFormGroup.get('gender_child').errors.required">Gender is required.
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="travel-form-box row">
+                          <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                            <div class="form-group">
+                              <label class="control-label travel-form-box-lable">Passport No<span aria-hidden="true"
+                                  class="required">*</span></label>
+                              <input type="text" pInputText placeholder="Passport No" formControlName="passportNumber" required
+                                [ngClass]="{ 'is-invalid': (submitted || childFormGroup.get('passportNumber').touched) && childFormGroup.get('passportNumber').errors }" />
+                              <!-- <dx-text-box mode="text" placeholder="Passport No" [showClearButton]="true" formControlName="passportNumber" [ngClass]="{ 'is-invalid': (submitted || childFormGroup.get('passportNumber').touched) && childFormGroup.get('passportNumber').errors }">
+                                                            </dx-text-box> -->
+                              <div
+                                *ngIf="childFormGroup.get('passportNumber').errors && (submitted || childFormGroup.get('passportNumber').touched)"
+                                class="invalid-feedback">
+                                <div *ngIf="childFormGroup.get('passportNumber').errors.required">Passport No is
+                                  required.
+                                </div>
+                                <div *ngIf="childFormGroup.get('passportNumber').errors.maxlength">Passport No must be
+                                  at max 50 characters.</div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                            <div class="form-group">
+                              <label class="control-label travel-form-box-lable">Passport Issuing Country<span
+                                  aria-hidden="true" class="required">*</span></label>
+                              <p-dropdown [options]="passportIssuingCountries" formControlName="passportIssuingCountry"
+                                optionLabel="name" optionValue="code" [showClear]="true" placeholder="Select a Country"
+                                [filter]="true" filterBy="name" required
+                                [ngClass]="{ 'is-invalid': (submitted || childFormGroup.get('passportIssuingCountry').touched) && childFormGroup.get('passportIssuingCountry').errors }">
+                              </p-dropdown>
+                              <!-- <dx-select-box [items]="passportIssuingCountries" placeholder="Passport Issuing Country"
+                                [showClearButton]="true" formControlName="passportIssuingCountry"
+                                [ngClass]="{ 'is-invalid': (submitted || childFormGroup.get('passportIssuingCountry').touched) && childFormGroup.get('passportIssuingCountry').errors }">
+                              </dx-select-box> -->
+                              <div
+                                *ngIf="childFormGroup.get('passportIssuingCountry').errors && (submitted || childFormGroup.get('passportIssuingCountry').touched)"
+                                class="invalid-feedback">
+                                <div *ngIf="childFormGroup.get('passportIssuingCountry').errors.required">Passport
+                                  Issuing Country is required.</div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="travel-form-box row">
+                          <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                            <div class="form-group">
+                              <label class="control-label travel-form-box-lable">CNIC/Passport Expiry<span
+                                  aria-hidden="true" class="required">*</span></label>
+                              <input class="form-control" placeholder="Passport Expiry" formControlName="passportExpiry"
+                                bsDatepicker required
+                                [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY', showClearButton: true, clearPosition: 'right',showWeekNumbers: false }">
+                              <!-- <dx-date-box type="date" [showClearButton]="true" placeholder="Passport Expiry"
+                                formControlName="passportExpiry"  displayFormat="dd/MM/yyyy"
+                                [ngClass]="{ 'is-invalid': (submitted || childFormGroup.get('passportExpiry').touched) && childFormGroup.get('passportExpiry').errors }"
+                                (onValueChanged)="changeChildsPassportExpiry()"
+                                (focusout)="changeChildsPassportExpiry()">
+                              </dx-date-box> -->
+                              <div
+                                *ngIf="childFormGroup.get('passportExpiry').errors && (submitted || childFormGroup.get('passportExpiry').touched)"
+                                class="invalid-feedback">
+                                <div *ngIf="childFormGroup.get('passportExpiry').errors.required">Passport Expiry is
+                                  required.
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                            <div class="form-group">
+                              <label class="control-label travel-form-box-lable">Meal</label>
+                              <p-dropdown [options]="mealPreferences" formControlName="mealPreference"
+                                optionLabel="name" optionValue="value" [showClear]="true"
+                                placeholder="Select a Preference">
+                              </p-dropdown>
+                              <!-- <dx-select-box [items]="mealPreferences" placeholder="Meal" [showClearButton]="true"
+                                formControlName="mealPreference">
+                              </dx-select-box> -->
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </ng-container>
+                  </ng-container>
+                  <ng-container *ngIf="infantCount && infantCount > 0">
+                    <ng-container
+                      *ngFor="let infantFormGroup of travellersForm.get('infantForms')['controls']; let i = index">
+                      <h2 style="margin-left: 15px;"> Infant {{ i + 1 }}</h2>
+                      <div [formGroup]="infantFormGroup">
+                        <div class="travel-form-box row">
+                          <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                            <div class="form-group">
+                              <label class="control-label travel-form-box-lable">First & Middle Name<span
+                                  aria-hidden="true" class="required">*</span></label>
+                              <input type="text" pInputText placeholder="First & Middle Name"
+                                formControlName="firstName" (keypress)="keyPressAlphaNumericWithCharacters($event)"
+                                [ngClass]="{ 'is-invalid': (submitted || infantFormGroup.get('firstName').touched) && infantFormGroup.get('firstName').errors }" />
+                              <!-- <dx-text-box mode="text" placeholder="First & Middle Name" [showClearButton]="true" formControlName="firstName" [ngClass]="{ 'is-invalid': (submitted || infantFormGroup.get('firstName').touched) && infantFormGroup.get('firstName').errors }">
+                                                            </dx-text-box> -->
+                              <div
+                                *ngIf="infantFormGroup.get('firstName').errors && (submitted || infantFormGroup.get('firstName').touched)"
+                                class="invalid-feedback">
+                                <div *ngIf="infantFormGroup.get('firstName').errors.required">First & Middle Name is
+                                  required.
+                                </div>
+                                <div *ngIf="infantFormGroup.get('firstName').errors.maxlength">First & Middle Name must
+                                  be at max 50 characters.</div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                            <div class="form-group">
+                              <label class="control-label travel-form-box-lable">Last Name<span aria-hidden="true"
+                                  class="required">*</span></label>
+                              <input type="text" pInputText placeholder="Last Name" formControlName="lastName"
+                                (keypress)="keyPressAlphaNumericWithCharacters($event)"
+                                [ngClass]="{ 'is-invalid': (submitted || infantFormGroup.get('lastName').touched) && infantFormGroup.get('lastName').errors }" />
+                              <!-- <dx-text-box mode="text" placeholder="Last Name" [showClearButton]="true" formControlName="lastName" [ngClass]="{ 'is-invalid': (submitted || infantFormGroup.get('lastName').touched) && infantFormGroup.get('lastName').errors }">
+                                                            </dx-text-box> -->
+                              <div
+                                *ngIf="infantFormGroup.get('lastName').errors && (submitted || infantFormGroup.get('lastName').touched)"
+                                class="invalid-feedback">
+                                <div *ngIf="infantFormGroup.get('lastName').errors.required">Last Name is required.
+                                </div>
+                                <div *ngIf="infantFormGroup.get('lastName').errors.maxlength">Last Name must be at max
+                                  50 characters.</div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="travel-form-box row">
+                          <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                            <div class="form-group">
+                              <label class="control-label travel-form-box-lable">Date of Birth<span aria-hidden="true"
+                                  class="required">*</span></label>
+                              <input class="form-control" placeholder="Date of Birth" formControlName="dateOfBirth"
+                                bsDatepicker [minDate]="minInfantDateOfBirth" [maxDate]="maxInfantDateOfBirth"
+                                [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY', showClearButton: true, clearPosition: 'right',showWeekNumbers: false }">
+                              <!-- <dx-date-box type="date" [showClearButton]="true" #InfantDateOfBirth
+                                placeholder="Date of Birth" formControlName="dateOfBirth" [min]="minInfantDateOfBirth"
+                                [max]="maxInfantDateOfBirth" displayFormat="dd/MM/yyyy"
+                                [ngClass]="{ 'is-invalid': (submitted || infantFormGroup.get('dateOfBirth').touched) && infantFormGroup.get('dateOfBirth').errors }"
+                                (onValueChanged)="changeInfantsDateOfBirth()" (focusout)="changeInfantsDateOfBirth()">
+                              </dx-date-box> -->
+                              <div
+                                *ngIf="infantFormGroup.get('dateOfBirth').errors && (submitted || infantFormGroup.get('dateOfBirth').touched)"
+                                class="invalid-feedback">
+                                <div *ngIf="infantFormGroup.get('dateOfBirth').errors.required">Date of Birth is
+                                  required.
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                            <div class="form-group">
+                              <label class="control-label travel-form-box-lable">Gender<span aria-hidden="true"
+                                  class="required">*</span></label>
+                              <div *ngFor="let gender of genders" class="p-field-genders">
+                                <p-radioButton [inputId]="'infant-' + gender.id" name="gender_infant"
+                                  [value]="gender.value" formControlName="gender_infant"></p-radioButton>
+                                <label [for]="'infant-' + gender.id" class="ml-1"> {{gender.name}}</label>
+                              </div>
+                              <!-- <dx-radio-group [items]="genders" layout="horizontal" formControlName="gender_infant">
+                                                            </dx-radio-group> -->
+                              <div
+                                *ngIf="infantFormGroup.get('gender_infant').errors && (submitted || infantFormGroup.get('gender_infant').touched)"
+                                class="invalid-feedback">
+                                <div *ngIf="infantFormGroup.get('gender_infant').errors.required">Gender is required.
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="travel-form-box row">
+                          <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                            <div class="form-group">
+                              <label class="control-label travel-form-box-lable">Passport No<span aria-hidden="true"
+                                  class="required">*</span></label>
+                              <input type="text" pInputText placeholder="Passport No" formControlName="passportNumber"
+                                [ngClass]="{ 'is-invalid': (submitted || infantFormGroup.get('passportNumber').touched) && infantFormGroup.get('passportNumber').errors }" />
+                              <!-- <dx-text-box mode="text" placeholder="Passport No" [showClearButton]="true" formControlName="passportNumber" [ngClass]="{ 'is-invalid': (submitted || infantFormGroup.get('passportNumber').touched) && infantFormGroup.get('passportNumber').errors }">
+                                                            </dx-text-box> -->
+                              <div
+                                *ngIf="infantFormGroup.get('passportNumber').errors && (submitted || infantFormGroup.get('passportNumber').touched)"
+                                class="invalid-feedback">
+                                <div *ngIf="infantFormGroup.get('passportNumber').errors.required">Passport No is
+                                  required.
+                                </div>
+                                <div *ngIf="infantFormGroup.get('passportNumber').errors.maxlength">Passport No must be
+                                  at max 50 characters.</div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                            <div class="form-group">
+                              <label class="control-label travel-form-box-lable">Passport Issuing Country<span
+                                  aria-hidden="true" class="required">*</span></label>
+                              <p-dropdown [options]="passportIssuingCountries" formControlName="passportIssuingCountry"
+                                optionLabel="name" optionValue="code" [showClear]="true" placeholder="Select a Country"
+                                [filter]="true" filterBy="name"
+                                [ngClass]="{ 'is-invalid': (submitted || infantFormGroup.get('passportIssuingCountry').touched) && infantFormGroup.get('passportIssuingCountry').errors }">
+                              </p-dropdown>
+                              <!-- <dx-select-box [items]="passportIssuingCountries" placeholder="Passport Issuing Country"
+                                [showClearButton]="true" formControlName="passportIssuingCountry"
+                                [ngClass]="{ 'is-invalid': (submitted || infantFormGroup.get('passportIssuingCountry').touched) && infantFormGroup.get('passportIssuingCountry').errors }">
+                              </dx-select-box> -->
+                              <div
+                                *ngIf="infantFormGroup.get('passportIssuingCountry').errors && (submitted || infantFormGroup.get('passportIssuingCountry').touched)"
+                                class="invalid-feedback">
+                                <div *ngIf="infantFormGroup.get('passportIssuingCountry').errors.required">Passport
+                                  Issuing Country is required.</div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="travel-form-box row">
+                          <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                            <div class="form-group">
+                              <label class="control-label travel-form-box-lable">CNIC/Passport Expiry<span aria-hidden="true"
+                                  class="required">*</span></label>
+                              <input class="form-control" placeholder="Passport Expiry" formControlName="passportExpiry"
+                                bsDatepicker
+                                [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY', showClearButton: true, clearPosition: 'right',showWeekNumbers: false }">
+                              <!-- <dx-date-box type="date" [showClearButton]="true" placeholder="Passport Expiry"
+                                formControlName="passportExpiry"  displayFormat="dd/MM/yyyy"
+                                [ngClass]="{ 'is-invalid': (submitted || infantFormGroup.get('passportExpiry').touched) && infantFormGroup.get('passportExpiry').errors }"
+                                (onValueChanged)="changeInfantsPassportExpiry()"
+                                (focusout)="changeInfantsPassportExpiry()">
+                              </dx-date-box> -->
+                              <div
+                                *ngIf="infantFormGroup.get('passportExpiry').errors && (submitted || infantFormGroup.get('passportExpiry').touched)"
+                                class="invalid-feedback">
+                                <div *ngIf="infantFormGroup.get('passportExpiry').errors.required">Passport Expiry is
+                                  required.
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                            <div class="form-group">
+                              <label class="control-label travel-form-box-lable">Meal</label>
+                              <p-dropdown [options]="mealPreferences" formControlName="mealPreference"
+                                optionLabel="name" optionValue="value" [showClear]="true"
+                                placeholder="Select a Preference">
+                              </p-dropdown>
+                              <!-- <dx-select-box [items]="mealPreferences" placeholder="Meal" [showClearButton]="true"
+                                formControlName="mealPreference">
+                              </dx-select-box> -->
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </ng-container>
+                  </ng-container>
+                  <h2 style="margin-left: 15px;"> Contact Information</h2>
+                  <div [formGroup]="travellersForm.get('contactInfoForm')">
+                    <div class="travel-form-box row">
+                      <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                        <div class="form-group">
+                          <label class="control-label travel-form-box-lable">First Name<span aria-hidden="true"
+                              class="required">*</span></label>
+                          <input type="text" pInputText placeholder="First Name" formControlName="firstName"
+                            (keypress)="keyPressAlphaNumericWithCharacters($event)"
+                            [ngClass]="{ 'is-invalid': (submitted || travellersForm.get('contactInfoForm').get('firstName').touched) && travellersForm.get('contactInfoForm').get('firstName').errors }" />
+                          <!-- <dx-text-box mode="text" placeholder="First Name" [showClearButton]="true" formControlName="firstName" [ngClass]="{ 'is-invalid': (submitted || travellersForm.get('contactInfoForm').get('firstName').touched) && travellersForm.get('contactInfoForm').get('firstName').errors }">
+                                                    </dx-text-box> -->
+                          <div
+                            *ngIf="travellersForm.get('contactInfoForm').get('firstName').errors && (submitted || travellersForm.get('contactInfoForm').get('firstName').touched)"
+                            class="invalid-feedback">
+                            <div *ngIf="travellersForm.get('contactInfoForm').get('firstName').errors.required">First &
+                              Middle Name is required.</div>
+                            <div *ngIf="travellersForm.get('contactInfoForm').get('firstName').errors.maxlength">First
+                              Name must be at max 50 characters.</div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                        <div class="form-group">
+                          <label class="control-label travel-form-box-lable">Last Name<span aria-hidden="true"
+                              class="required">*</span></label>
+                          <input type="text" pInputText placeholder="Last Name" formControlName="lastName"
+                            (keypress)="keyPressAlphaNumericWithCharacters($event)"
+                            [ngClass]="{ 'is-invalid': (submitted || travellersForm.get('contactInfoForm').get('lastName').touched) && travellersForm.get('contactInfoForm').get('lastName').errors }" />
+                          <!-- <dx-text-box mode="text" placeholder="Last Name" [showClearButton]="true" formControlName="lastName" [ngClass]="{ 'is-invalid': (submitted || travellersForm.get('contactInfoForm').get('lastName').touched) && travellersForm.get('contactInfoForm').get('lastName').errors }">
+                                                    </dx-text-box> -->
+                          <div
+                            *ngIf="travellersForm.get('contactInfoForm').get('lastName').errors && (submitted || travellersForm.get('contactInfoForm').get('lastName').touched)"
+                            class="invalid-feedback">
+                            <div *ngIf="travellersForm.get('contactInfoForm').get('lastName').errors.required">Last Name
+                              is required.</div>
+                            <div *ngIf="travellersForm.get('contactInfoForm').get('lastName').errors.maxlength">Last
+                              Name must be at max 50 characters.</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="travel-form-box row">
+                      <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                        <div class="form-group">
+                          <label class="control-label travel-form-box-lable">Country Code</label>
+                          <p-dropdown [options]="countryCodes" formControlName="countryCode" optionLabel="name"
+                            optionValue="code" [showClear]="true" placeholder="Select country code" [filter]="true"
+                            filterBy="name"
+                            [ngClass]="{ 'is-invalid': (submitted || travellersForm.get('contactInfoForm').get('countryCode').touched) && travellersForm.get('contactInfoForm').get('countryCode').errors }">
+                          </p-dropdown>
+                          <div
+                            *ngIf="travellersForm.get('contactInfoForm').get('countryCode').errors && (submitted || travellersForm.get('contactInfoForm').get('countryCode').touched)"
+                            class="invalid-feedback">
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                        <div class="form-group">
+                          <label class="control-label travel-form-box-lable">Mobile No<span aria-hidden="true"
+                              class="required">*</span></label>
+                          <p-inputMask mask="(0)-9999999999" formControlName="mobileNumber" placeholder="Mobile No"
+                            [ngClass]="{ 'is-invalid': (submitted || travellersForm.get('contactInfoForm').get('mobileNumber').touched) && travellersForm.get('contactInfoForm').get('mobileNumber').errors }"></p-inputMask>
+                          <!-- <dx-text-box mode="text" placeholder="Mobile No" [showClearButton]="true" formControlName="mobileNumber" [ngClass]="{ 'is-invalid': (submitted || travellersForm.get('contactInfoForm').get('mobileNumber').touched) && travellersForm.get('contactInfoForm').get('mobileNumber').errors }">
+                                                    </dx-text-box> -->
+                          <div
+                            *ngIf="travellersForm.get('contactInfoForm').get('mobileNumber').errors && (submitted || travellersForm.get('contactInfoForm').get('mobileNumber').touched)"
+                            class="invalid-feedback">
+                            <div *ngIf="travellersForm.get('contactInfoForm').get('mobileNumber').errors.required">
+                              Mobile No is required.</div>
+                            <div *ngIf="travellersForm.get('contactInfoForm').get('mobileNumber').errors.maxlength">
+                              Mobile No must be at max 50 characters.</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="travel-form-box row">
+                      <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                        <div class="form-group">
+                          <label class="control-label travel-form-box-lable">Email<span aria-hidden="true"
+                              class="required">*</span></label>
+                          <input type="text" pInputText placeholder="Email" formControlName="email"
+                            [ngClass]="{ 'is-invalid': (submitted || travellersForm.get('contactInfoForm').get('email').touched) && travellersForm.get('contactInfoForm').get('email').errors }" />
+                          <!-- <dx-text-box mode="text" placeholder="Email" [showClearButton]="true" formControlName="email" [ngClass]="{ 'is-invalid': (submitted || travellersForm.get('contactInfoForm').get('email').touched) && travellersForm.get('contactInfoForm').get('email').errors }">
+                                                    </dx-text-box> -->
+                          <div
+                            *ngIf="travellersForm.get('contactInfoForm').get('email').errors && (submitted || travellersForm.get('contactInfoForm').get('email').touched)"
+                            class="invalid-feedback">
+                            <div *ngIf="travellersForm.get('contactInfoForm').get('email').errors.required">Email is
+                              required.
+                            </div>
+                            <div *ngIf="travellersForm.get('contactInfoForm').get('email').errors.email">Enter a valid
+                              email.
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="book-submit-btn">
+                    <button class="custom-submit-button btn" (click)="save()" [disabled]="(travellersForm.invalid && submitted) ||
+                            !isValidAdultsDateOfBirth ||
+                            !isValidChildsDateOfBirth ||
+                            !isValidInfantsDateOfBirth ||
+                            !isValidAdultsPassportExpiry ||
+                            !isValidChildsPassportExpiry ||
+                            !isValidInfantsPassportExpiry">
+                      Continue
+                    </button>
+                    <!-- <a class="flight btn" [routerLink]="'/review-booking/' + flightId">Back</a> -->
+                  </div>
+                </form>
+              </div>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 col-xs-12 col-xs-12">
+        <ng-container *ngIf="flight && flight.flightSegments && flight.flightSegments.length > 0">
+          <div class="contact-box search-box">
+            <div class="contact-header wow fadeInUp">
+              <h2>Flight Summary</h2>
+            </div>
+            <div class="summary-body wow fadeIn">
+              <ng-container *ngIf="departureSegments && departureSegments.length > 0">
+                <div class="summary-header">
+                  <img src="assets/images/search/depareture.png" class="img-fluid" alt="">
+                  <h5>Departure</h5>
+                </div>
+                <div class="summary-cont">
+                  <div id="accordion">
+                    <div class="card">
+                      <div class="card-header" id="heading4">
+                        <h5 class="mb-0">
+                          <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapse4"
+                            aria-expanded="true" aria-controls="collapse4">
+                            <div class="base">
+                              <span class="add-tag"> <i class="fa fa-plus" aria-hidden="true"></i>
+                                <!-- <img src="assets/images/search/add.png" class="img-fluid" alt=""> --></span>
+                              <h5> {{ flight.originLocation }} > {{ flight.destinationLocation }} </h5>
+                            </div>
+                          </button>
+                        </h5>
+                      </div>
+
+                      <div id="collapse4" class="collapse" aria-labelledby="heading4" data-parent="#accordion">
+                        <div class="card-body">
+                          <ng-container *ngFor="let segment of departureSegments">
+                            <div class="flight-cont">
+                              <div class="flt-cont-box">
+                                <div class="flt-date">
+                                  <h5>{{ segment.departureTimeFormat }}</h5>
+                                  <p>{{ segment.departureAirport }}</p>
+                                  <p>{{ segment.departureDateFormat }}</p>
+                                </div>
+                                <div class="flt-arrow">
+                                  <p>{{ segment.duration }}</p>
+                                  <img src="assets/images/search/arrow-first.png" alt="" class="img-fluid">
+                                  <p class="economy">{{ segment.travelClass }} ({{ segment.fareClass }})</p>
+                                </div>
+                                <div class="flt-date">
+                                  <h5>{{ segment.arrivalTimeFormat }}</h5>
+                                  <p>{{ segment.arrivalAirport }}</p>
+                                  <p>{{ segment.arrivalDateFormat }}</p>
+                                </div>
+                              </div>
+                            </div>
+                          </ng-container>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </ng-container>
+              <ng-container *ngIf="returnSegments && returnSegments.length > 0">
+                <div class="summary-header">
+                  <img src="assets/images/search/depareture.png" class="img-fluid return" alt="">
+                  <h5>Return</h5>
+                </div>
+                <div class="summary-cont">
+                  <div id="accordion1">
+                    <div class="card">
+                      <div class="card-header" id="heading5">
+                        <h5 class="mb-0">
+                          <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapse5"
+                            aria-expanded="true" aria-controls="collapse5">
+                            <div class="base">
+                              <span class="add-tag"> <i class="fa fa-plus" aria-hidden="true"></i>
+                                <!-- <img src="assets/images/search/add.png" class="img-fluid" alt=""> --></span>
+                              <h5> {{ flight.destinationLocation }} > {{ flight.originLocation }} </h5>
+                            </div>
+                          </button>
+                        </h5>
+                      </div>
+
+                      <div id="collapse5" class="collapse" aria-labelledby="heading5" data-parent="#accordion">
+                        <div class="card-body">
+                          <ng-container *ngFor="let segment of returnSegments">
+                            <div class="flight-cont">
+                              <div class="flt-cont-box">
+                                <div class="flt-date">
+                                  <h5>{{ segment.departureTimeFormat }}</h5>
+                                  <p>{{ segment.departureAirport }}</p>
+                                  <p>{{ segment.departureDateFormat }}</p>
+                                </div>
+                                <div class="flt-arrow">
+                                  <p>{{ segment.duration }}</p>
+                                  <img src="assets/images/search/arrow-first.png" alt="" class="img-fluid">
+                                  <p class="economy">{{ segment.travelClass }} ({{ segment.fareClass }})</p>
+                                </div>
+                                <div class="flt-date">
+                                  <h5>{{ segment.arrivalTimeFormat }}</h5>
+                                  <p>{{ segment.arrivalAirport }}</p>
+                                  <p>{{ segment.arrivalDateFormat }}</p>
+                                </div>
+                              </div>
+                            </div>
+                          </ng-container>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </ng-container>
+            </div>
+          </div>
+        </ng-container>
+
+        <ng-container *ngIf="flight && flight.fareDetails">
+          <div class="contact-box Fare-box">
+            <div class="contact-header wow fadeInUp">
+              <h2>Fare Summary</h2>
+            </div>
+            <div class="summery-accordion wow fadeIn">
+              <div id="accordion">
+                <div class="card">
+                  <div class="card-header" id="headingOne">
+                    <h5 class="mb-0">
+                      <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseOne"
+                        aria-expanded="true" aria-controls="collapseOne" style="width:100%;">
+                        <div class="base" style="text-align: left;">
+                          <i class="fa fa-plus" aria-hidden="true"></i>
+                          <!-- <img src="assets/images/search/add.png" class="img-fluid" alt=""> -->
+                          <span>Base Fare</span>
+                          <span class="pull-right">{{ flight.fareDetails.farePrices.currencyCode }} {{
+                            flight.fareDetails.farePrices.totalBaseFare | number }}</span>
+                        </div>
+                      </button>
+                    </h5>
+                  </div>
+
+                  <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                    <div class="card-body">
+                      <div class="base" *ngIf="flight.fareDetails.farePrices.adultCount">
+                        <span class="details">Adult(s) ({{ flight.fareDetails.farePrices.adultCount }} x {{
+                          flight.fareDetails.farePrices.currencyCode }} {{
+                          flight.fareDetails.farePrices.adultEquivAmount | number }})</span>
+                        <span class="details pull-right">{{ flight.fareDetails.farePrices.currencyCode }} {{
+                          flight.fareDetails.farePrices.adultBaseFare | number }}</span>
+                      </div>
+                      <div class="base" *ngIf="flight.fareDetails.farePrices.childCount">
+                        <span class="details">Child(s) ({{ flight.fareDetails.farePrices.childCount }} x {{
+                          flight.fareDetails.farePrices.currencyCode }} {{
+                          flight.fareDetails.farePrices.childEquivAmount | number }})</span>
+                        <span class="details pull-right">{{ flight.fareDetails.farePrices.currencyCode }} {{
+                          flight.fareDetails.farePrices.childBaseFare | number }}</span>
+                      </div>
+                      <div class="base" *ngIf="flight.fareDetails.farePrices.infantCount">
+                        <span class="details">Infant(s) ({{ flight.fareDetails.farePrices.infantCount }} x {{
+                          flight.fareDetails.farePrices.currencyCode }} {{
+                          flight.fareDetails.farePrices.infantEquivAmount | number }})</span>
+                        <span class="details pull-right">{{ flight.fareDetails.farePrices.currencyCode }} {{
+                          flight.fareDetails.farePrices.infantBaseFare | number }}</span>
+                      </div>
+                      <!--<div class="base">
+                  <img src="assets/images/search/add.png" class="img-fluid" alt=""><span>Base Fare</span>
+                </div>
+                <div class="base">
+                  <img src="assets/images/search/add.png" class="img-fluid" alt=""><span>Base Fare</span>
+                </div>-->
+                    </div>
+                  </div>
+                </div>
+                <div class="card">
+                  <div class="card-header" id="headingTwo">
+                    <h5 class="mb-0">
+                      <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo"
+                        aria-expanded="false" aria-controls="collapseTwo" style="width:100%;">
+                        <div class="base" style="text-align: left;">
+                          <i class="fa fa-plus" aria-hidden="true"></i>
+                          <!-- <img src="assets/images/search/add.png" class="img-fluid" alt=""> -->
+                          <span>Surcharges</span>
+                          <span class="pull-right">{{ flight.fareDetails.farePrices.currencyCode }} {{
+                            flight.fareDetails.farePrices.totalFeeAndTax | number }}</span>
+                        </div>
+                      </button>
+                    </h5>
+                  </div>
+                  <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                    <div class="card-body">
+                      <div class="base" *ngIf="flight.fareDetails.farePrices.adultCount">
+                        <span class="details">Adult(s) ({{ flight.fareDetails.farePrices.adultCount }} x {{
+                          flight.fareDetails.farePrices.currencyCode }} {{ flight.fareDetails.farePrices.adultTaxAmount
+                          | number }})</span>
+                        <span class="details pull-right">{{ flight.fareDetails.farePrices.currencyCode }} {{
+                          flight.fareDetails.farePrices.adultFeeAndTax | number }}</span>
+                      </div>
+                      <div class="base" *ngIf="flight.fareDetails.farePrices.childCount">
+                        <span class="details">Child(s) ({{ flight.fareDetails.farePrices.childCount }} x {{
+                          flight.fareDetails.farePrices.currencyCode }} {{ flight.fareDetails.farePrices.childTaxAmount
+                          | number }})</span>
+                        <span class="details pull-right">{{ flight.fareDetails.farePrices.currencyCode }} {{
+                          flight.fareDetails.farePrices.childFeeAndTax | number }}</span>
+                      </div>
+                      <div class="base" *ngIf="flight.fareDetails.farePrices.infantCount">
+                        <span class="details">Infant(s) ({{ flight.fareDetails.farePrices.infantCount }} x {{
+                          flight.fareDetails.farePrices.currencyCode }} {{ flight.fareDetails.farePrices.infantTaxAmount
+                          | number }})</span>
+                        <span class="details pull-right">{{ flight.fareDetails.farePrices.currencyCode }} {{
+                          flight.fareDetails.farePrices.infantFeeAndTax | number }}</span>
+                      </div>
+                      <!--<div class="base">
+                  <img src="assets/images/search/add.png" class="img-fluid" alt=""><span>Surcharges</span>
+                </div>
+                <div class="base">
+                  <img src="assets/images/search/add.png" class="img-fluid" alt=""><span>Surcharges</span>
+                </div>-->
+                    </div>
+                  </div>
+                </div>
+                <!--<div class="card">
+            <div class="card-header" id="headingThree">
+              <h5 class="mb-0">
+                <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                  <div class="base">
+                    <img src="assets/images/search/add.png" class="img-fluid" alt=""><span>Discount</span>
+                  </div>
+                </button>
+              </h5>
+            </div>
+            <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+              <div class="card-body">
+                <div class="base">
+                  <img src="assets/images/search/add.png" class="img-fluid" alt=""><span>Discount</span>
+                </div>
+                <div class="base">
+                  <img src="assets/images/search/add.png" class="img-fluid" alt=""><span>Discount</span>
+                </div>
+                <div class="base">
+                  <img src="assets/images/search/add.png" class="img-fluid" alt=""><span>Discount</span>
+                </div>
+              </div>
+            </div>
+          </div>-->
+              </div>
+              <div class="summary-tottle">
+                <h5>Total</h5>
+                <h5 class="text-right">{{ flight.currencyCode }} {{ flight.totalFare | number }}</h5>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="dist\**" />
+    <Compile Remove="node_modules\**" />
+    <EmbeddedResource Remove="dist\**" />
+    <EmbeddedResource Remove="node_modules\**" />
+    <None Remove="dist\**" />
+    <None Remove="node_modules\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="src\app\auth\guard\" />
+    <Folder Include="src\app\auth\shared\" />
+    <Folder Include="src\app\home\shared\" />
+    <Folder Include="src\app\services\" />
+  </ItemGroup>
+
+</Project>

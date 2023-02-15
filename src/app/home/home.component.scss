@@ -1,0 +1,40 @@
+.disable-link {
+  pointer-events: none;
+}
+
+.tab-navigation ul li .disabled {
+  color: #D3D3D3 !important;
+  svg {
+    fill: #D3D3D3 !important;
+  }
+}
+
+
+.apply-travellers {
+  position: relative;
+  width: 140px;
+  color: #fff;
+  background: #57B957;
+  font-size: 16px;
+  line-height: 32px;
+  text-align: center;
+  text-decoration: none;
+  font-family: "SFUIDisplay-Semibold";
+  padding: 0;
+  border: 1px solid #57b957;
+  letter-spacing: 0.5px;
+  transition: 0.5s all ease;
+  top: 10px;
+}
+
+.img {
+  aspect-ratio: attr(width) / attr(height);
+}
+
+.footer-link h5 {
+  font-size: 15px;
+}
+
+.footer-link ul li a {
+  font-size: 13px;
+}

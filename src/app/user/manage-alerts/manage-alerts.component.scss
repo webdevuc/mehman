@@ -1,0 +1,16 @@
+.header-title h1 {
+  margin: 0 !important;
+}
+
+/* Position text in the middle */
+.middle {
+  position        : absolute;
+  top             : 50%;
+  left            : 50%;
+  transform       : translate(-50%, -50%);
+  text-align      : center;
+  background-color: #57b957;
+  color           : white;
+  width           : 300px;
+  height          : 35px;
+}

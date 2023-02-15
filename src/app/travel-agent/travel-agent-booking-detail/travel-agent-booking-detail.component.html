@@ -1,0 +1,350 @@
+<div id="ItineraryId">
+  <mat-card>
+    <!-- <mat-card-header>
+      <div class="header-title wow fadeInUp" style="margin-left: 20px;">
+        <div class="print-none">
+          <button type="submit" class="back-btn btn mr-2 mt-2 mb-2 float-right"
+            [routerLink]="'/travel-agent/bookings'">
+            <i class="fa fa-arrow-left" aria-hidden="true"></i> Back to list
+          </button>
+        </div>
+        <h1 style="color: white !important">
+          Booking Reference: {{ booking?.pnr }}
+        </h1>
+      </div>
+    </mat-card-header> -->
+    <mat-card-content>
+      <!-- <section class="hero-header-user">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-12 col-sm-12 col-xs-12">
+              <div class="header-title wow fadeInUp">
+                <div class="print-none">
+                  <button type="submit" class="back-btn btn mr-2 mt-2 mb-2 float-right"
+                    [routerLink]="'/travel-agent/bookings'">
+                    <i class="fa fa-arrow-left" aria-hidden="true"></i> Back to list</button>
+                </div>
+                <h1>Booking Reference: {{booking?.pnr}}</h1>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section> -->
+      <div class="row" style="padding: 5px">
+        <div class="col-md-12 flights-detail">
+          <div class="print-none">
+            <button type="submit" class="back-btn btn mr-2 mt-2 mb-2" [routerLink]="'/travel-agent/bookings'">
+              <i class="fa fa-arrow-left" aria-hidden="true"></i> Back to list</button>
+          </div>
+            <h1 class="flex:50%">Booking Reference: {{booking?.pnr}}</h1>
+            <img src="{{getImage()}}" style="height: 70px;margin-top: -80px;flex:50%" class="float-right img-fluid" alt="" />
+        </div>
+      </div>
+      <div class="main-content" style="padding: 5px">
+        <div class="print-none">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="row">
+                <div class="col-md grid">
+                  <span class="font-weight-bold">Booking Date</span> : {{booking?.createdOn | date:'longDate'}}
+                </div>
+                <div class="col-md grid">
+                  <span class="font-weight-bold">Lead Passenger</span> : {{trip?.contactInfo.firstName}}
+                  {{trip?.contactInfo.lastName}}
+                </div>
+                <div class="col-md grid">
+                  <span class="font-weight-bold">Booking Stage</span> : {{getBookingStatus(booking?.status)}}
+                </div>
+                <!-- <div class="col-md grid">
+                  <span class="font-weight-bold">Payment Method</span> : {{getPaymentType(booking?.paymentType)}}
+                </div>
+                <div class="col-md grid">
+                  <span class="font-weight-bold">Payment Status</span> : {{getPaymentStatus(booking?.paymentStatus)}}
+                </div> -->
+                <!-- <div class="col-md grid">
+                  <span class="font-weight-bold">Total Fare</span> : {{trip?.totalFare | currency:'PKR
+                  ':'symbol':'1.0-0'}}
+                </div> -->
+                <!-- <button type="submit" class="custom-sign-btn btn mr-2 mt-2 mb-2" (click)="requestClick()"> Request
+                  Reschedule
+                </button>
+                <button type="submit" class="custom-sign-btn btn mr-2 mt-2 mb-2" (click)="requestClick()"> Request
+                  Cancelation
+                </button>
+                <button type="submit" class="custom-sign-btn btn mr-2 mt-2 mb-2" (click)="requestClick()"> Add Payment
+                </button> -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+
+        <div class="col-md-12">
+          <div class="print-none">
+            <button type="submit" class="custom-sign-btn btn mr-2 mt-2 mb-2" (click)="showCancelBookingDialog()"
+              *ngIf="booking?.bookingStatusName !='Cancelled'">
+              Cancel booking
+            </button>
+            <button type="submit" class="custom-sign-btn btn mr-2 mt-2 mb-2" style="margin-left: 5px;"
+              (click)="showBooktheTicketDialog()" *ngIf="booking?.bookingStatusName !='Cancelled'">
+              Issue the Ticket
+            </button>
+            <button type="button" class="custom-sign-btn btn mr-2 mt-2 mb-2" style="margin-left: 5px;"
+              [print]="['ItineraryId']">
+              Download / Print Itinerary
+            </button>            
+              <p-dropdown  class="custom-FarePrint-btn btn mr-2 mt-2 mb-2" style="margin-left: 5px;" [options]="farePrintOption"  [(ngModel)]="selectedFarePrintOption"
+              optionLabel="label" optionValue="value" (onChange)="onCustomFarePrint($event)"></p-dropdown>            
+              <p-inputNumber [(ngModel)]="customFare" class="custom-FarePrint-btn btn mr-2 mt-2 mb-2" *ngIf="selectedFarePrintOption === '3'"></p-inputNumber>
+              <button pButton pRipple type="button" icon="pi pi-check" *ngIf="selectedFarePrintOption === '3'" label="Apply" (click)="getTotalFare()"  style="vertical-align:middle;"></button>
+          </div>
+        </div>
+        <!-- <button type="submit" class="custom-sign-btn btn mr-2 mt-2 mb-2" (click)="requestClick()"> Add Payment </button> -->
+
+      </div>
+      <div class="row" style="margin: 5px;">
+        <div class="col-md-12 flights-detail">
+          <p>Flight Details - {{trip?.tripType}}</p>
+        </div>
+        <div class="table-responsive">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">Airline</th>
+                <th scope="col">Departure</th>
+                <th scope="col">Arrival</th>
+                <th scope="col">Class</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let flight of flightSegments; let in = index">
+                <td>
+                  <p>{{ trip.airline }} - {{ flight.flightNumber }}</p>
+                  <p>{{ trip.airlineName}}</p>
+                </td>
+                <td>
+                  <p>{{flight.departureAirport}} - {{flight.departureAirportLocation}}</p>
+                  <p>{{ flight.departureDateTime | date: "medium" }}</p>
+                </td>
+                <td>
+                  <p>{{flight.arrivalAirport}} - {{flight.arrivalAirportLocation}}</p>
+                  <p>{{ flight.arrivalDateTime | date: "medium" }}</p>
+                </td>
+                <td>
+                  {{ getTravelClass(trip.travelClass) }}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="row" style="margin: 5px;">
+        <div class="col-md-12 flights-detail">
+          <p>Traveler Details</p>
+        </div>
+        <div class="table-responsive mb-5">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">Full Name</th>
+                <th scope="col">Gender</th>
+                <th scope="col">Phone</th>
+                <th scope="col">Email</th>
+                <th scope="col">Ticket#</th>
+                <th scope="col">Date of birth</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let passenger of trip?.passengerInfos; let in = index">
+                <td>{{ passenger.lastName }}/{{ passenger.firstName }} {{passenger.title}} </td>
+                <td>
+                  {{ passenger.gender }}
+                </td>
+                <td>
+                  {{ passenger.mobileNumber }}
+                </td>
+                <td>
+                  {{ passenger.email }}
+                </td>
+                <td>
+                  {{ passenger.ticketNumber }}
+                </td>
+                <td>
+                  {{ passenger.dateOfBirth | date: "longDate" }}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>      
+      <div class="row" style="margin: 5px;" *ngIf="selectedFarePrintOption === '1' || selectedFarePrintOption === '3'">
+        <div class="col-md-12 flights-detail">
+          <p>Fare Details</p>
+        </div>
+        <div class="table-responsive mb-5">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">Base Fare</th>
+                <th scope="col">Surcharge</th>
+                <th scope="col">Total Fare</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr >
+                <td>{{ getBaseFare() | currency:'PKR
+                  ':'symbol':'1.0-0' }}</td>
+                <td>
+                  {{ getSurchage() | currency:'PKR
+                  ':'symbol':'1.0-0'}}
+                </td>
+                <td>
+                  {{ getTotalFare() | currency:'PKR
+                  ':'symbol':'1.0-0' }}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="print-none">
+        <div class="row" style="margin: 5px;">
+          <div class="col-md-12 flights-detail">
+            <p>General Facts</p>
+          </div>
+          <div class="table-responsive mb-5">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th scope="col">Code</th>
+                  <th scope="col">Name</th>
+                  <th scope="col">Message</th>
+                  <th scope="col">StatusCode</th>
+                  <th scope="col">StatusName</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let special of booking?.specialService; let in = index">
+                  <td>{{ special.code }}</td>
+                  <td>
+                    {{ special.name }}
+                  </td>
+                  <td>
+                    {{ special.message }}
+                  </td>
+                  <td>
+                    {{ special.statusCode }}
+                  </td>
+                  <td>
+                    {{ special.statusName }}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="row" style="margin: 5px;">
+        <div class="col-md-12 flights-detail">
+          <p>Consultant Details</p>
+        </div>
+        <div class="table-responsive mb-5">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Phone Number</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  {{ UserName }}
+                </td>
+                <td>
+                  {{ UserEmail }}
+                </td>
+                <td>
+                  {{ UserPhone }}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <p-dialog header="Issue Offline Ticket" [(visible)]="displayBooktheTicket" [modal]="true"
+        [style]="{width: '30vw'}" [baseZIndex]="10000" [draggable]="false" [resizable]="false">
+        <mat-card>
+          <mat-card-content>
+            <form [formGroup]="ticketBookingForm">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label>Payment Recived
+                      <span class="required-asterisk">*</span></label>
+                    <div class="col-md-12 row">
+                      <mat-radio-group formControlName="paymentReceived" aria-label="Select an option">
+                        <mat-radio-button value="0">No</mat-radio-button>
+                        <mat-radio-button value="2">Yes</mat-radio-button>
+                      </mat-radio-group>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label>Payment Methods
+                      <span class="required-asterisk">*</span></label>
+                    <div class="col-md-12 row">
+                      <div class="form-group">
+                        <p-dropdown [options]="paymentMethods" formControlName="paymentMethod"
+                          placeholder="Choose an Payment Methods" optionLabel="label" optionValue="label"
+                          [showClear]="true"></p-dropdown>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+            <mat-card-actions>
+              <button pButton pRipple type="button" class="p-button-raised" label="Save"
+                [disabled]="!ticketBookingForm.valid" (click)="updateTicketBooking()">
+
+              </button>
+              <button pButton pRipple type="button" class="p-button-warning" label="Close" style="margin-left: 5px;"
+                id="ticketBooking" (click)="displayBooktheTicket=false">
+
+              </button>
+            </mat-card-actions>
+          </mat-card-content>
+        </mat-card>
+      </p-dialog>
+
+      <p-dialog header="Cancel Booking" [(visible)]="displayCancelBooking" [modal]="true" [style]="{width: '50vw'}"
+        [baseZIndex]="10000" [draggable]="false" [resizable]="false">
+        <mat-card>
+          <mat-card-content>
+            <form [formGroup]="cancelBookingForm">
+              <div class="row">
+                <div class="col-md-12">
+                  <label>Cancellation Reason<span class="required-asterisk">*</span></label>
+                  <textarea rows="5 " style="width: 100%;" formControlName="cancelReason"></textarea>
+                </div>
+              </div>
+            </form>
+            <mat-card-actions>
+              <button pButton pRipple type="button" class="p-button-raised" label="Save"
+                [disabled]="!cancelBookingForm.valid" (click)="updateRequestCancelation()">
+
+              </button>
+              <button pButton pRipple type="button" class="p-button-warning" label="Close" style="margin-left: 5px;"
+                id="cancelBooking" (click)="displayCancelBooking=false">
+
+              </button>
+            </mat-card-actions>
+          </mat-card-content>
+        </mat-card>
+      </p-dialog>
+    </mat-card-content>
+  </mat-card>
+
+</div>

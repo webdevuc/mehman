@@ -1,0 +1,3 @@
+<app-header *ngIf="isHome"></app-header>
+<router-outlet><span *ngIf="showLoader" class="loading"></span></router-outlet>
+<ng-template class="footer_content"  *ngIf="isHome" [ngComponentOutlet]="footerComponent | async"></ng-template>

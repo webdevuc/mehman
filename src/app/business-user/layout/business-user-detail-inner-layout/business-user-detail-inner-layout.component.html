@@ -1,0 +1,19 @@
+<div id="sidenav" class="sidebar">
+  <span class="logo" [routerLink]="['/booking-user/home']"> <img src="assets/images/home/logo.webp" class="img-fluid"
+      alt="mehman.pk logo"></span>
+  <h3 class="text-center">Hello <br />{{ userName }}</h3>
+  <h3 class="text-center travel-agency">Business Agency</h3>
+  <hr style="background-color: #f1f1f1;">
+  <a [routerLinkActive]="['active']" (click)="setTitle('Bookings')"
+    [routerLink]="['/booking-user/bookings']">Bookings</a>
+  <a [routerLinkActive]="['active']" (click)="setTitle('Contact Us')" [routerLink]="['/contact-us']">Contact Us</a>
+  <a [routerLink]="['/booking-user/auth/signin']" (click)="logout()">Log out</a>
+</div>
+<div class="page-content-panel-inner">
+  <app-business-user-inner-header>
+  </app-business-user-inner-header>
+
+  <router-outlet></router-outlet>
+</div>
+<!-- <app-footer class="footer_content"></app-footer> -->
+<ng-template [ngComponentOutlet]="footerComponent" class="footer_content"></ng-template>

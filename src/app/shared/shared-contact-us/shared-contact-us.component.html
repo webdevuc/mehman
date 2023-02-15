@@ -1,0 +1,205 @@
+<!-- <section class="hero-headermain">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 col-sm-12 col-xs-12">
+        <div class="header-title wow fadeInUp">
+          <h1>Contact Us</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+</section> -->
+
+<!-- start contact us -->
+
+<section class="hero-contact">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 col-sm-12 col-xs-12">
+        <div class="contact-box">
+          <div class="contact-header wow fadeInUp">
+            <h2>Send us a Message</h2>
+          </div>
+          <div class="contact-formbox wow fadeInUp">
+            <div class="contact-form">
+              <form [formGroup]="contactUsForm">
+                <div class="input-box">
+                  <label for="">Your Name: </label>
+                  <input type="text" formControlName="name" [ngClass]="{
+                      'is-invalid':
+                        (submitted || contactUsForm.get('name').touched) &&
+                        contactUsForm.get('name').errors
+                    }" class="contact-input" placeholder="Enter your name here" />
+
+                  <div *ngIf="
+                      contactUsForm.get('name').errors &&
+                      (submitted || contactUsForm.get('name').touched)
+                    " class="invalid-feedback">
+                    <div *ngIf="contactUsForm.get('name').errors.required">
+                      Name is required.
+                    </div>
+                  </div>
+                </div>
+                <div class="input-box">
+                  <label for="">Your Email: </label>
+                  <input type="email" formControlName="email" class="contact-input" placeholder="Enter your email here"
+                    [ngClass]="{
+                      'is-invalid':
+                        (submitted || contactUsForm.get('email').touched) &&
+                        contactUsForm.get('email').errors
+                    }" />
+                  <div *ngIf="
+                      contactUsForm.get('email').errors &&
+                      (submitted || contactUsForm.get('email').touched)
+                    " class="invalid-feedback">
+                    <div *ngIf="contactUsForm.get('email').errors.required">
+                      Email is required.
+                    </div>
+                    <div *ngIf="contactUsForm.get('email').errors.email">
+                      Email a valid email.
+                    </div>
+                  </div>
+                </div>
+
+                <div class="input-box">
+                  <label for="">Your Phone: </label>
+                  <input type="text" class="contact-input" placeholder="Enter your phone number here"
+                    formControlName="phone" [ngClass]="{
+                      'is-invalid':
+                        (submitted || contactUsForm.get('phone').touched) &&
+                        contactUsForm.get('phone').errors
+                    }" />
+
+                  <div *ngIf="
+                      contactUsForm.get('phone').errors &&
+                      (submitted || contactUsForm.get('phone').touched)
+                    " class="invalid-feedback">
+                    <div *ngIf="contactUsForm.get('phone').errors.required">
+                      Phone is required.
+                    </div>
+                  </div>
+                </div>
+
+                <div class="input-box">
+                  <label for="">Subject: </label>
+                  <input type="text" class="contact-input" placeholder="Enter subject here" formControlName="subject"
+                    [ngClass]="{
+                      'is-invalid':
+                        (submitted || contactUsForm.get('subject').touched) &&
+                        contactUsForm.get('subject').errors
+                    }" />
+                  <div *ngIf="
+                      contactUsForm.get('subject').errors &&
+                      (submitted || contactUsForm.get('subject').touched)
+                    " class="invalid-feedback">
+                    <div *ngIf="contactUsForm.get('subject').errors.required">
+                      Subject is required.
+                    </div>
+                  </div>
+                </div>
+                <div class="input-message">
+                  <label for="">Message:</label>
+                  <textarea class="message-input" placeholder="Type here.." formControlName="message" [ngClass]="{
+                      'is-invalid':
+                        (submitted || contactUsForm.get('message').touched) &&
+                        contactUsForm.get('message').errors
+                    }">
+                  </textarea>
+                  <div *ngIf="
+                      contactUsForm.get('message').errors &&
+                      (submitted || contactUsForm.get('message').touched)
+                    " class="invalid-feedback">
+                    <div *ngIf="contactUsForm.get('message').errors.required">
+                      Message is required.
+                    </div>
+                  </div>
+                </div>
+                <div class="contact-input-btn">
+                  <!-- <button type="button" class="reset">Reset</button> -->
+                  <p-button styleClass="p-button-lg" label="Submit" (click)="submit()"
+                    [disabled]="contactUsForm.invalid && submitted"></p-button>
+                  <!-- <button type="submit" class="input-btn" (click)="submit()"
+                    [disabled]="contactUsForm.invalid && submitted">
+                    Submit
+                  </button> -->
+                </div>
+              </form>
+            </div>
+            <div class="contact-address-box wow fadeInUp">
+              <div class="address-box">
+                <div class="address-img">
+                  <span><img src="assets/images/home/address.png" class="img-fluid" alt="" /></span>Address
+                </div>
+                <div class="address-cont">
+                  <p>
+                    Mehman Travel & Tours Pvt Limited, G25 Shimla Heights, 5
+                    Davis Road Lahore, 54000
+                  </p>
+                </div>
+              </div>
+
+              <div class="address-box">
+                <div class="address-img">
+                  <span><img src="assets/images/home/write.png" class="img-fluid" alt="" /></span>Write us
+                </div>
+                <div class="address-cont">
+                  <p><a href="javascript:void(0);">mehmanpk@gmail.com</a></p>
+                </div>
+              </div>
+
+              <div class="address-box">
+                <div class="address-img">
+                  <span><img src="assets/images/home/follow.png" class="img-fluid" alt="" /></span>Follow us
+                </div>
+                <div class="address-cont">
+                  <ul>
+                    <li>
+                      <a href="javascript:void(0);" (click)="
+                          onNavigate('https://www.facebook.com/mehman.pk')
+                        "><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                    </li>
+                    <li>
+                      <a href="javascript:void(0);" (click)="
+                          onNavigate('https://www.instagram.com/mehmanpk/')
+                        "><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                    </li>
+                    <li>
+                      <a href="javascript:void(0);" (click)="onNavigate('https://twitter.com/mehman_pk')"><i
+                          class="fa fa-tumblr" aria-hidden="true"></i></a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="address-box">
+                <div class="address-img">
+                  <span><img src="assets/images/home/callus.png" class="img-fluid" alt="" /></span>Call us
+                </div>
+                <div class="address-cont">
+                  <ul class="list-group list-group-flush">
+                    <li class="list-group-item"><a href="javascript:void(0);">{{ phone }}</a></li>
+                    <li class="list-group-item"><a href="javascript:void(0);">0322-3113285</a></li>
+                    <li class="list-group-item"><a href="javascript:void(0);">0320-2554419</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero-map">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-12 col-sm-12 col-xs-12 map-padding">
+        <div class="map">
+          <iframe frameborder="0" scrolling="no" marginheight="0" marginwidth="0" id="gmap_canvas"
+            src="https://maps.google.com/maps?width=520&amp;height=400&amp;hl=en&amp;q=5%20Davis%20Road,%20Lahore,%20Lahore+(Mehman%20Travel%20&amp;%20Tours%20Pvt%20Limited)&amp;t=&amp;z=12&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

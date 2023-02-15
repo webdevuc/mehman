@@ -1,0 +1,48 @@
+.required {
+  color: red;
+}
+
+.is-invalid {
+  border: solid 1px red;
+}
+
+.invalid-feedback {
+  display: inherit !important;
+  margin-bottom: 10px;
+}
+
+.sign-input {
+  margin-bottom: 10px;
+}
+
+.custom-sign-btn {
+  position: relative !important;
+  display: block !important;
+  width: 100%;
+  color: #fff;
+  border: 1px solid #57b957;
+  background-color: #57b957 !important;
+  box-shadow: 0px 5px 10px rgba(87, 185, 87, 0.5);
+  font-size: 16px !important;
+  text-align: center !important;
+  text-decoration: none !important;
+  font-family: "SFUIDisplay-Bold" !important;
+  letter-spacing: 0.5px !important;
+  padding: 8px 0 !important;
+  border-radius: 8px !important;
+  transition: 0.5s all ease !important;
+}
+
+.custom-sign-btn:hover {
+  background-color: transparent !important;
+  color: #57b957 !important;
+  transition: 0.5s all ease !important;
+}
+
+.signup-title h2 {
+  font-size: 32px;
+  line-height: 45px;
+  color: #181B31;
+  margin-bottom: 10px!important;
+  font-family: "SFUIDisplay-Semibold";
+}

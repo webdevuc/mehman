@@ -1,0 +1,164 @@
+
+<div class="position-static">
+<mat-card >
+    <mat-card-header>
+        <div>
+            <mat-card-title>Add Refund</mat-card-title>            
+          </div>
+    </mat-card-header>
+    <mat-card-content>
+        <mat-dialog-content>
+            <form [formGroup]="refundForm" #refundNgForm="ngForm">
+                <div class="container">   
+                    <div class="d-flex flex-wrap w-100 justify-content-start mb-4">
+                        <div class="col-lg-3 col-md-6 form-group">
+                            <label for="" class="d-flex text-primary">Request Type <span class="text-danger"> *</span>
+                            </label>
+                            <p-dropdown (onChange)="addRemoveValidation()" [options]="requestTypeList" optionLabel="name"
+                                optionValue="key" [formControlName]="'requestType'" placeholder="Select Request Type"
+                                required></p-dropdown>
+                            <p class="text-danger d-flex mt-2"
+                                *ngIf="(isSubmmited && refundForm.get('requestType').hasError('required')) || (refundForm.get('requestType').touched && refundForm.get('requestType').invalid)">
+                                Request Type field is required
+                            </p>
+                        </div>
+                        <div class="col-lg-3 col-md-6 form-group">
+                            <label for="" class="d-flex text-primary">Airline <span class="text-danger"> *</span></label>
+                            <p-dropdown [options]="airLinesList" optionLabel="name" optionValue="id"
+                                [formControlName]="'airLine'" placeholder="Select Airline" required></p-dropdown>
+    
+                            <p class="text-danger d-flex mt-2"
+                                *ngIf="(isSubmmited && refundForm.get('airLine').hasError('required')) || (refundForm.get('airLine').touched && refundForm.get('airLine').invalid)">
+                                Airline field is required
+                            </p>
+                        </div>
+    
+                        <div class="col-lg-3 col-md-6 form-group">
+                            <label for="" class="d-flex text-primary">PNR <span class="text-danger"> *</span></label>
+                            <input type="text" class="contact-input w-100 rounded" placeholder="Enter PNR here"
+                                [formControlName]="'pnr'" required />
+                            <p class="text-danger d-flex mt-2"
+                                *ngIf="(isSubmmited && refundForm.get('pnr').hasError('required')) || (refundForm.get('pnr').touched && refundForm.get('pnr').invalid)">
+                                PNR field is required
+                            </p>
+                        </div>
+                        <div class="col-lg-3 col-md-6 form-group">
+                            <label for="" class="d-flex text-primary">Route <span class="text-danger"> *</span></label>
+                            <input type="text" class="contact-input w-100 rounded" placeholder="Enter route here"
+                                [formControlName]="'route'" required />
+                            <p class="text-danger d-flex mt-2"
+                                *ngIf="(isSubmmited && refundForm.get('route').hasError('required')) || (refundForm.get('route').touched && refundForm.get('route').invalid)">
+                                Route field is required
+                            </p>
+                        </div>
+    
+                        <div class="col-lg-3 col-md-6 form-group">
+                            <label for="" class="d-flex text-primary">Travel Date <span class="text-danger">
+                                    *</span></label>
+                            <p-calendar class="w-100" [formControlName]="'travelDate'" 
+                                 [showIcon]="true" inputId="icon" required></p-calendar>
+                            <p class="text-danger d-flex mt-2"
+                                *ngIf="(isSubmmited && refundForm.get('travelDate').hasError('required')) || (refundForm.get('travelDate').touched && refundForm.get('travelDate').invalid)">
+                                Travel Date field is required
+                            </p>
+                        </div>
+    
+                        <div class="col-lg-3 col-md-6 form-group" *ngIf="refundForm.get('requestType').value == 'refund'">
+                            <label for="" class="d-flex text-primary">Refund Type <span class="text-danger"> *</span>
+                            </label>
+                            <p-dropdown [options]="refundTypeList" optionLabel="name" optionValue="key" class="w-100"
+                                [formControlName]="'refundType'" placeholder="Select Refund Type"></p-dropdown>
+                            <p class="text-danger d-flex mt-2"
+                                *ngIf="(isSubmmited && refundForm.get('refundType').hasError('required')) || (refundForm.get('refundType').touched && refundForm.get('refundType').invalid)">
+                                Refund Type field is required
+                            </p>
+                        </div>
+                    </div>
+    
+                    <div class="d-flex flex-column w-100 mb-4">
+                        <div class="d-flex w-100 justify-content-between mb-2">
+                            <h3 class="mb-0 d-flex align-items-center   px-2">Passenger Details</h3>
+    
+                            <button *ngIf="!readonly" type="button" class="btn btn-outline-success" (click)="addPassenger()">Add </button>
+                        </div>
+                        <div formArrayName="passenger">
+                            <div *ngFor="let item of refundForm.get('passenger')?.controls; let i = index"
+                                class="d-flex w-100 flex-wrap justify-content-start" [formGroupName]="i">
+                                <div class="col-md-1 col-sm-12 text-center mb-2 d-flex align-items-center">
+                                    <div class="circle">
+                                        {{i+1}}
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-4 col-sm-12  mb-2 d-flex flex-wrap align-items-center">
+                                    <div class="d-flex w-100">
+                                        <input type="text" [formControlName]="'passangerTicketNumber'"
+                                            class="contact-input w-100 rounded" placeholder="Enter ticket number*" />
+                                    </div>
+    
+                                    <p class="text-danger d-flex mt-2"
+                                        *ngIf="(isSubmmited && item.get('passangerTicketNumber').hasError('required')) || (item.get('passangerTicketNumber').touched && item.get('passangerTicketNumber').invalid)">
+                                        Passanger Ticket Number field is required
+                                    </p>
+                                </div>
+                                <div class="col-lg-3 col-md-4 col-sm-12  mb-2 d-flex flex-wrap align-items-center">
+                                    <div class="d-flex w-100">
+                                        <input type="text" [formControlName]="'passangerName'"
+                                            class="contact-input w-100 rounded" placeholder="Enter passenger name*" />
+                                    </div>
+                                    <p class="text-danger d-flex mt-2"
+                                        *ngIf="(isSubmmited && item.get('passangerName').hasError('required')) || (item.get('passangerName').touched && item.get('passangerName').invalid)">
+                                        Passanger Name field is required
+                                    </p>
+                                </div>
+                                <div class="col-md-3 col-sm-12  mb-2 d-flex align-items-center">
+                                    <button *ngIf="!readonly" (click)="deletePassengerItem(i)" class="btn btn-danger rounded-circle">
+                                        <i class="pi pi-trash"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+    
+                    </div>
+    
+                    <div class="d-flex w-100 flex-column justify-content-start mb-4">
+                        <div class="d-flex w-100 justify-content-between mb-2">
+                            <h3 class="mb-0 d-flex align-items-center   px-2">Remarks</h3>
+                        </div>
+    
+                        <div class="d-flex col-lg-7 col-md-12">
+                            <textarea class="form-control rouned" maxlength="250" rows="5"
+                                [formControlName]="'remarks'">Enter remark here...</textarea>
+                        </div>
+                    </div>
+    
+                    <div class="d-flex w-100 flex-column justify-content-start">
+                        <div class="form-check mt-3">
+                            <label class="form-check-label" for="check1">
+                                <input type="checkbox" class="form-check-input" id="check1" [formControlName]="'isChecked'"
+                                    [checked]="refundForm.get('isChecked').value"><span class="text-muted">
+                                    We
+                                    will not be
+                                    responsible for any financial loss occuring due to non complaince of the above</span>
+                            </label>
+    
+                            <div class="text-danger d-flex mt-2" *ngIf="isSubmmited && !refundForm.get('isChecked').value">
+                                Check the above check box.
+                            </div>
+                        </div>
+                    </div>               
+                    <div class="d-flex w-100 flex-column justify-content-center my-4">
+                        
+                    </div>
+                </div>
+            </form>
+        </mat-dialog-content>
+        <mat-dialog-actions align="end">
+            <div *ngIf="!readonly">
+                <button pButton pRipple type="button" class="p-button-raised p-button-success"
+                    (click)="saveDetails()" matDialogClose>Submit</button>                                
+            </div>
+            <button pButton pRipple type="button" class="p-button-raised p-button-warning" style="margin-left: 5px;" matDialogClose>Close</button>
+          </mat-dialog-actions>
+    </mat-card-content>
+</mat-card>
+</div>

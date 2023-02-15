@@ -1,0 +1,173 @@
+<div *ngFor="let data of multicityData; let i = index;">
+  <div [ngClass]="(showHomeSearch === true)?'book-box':'search-result-box wow fadeInUp'">
+    <ul>
+      <li class="trip_type" *ngIf="showHomeSearch === false">
+        <div class="result-cont trip_type">
+          <h5 style="width: 70px;">TRIP-{{i+1}}</h5>
+        </div>
+      </li>
+      <li id="liDeparture" data-trigger="manual" data-toggle="popover" data-placement="top">
+        <a (click)="fromClick(i)">
+          <div class="book-details book-details2" [title]="data.departureTitle">
+            <h5 *ngIf="showHomeSearch == true">From</h5>
+            <p *ngIf="showHomeSearch == false">From</p>
+
+            <input type="text" class="mehman-inputfiled" placeholder="Select City" *ngIf="showHomeSearch == true"
+              [(ngModel)]="data.departureCity" readonly />
+            <input type="text" class="mehman-inputfiled" placeholder="Select City" *ngIf="showHomeSearch == false"
+              [(ngModel)]="data.departureAirportName" readonly />
+            <p *ngIf="showHomeSearch == true">{{ data.departureAirportName}}</p>
+          </div>
+        </a>
+        <div class="inputfiled-formboxes selectmulticityboxFrom{{i}}">
+          <div class="inputfiled-formbox">
+            <div class="input-search">
+              <input type="text" id="txtFromCity{{i}}" class="input-from" placeholder="From"
+                (keyup)="searchDeparturePopup(i)" autofocus />
+              <div class="seach-icon">
+                <i class="fa fa-search" aria-hidden="true"></i>
+              </div>
+            </div>
+            <ul *ngIf="
+                                                    popularCities &&
+                                                    popularCities.length > 0 &&
+                                                    isSuggest === true
+                                                  ">
+              <li>
+                <p class="recent-tag">Popular Cities</p>
+              </li>
+              <li *ngFor="let airport of popularCities" role="option" (click)="selectedFrom(airport,i)"
+                style="cursor: pointer">
+                <div class="hrtlCenter" (click)="hideFromAirportResults(i)">
+                  <div class="recent-searches">
+                    <p>
+                      {{ airport.city }}, {{ airport.country }}
+                    </p>
+                    <p class="blackText">{{ airport.name }}</p>
+                  </div>
+                  <div class="searches-code">
+                    <p>{{ airport.code }}</p>
+                  </div>
+                </div>
+              </li>
+            </ul>
+            <ul *ngIf="
+                                                    departureAirportResults &&
+                                                    departureAirportResults.length > 0
+                                                  ">
+              <li>
+                <p class="recent-tag">SUGGESTIONS</p>
+              </li>
+              <li *ngFor="let airport of departureAirportResults" role="option" (click)="selectedFrom(airport,i)"
+                style="cursor: pointer">
+                <div class="hrtlCenter" (click)="hideFromAirportResults(i)">
+                  <div class="recent-searches">
+                    <p>
+                      {{ airport.city }}, {{ airport.country }}
+                    </p>
+                    <p class="blackText">{{ airport.name }}</p>
+                  </div>
+                  <div class="searches-code">
+                    <p>{{ airport.code }}</p>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </li>
+      <li id="liArrival" data-trigger="focus" data-toggle="popover" data-placement="top"
+        [attr.data-content]="liArrivalErrMsg">
+        <a (click)="toClick(i)">
+          <div class="book-details book-details2" [title]="data.arrivalTitle">
+            <h5 *ngIf="showHomeSearch == true">To</h5>
+            <p *ngIf="showHomeSearch == false">To</p>
+            <input type="text" class="mehman-inputfiled" placeholder="Select City" *ngIf="showHomeSearch == true"
+              [(ngModel)]="data.arrivalCity" readonly />
+            <input type="text" class="mehman-inputfiled" placeholder="Select City" *ngIf="showHomeSearch == false"
+              [(ngModel)]="data.arrivalAirportName" readonly />
+            <p *ngIf="showHomeSearch == true">{{ data.arrivalAirportName}}</p>
+          </div>
+        </a>
+        <div class="inputfiled-formboxes selectmulticityboxTo{{i}}">
+          <div class="inputfiled-formbox">
+
+            <div class="input-search">
+              <input type="text" id="txtToCity{{i}}" class="input-from" placeholder="To" (keyup)="searchArrivalPopup(i)"
+                autofocus />
+              <div class="seach-icon">
+                <i class="fa fa-search" aria-hidden="true"></i>
+              </div>
+            </div>
+            <ul class="arriveselect" *ngIf="
+                                                    arrivalAirportResults &&
+                                                    arrivalAirportResults.length > 0
+                                                  ">
+              <li>
+                <p class="recent-tag">SUGGESTIONS</p>
+              </li>
+              <li *ngFor="let airport of arrivalAirportResults" role="option" (click)="selectedTo(airport,i)"
+                style="cursor: pointer">
+                <div class="hrtlCenter" (click)="hideToAirportResults(i)">
+                  <div class="recent-searches">
+                    <p>
+                      {{ airport.city }}, {{ airport.country }}
+                    </p>
+                    <p class="blackText">{{ airport.name }}</p>
+                  </div>
+                  <div class="searches-code">
+                    <p>{{ airport.code }}</p>
+                  </div>
+                </div>
+              </li>
+            </ul>
+            <ul class="arriveselect" *ngIf="popularCities && popularCities.length > 0 && isSuggest === true">
+              <li>
+                <p class="recent-tag">POPULAR CITIES</p>
+              </li>
+              <li *ngFor="let airport of popularCities" role="option" (click)="selectedTo(airport,i)"
+                style="cursor: pointer">
+                <div class="hrtlCenter" (click)="hideToAirportResults(i)">
+                  <div class="recent-searches">
+                    <p>
+                      {{ airport.city }}, {{ airport.country }}
+                    </p>
+                    <p class="blackText">{{ airport.name }}</p>
+                  </div>
+                  <div class="searches-code">
+                    <p>{{ airport.code }}</p>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </li>
+      <li class="dates" style="cursor: pointer" (click)="singleDatePicker(i,data)">
+        <div class="book-details">
+          <h5 *ngIf="showHomeSearch == true">Departure</h5>
+          <p *ngIf="showHomeSearch == false">Departure</p>
+          <h2>{{ data.departureDisplayDate | date: "d MMM yy" }}</h2>
+          <p *ngIf="showHomeSearch == true">{{ data.departureDisplayDate | date: "EEEE" }}</p>
+          <div class="date">
+            <input type="text" name="daterange" [(ngModel)]="data.departureDate" id="dpLeaveDate{{i}}" readonly />
+          </div>
+        </div>
+      </li>
+      <li>
+
+        <button type="button" pRipple class="p-button-raised p-button-text" icon="pi pi-plus-circle" pButton
+          (click)="createBlankFormArray()" *ngIf="multicityData.length == i+1" [disabled]="multicityData.length > 3"
+          label="Add City" (click)="onUpdateMultiCity.emit('AddCity')"></button>
+
+        <button pButton pRipple type="button" style="margin-left: 15px;" icon="pi pi-times"
+          class="p-button-rounded p-button-danger" (click)="removeMulticityData(i)"  (click)="onUpdateMultiCity.emit('DeleteRow')"
+          *ngIf="multicityData.length == i+1 && i>0"></button>
+
+        <button pButton type="button" *ngIf="multicityData.length == i+1 && showHomeSearch === false" style="margin-left: 15px;" icon="pi pi-plus-search" label="SEARCH"
+                      icon="pi pi-search" (click)="onSearch.emit('Search')"></button>
+      </li>
+    </ul>
+
+  </div>
+</div>

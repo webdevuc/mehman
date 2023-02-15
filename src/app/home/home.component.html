@@ -1,0 +1,582 @@
+<!-- header banner -->
+<section class="header-banner">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 col-sm-12 col-xs-12">
+        <div class="header-tabview wow fadeIn">
+          <div class="tab-navigation">
+            <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+              <li class="nav-item">
+                <a class="nav-link active" id="pills-Flights-tab" data-toggle="pill" href="#pills-Flights" role="tab"
+                  (click)="selectedTab('flights')" aria-controls="pills-Flights" aria-selected="true">
+                  <span class="tab-img">
+                    <svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+                      <path
+                        d="M26.6604 16.0955L26.113 13.3585L28.9607 10.5107C30.9206 8.55098 32 5.94524 32 3.16993C32 1.42206 30.5779 0 28.8264 0C26.0548 0 23.4491 1.07925 21.4892 3.03912L18.6414 5.88693L15.9044 5.33949C16.424 4.17449 16.2073 2.75824 15.2529 1.80381C14.0169 0.567686 12.0057 0.567811 10.7699 1.80381L8.67923 3.89449L5.54536 3.26781C4.38849 3.03662 3.19999 3.39643 2.36581 4.23049C0.826998 5.7693 1.04069 8.32123 2.80887 9.58417L9.94317 14.6801C9.05617 15.7032 8.25423 16.7895 7.53774 17.932H2.89524C1.29887 17.932 0 19.2308 0 20.8273C0 21.9226 0.628186 22.9446 1.6005 23.4306L4.26387 24.7623L3.07406 27.5384C2.69924 28.4131 3.58693 29.3006 4.46149 28.9258L7.23761 27.736L8.56936 30.3995C9.05542 31.3718 10.0773 32 11.1727 32C12.769 32 14.0679 30.7012 14.0679 29.1048V24.4622C15.2104 23.7457 16.2968 22.9438 17.3198 22.0568L22.4157 29.1911V29.191C23.6786 30.9591 26.2296 31.1739 27.7693 29.6342C28.6035 28.8 28.9634 27.6114 28.7321 26.4546L28.1053 23.3208L30.1959 21.2301C31.4319 19.9942 31.4319 17.9832 30.1959 16.7471C29.2416 15.7926 27.8253 15.576 26.6604 16.0955ZM12.2642 3.29812C12.6763 2.88624 13.3465 2.88618 13.7585 3.29812C14.1705 3.71012 14.1705 4.38049 13.7586 4.79243L13.6603 4.89068L11.1697 4.39255L12.2642 3.29812ZM4.03737 7.86442C2.81543 6.99155 3.64331 5.04268 5.13099 5.33999C5.31293 5.37643 16.4749 7.60874 16.8454 7.68286L11.4028 13.1255L4.03737 7.86442ZM2.54556 21.5403C2.28293 21.409 2.11331 21.1291 2.11331 20.8271C2.11331 20.396 2.46406 20.0451 2.89524 20.0451H6.34474C5.87274 20.9791 5.66461 21.494 5.0978 22.8164L2.54556 21.5403ZM11.9547 29.1047C11.9547 29.5358 11.6039 29.8866 11.1727 29.8866C10.8708 29.8866 10.5909 29.717 10.4595 29.4544L9.18336 26.9021C10.494 26.3405 11.0182 26.1284 11.9546 25.6553V29.1047H11.9547ZM17.2119 19.271C13.4013 23.0816 9.96673 24.2672 6.05711 25.9427C7.73274 22.033 8.91798 18.5989 12.7286 14.7882C13.6415 13.8753 22.4391 5.07774 22.9835 4.53337C24.5441 2.97274 26.6192 2.11331 28.83 2.11331C29.4126 2.11331 29.8866 2.58731 29.8866 3.17362C29.8866 5.38074 29.0271 7.4558 27.4664 9.01648C27.0794 9.40348 17.598 18.8849 17.2119 19.271ZM24.1355 27.9627C24.1355 27.9626 24.1355 27.9626 24.1355 27.9626L18.8744 20.5971L24.3171 15.1545C24.5396 16.2672 26.4098 25.6181 26.6599 26.869C26.9537 28.3379 25.018 29.198 24.1355 27.9627ZM28.7018 19.7358L27.6073 20.8303L27.1092 18.3397L27.2074 18.2414C27.6195 17.8295 28.2897 17.8294 28.7018 18.2414C29.1138 18.6535 29.1138 19.3238 28.7018 19.7358Z" />
+                    </svg>
+                  </span>
+                  Flights
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" id="pills-Visas-tab" data-toggle="pill" href="#pills-Visas" role="tab"
+                (click)="selectedTab('visas')" aria-controls="pills-Visas" aria-selected="false">
+                  <span class="tab-img">
+                    <svg width="28" height="32" viewBox="0 0 28 32" xmlns="http://www.w3.org/2000/svg">
+                      <path
+                        d="M5.5625 32H22.4375C25.0222 32 27.125 29.8972 27.125 27.3125V4.6875C27.125 2.10278 25.0222 0 22.4375 0C16.9819 0 10.9585 0 5.5625 0C2.97778 0 0.875 2.10278 0.875 4.6875V27.3125C0.875 29.8972 2.97778 32 5.5625 32ZM25.25 4.6875V27.3125C25.25 28.8633 23.9883 30.125 22.4375 30.125H22.4351C23.0249 29.3411 23.375 28.3669 23.375 27.3125V4.6875C23.375 3.63306 23.0249 2.65894 22.4351 1.875H22.4375C23.9883 1.875 25.25 3.13672 25.25 4.6875ZM2.75 4.6875C2.75 3.13672 4.01172 1.875 5.5625 1.875H18.6875C20.2383 1.875 21.5 3.13672 21.5 4.6875V27.3125C21.5 28.8633 20.2383 30.125 18.6875 30.125C18.0955 30.125 9.15039 30.125 5.5625 30.125C4.01172 30.125 2.75 28.8633 2.75 27.3125V4.6875Z" />
+                      <path
+                        d="M12.125 20.625C16.2605 20.625 19.625 17.2605 19.625 13.125C19.625 8.9895 16.2605 5.625 12.125 5.625C7.9895 5.625 4.625 8.9895 4.625 13.125C4.625 17.2605 7.9895 20.625 12.125 20.625ZM6.57861 14.0625H8.40259C8.48511 15.4932 8.75562 16.8306 9.18677 17.9197C7.83008 17.0852 6.85303 15.6917 6.57861 14.0625ZM12.125 7.5C12.7246 7.5 13.7791 9.25708 13.97 12.1875H10.28C10.4709 9.25708 11.5254 7.5 12.125 7.5ZM13.97 14.0625C13.7791 16.9929 12.7246 18.75 12.125 18.75C11.5254 18.75 10.4709 16.9929 10.28 14.0625H13.97ZM15.0632 17.9197C15.4944 16.8306 15.7649 15.4924 15.8474 14.0618H17.6714C17.397 15.6912 16.4199 17.0852 15.0632 17.9197ZM17.6714 12.1875H15.8474C15.7649 10.7568 15.4944 9.41943 15.0632 8.33032C16.4199 9.16479 17.397 10.5583 17.6714 12.1875ZM9.18677 8.33032C8.75562 9.41943 8.48511 10.7568 8.40259 12.1875H6.57861C6.85303 10.5583 7.83008 9.16479 9.18677 8.33032Z" />
+                      <path
+                        d="M16.8125 22.625H7.4375C6.91968 22.625 6.5 23.0447 6.5 23.5625C6.5 24.0803 6.91968 24.5 7.4375 24.5H16.8125C17.3303 24.5 17.75 24.0803 17.75 23.5625C17.75 23.0447 17.3303 22.625 16.8125 22.625Z" />
+                      <path
+                        d="M14.9375 26.375H9.3125C8.79468 26.375 8.375 26.7947 8.375 27.3125C8.375 27.8303 8.79468 28.25 9.3125 28.25H14.9375C15.4553 28.25 15.875 27.8303 15.875 27.3125C15.875 26.7947 15.4553 26.375 14.9375 26.375Z" />
+                    </svg>
+                  </span>
+                  Visas
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link disabled" id="pills-Hotels-tab" data-toggle="pill" href="#pills-Hotels" role="tab"
+                  aria-controls="pills-Hotels" aria-selected="false">
+                  <span class="tab-img">
+                    <svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+                      <path
+                        d="M31.0625 13.125C31.5802 13.125 32 12.7052 32 12.1875V8.4375C32 7.91975 31.5802 7.5 31.0625 7.5C30.6369 7.5 26.8102 7.5 26.375 7.5V5.625H27.3125C27.8302 5.625 28.25 5.20525 28.25 4.6875V0.9375C28.25 0.41975 27.8302 0 27.3125 0C26.5471 0 5.76425 0 4.6875 0C4.16975 0 3.75 0.41975 3.75 0.9375V4.6875C3.75 5.20525 4.16975 5.625 4.6875 5.625H5.625V7.5C5.18975 7.5 1.36319 7.5 0.9375 7.5C0.41975 7.5 0 7.91975 0 8.4375V12.1875C0 12.7052 0.41975 13.125 0.9375 13.125H1.875V30.125H0.9375C0.41975 30.125 0 30.5448 0 31.0625C0 31.5802 0.41975 32 0.9375 32C1.31337 32 30.6758 32 31.0625 32C31.5802 32 32 31.5802 32 31.0625C32 30.5448 31.5802 30.125 31.0625 30.125H30.125V13.125H31.0625ZM5.625 30.125H3.75V13.125H5.625V30.125ZM5.625 11.25H1.875V9.375C2.28556 9.375 5.14787 9.375 5.625 9.375V11.25ZM5.625 1.875C6.34363 1.875 25.6407 1.875 26.375 1.875V3.75H5.625V1.875ZM11.25 30.125V24.375H15.1289L15.1376 30.125H11.25ZM20.75 30.125H17.0126L17.0039 24.375H20.75V30.125ZM24.5 30.125H22.625V23.4375C22.625 22.9198 22.2052 22.5 21.6875 22.5C21.1898 22.5 10.8632 22.5 10.3125 22.5C9.79475 22.5 9.375 22.9198 9.375 23.4375V30.125H7.5C7.5 29.5086 7.5 6.25087 7.5 5.625H24.5C24.5 6.24794 24.5 29.5084 24.5 30.125ZM28.25 30.125H26.375V13.125H28.25V30.125ZM26.375 11.25V9.375C26.8058 9.375 29.7208 9.375 30.125 9.375V11.25H26.375Z" />
+                    </svg>
+                  </span>
+                  Hotels
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link disabled" id="pills-Umrah-tab" data-toggle="pill" href="#pills-Umrah" role="tab"
+                  aria-controls="pills-Umrah" aria-selected="false">
+                  <span class="tab-img">
+                    <svg width="34" height="32" viewBox="0 0 34 32" xmlns="http://www.w3.org/2000/svg">
+                      <path
+                        d="M31.0205 9.04767V8.68698C31.8421 8.39733 32.5225 7.77414 32.8752 6.94047C33.1015 6.40557 32.8512 5.78868 32.3164 5.56245C31.7816 5.3361 31.1646 5.58645 30.9384 6.12128C30.7733 6.51157 30.3928 6.76381 29.9691 6.76381C29.3893 6.76381 28.9175 6.29208 28.9175 5.71228C28.9175 5.28855 29.1698 4.90808 29.5601 4.74295C30.095 4.51672 30.3451 3.89977 30.1189 3.36493C29.8927 2.83004 29.2756 2.57969 28.7409 2.80611C27.5706 3.30107 26.8145 4.44184 26.8145 5.71235C26.8145 7.08318 27.6937 8.25191 28.9175 8.68597V9.04774C27.6936 9.4818 26.8145 10.6506 26.8145 12.0214V20.4334H24.361V17.2789C24.361 15.0121 22.4695 13.5408 20.8005 12.2429C19.3871 11.1434 18.052 10.105 18.052 8.86679V8.03274C19.3029 7.7111 20.356 6.82546 20.8755 5.59728C21.1018 5.06251 20.8515 4.44549 20.3167 4.21927C19.7818 3.99291 19.1649 4.2432 18.9387 4.77809C18.6085 5.55855 17.8477 6.06283 17.0005 6.06283C15.8409 6.06283 14.8975 5.11945 14.8975 3.95985C14.8975 3.11257 15.4018 2.35183 16.1823 2.02162C16.7171 1.79533 16.9673 1.17837 16.7411 0.643543C16.5148 0.108775 15.8978 -0.141509 15.363 0.0847798C13.8027 0.744753 12.7945 2.2658 12.7945 3.95985C12.7945 5.91609 14.137 7.56467 15.949 8.03274V8.86685C15.949 10.1051 14.6139 11.1435 13.2005 12.2429C11.5316 13.5408 9.63999 15.0121 9.63999 17.2789V20.4334H7.18652V12.0214C7.18652 10.6505 6.30737 9.4818 5.08354 9.04774V8.68705C5.90512 8.3974 6.58556 7.7742 6.93825 6.94053C7.16448 6.40564 6.91426 5.78874 6.37942 5.56252C5.84466 5.33616 5.22764 5.58651 5.00141 6.12134C4.83634 6.51163 4.45581 6.76387 4.03208 6.76387C3.45228 6.76387 2.98055 6.29215 2.98055 5.71235C2.98055 5.28861 3.23279 4.90815 3.62308 4.74301C4.15797 4.51679 4.40813 3.89983 4.18191 3.365C3.95562 2.83017 3.33866 2.57976 2.80389 2.80617C1.63352 3.30107 0.877441 4.44184 0.877441 5.71235C0.877441 7.08318 1.75659 8.25191 2.98043 8.68597V9.04774C1.75659 9.4818 0.877441 10.6506 0.877441 12.0214V30.9485C0.877441 31.5292 1.34822 32 1.92897 32H32.072C32.6527 32 33.1236 31.5292 33.1236 30.9485V12.0214C33.1235 10.6505 32.2444 9.48173 31.0205 9.04767ZM5.08347 21.4848V29.8968H2.98043V15.1758H5.08341V21.4848H5.08347ZM5.08347 13.0728H2.98043V12.0213C2.98043 11.4415 3.45215 10.9698 4.03195 10.9698C4.61175 10.9698 5.08347 11.4415 5.08347 12.0213V13.0728ZM9.63993 29.8969H7.18646V22.5364H9.63993V29.8969ZM18.052 29.8969H15.949V26.7424C15.949 26.1626 16.4207 25.6909 17.0005 25.6909C17.5803 25.6909 18.0521 26.1626 18.0521 26.7424V29.8969H18.052ZM22.258 29.8969H20.155V26.7424C20.155 25.003 18.7399 23.5879 17.0005 23.5879C15.2611 23.5879 13.846 25.003 13.846 26.7424V29.8969H11.743V20.4334H22.258V29.8969H22.258ZM22.258 18.3303H11.743V17.2788C11.743 16.0405 13.078 15.0022 14.4915 13.9028C15.3686 13.2206 16.3072 12.4906 17.0005 11.6223C17.6937 12.4905 18.6322 13.2205 19.5094 13.9028C20.9229 15.0022 22.258 16.0405 22.258 17.2788V18.3303ZM26.8145 29.8969H24.361V22.5364H26.8145V29.8969H26.8145ZM31.0205 29.8969H28.9175V21.4848V15.1758H31.0205V29.8969ZM31.0205 13.0728H28.9175V12.0213C28.9175 11.4415 29.3893 10.9698 29.9691 10.9698C30.5489 10.9698 31.0206 11.4415 31.0206 12.0213V13.0728H31.0205Z" />
+                    </svg>
+                  </span>
+                  Umrah
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link disabled" id="pills-Holidays-tab" data-toggle="pill" href="#pills-Holidays"
+                  role="tab" aria-controls="pills-Holidays" aria-selected="false">
+                  <span class="tab-img">
+                    <svg width="24" height="32" viewBox="0 0 24 32" xmlns="http://www.w3.org/2000/svg">
+                      <path
+                        d="M19.8602 3.6875H15.8275C15.6736 1.6275 14.0164 0 12 0C9.9837 0 8.32651 1.6275 8.17255 3.6875H4.13982C1.8571 3.6875 0 5.62206 0 8V12.5625C0 13.6395 0.584435 14.5766 1.43994 15.0489V27.5625C1.43994 30.0093 3.35092 32 5.69976 32H18.3002C20.6491 32 22.5601 30.0093 22.5601 27.5625V15.0489C23.4156 14.5765 24 13.6394 24 12.5625V8C24.0001 5.62206 22.143 3.6875 19.8602 3.6875ZM18.3603 26.3124V25.375C18.3603 23.8242 17.1491 22.5625 15.6604 22.5625H8.33965C6.85093 22.5625 5.63976 23.8242 5.63976 25.375V26.3124H3.23986V15.375H6.66074V19.25C6.66074 19.7677 7.06368 20.1875 7.5607 20.1875C8.05772 20.1875 8.46066 19.7677 8.46066 19.25V15.375H15.5403V19.25C15.5403 19.7677 15.9432 20.1875 16.4403 20.1875C16.9373 20.1875 17.3402 19.7677 17.3402 19.25V15.375H20.7601V26.3124H18.3603ZM16.5604 26.3124H7.43968V25.375C7.43968 24.8581 7.84341 24.4375 8.33965 24.4375H15.6604C16.1567 24.4375 16.5604 24.8581 16.5604 25.375V26.3124ZM12 1.875C13.0231 1.875 13.8724 2.66337 14.0182 3.6875H9.9819C10.1276 2.66337 10.977 1.875 12 1.875ZM1.79992 8C1.79992 6.65594 2.84958 5.5625 4.13982 5.5625H19.8602C21.1505 5.5625 22.2001 6.65594 22.2001 8V12.5625C22.2001 13.0794 21.7964 13.5 21.3002 13.5H17.3403V11.625C17.3403 11.1073 16.9373 10.6875 16.4403 10.6875C15.9433 10.6875 15.5404 11.1073 15.5404 11.625V13.5H8.46072V11.625C8.46072 11.1073 8.05778 10.6875 7.56076 10.6875C7.06374 10.6875 6.6608 11.1073 6.6608 11.625V13.5H2.69989C2.20365 13.5 1.79992 13.0794 1.79992 12.5625V8ZM18.3003 30.125H5.69982C4.55033 30.125 3.58275 29.2993 3.31426 28.1874H20.6859C20.4174 29.2993 19.4498 30.125 18.3003 30.125Z" />
+                    </svg>
+                  </span>
+                  Holidays
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link disabled" id="pills-Transfers-tab" data-toggle="pill" href="#pills-Transfers"
+                  role="tab" aria-controls="pills-Transfers" aria-selected="false">
+                  <span class="tab-img">
+                    <svg width="32" height="30" viewBox="0 0 32 30" xmlns="http://www.w3.org/2000/svg">
+                      <path
+                        d="M24.5 25.0932H15C14.3096 25.0932 13.75 24.537 13.75 23.8509C13.75 23.1648 14.3096 22.6087 15 22.6087H24.5C27.257 22.6087 29.5 20.3796 29.5 17.6398V7.45342C29.5 4.71354 27.257 2.48447 24.5 2.48447H7.5C4.743 2.48447 2.5 4.71354 2.5 7.45342V17.0186C2.5 17.3611 2.78038 17.6398 3.125 17.6398H6.875C7.56537 17.6398 8.125 18.1959 8.125 18.882C8.125 19.5681 7.56537 20.1242 6.875 20.1242H3.125C1.40188 20.1242 0 18.7311 0 17.0186V7.45342C0 3.3436 3.3645 0 7.5 0H24.5C28.6355 0 32 3.3436 32 7.45342V17.6398C32 21.7496 28.6355 25.0932 24.5 25.0932ZM11.25 23.8496C11.25 23.1635 10.6904 22.6074 10 22.6074H1.25C0.559625 22.6074 0 23.1635 0 23.8496C0 24.5357 0.559625 25.0919 1.25 25.0919H10C10.6904 25.0919 11.25 24.5357 11.25 23.8496ZM15 28.7578C15 28.0717 14.4404 27.5155 13.75 27.5155H1.25C0.559625 27.5155 0 28.0717 0 28.7578C0 29.4439 0.559625 30 1.25 30H13.75C14.4404 30 15 29.4439 15 28.7578ZM21 12.5466C21 9.80671 18.757 7.57764 16 7.57764C13.243 7.57764 11 9.80671 11 12.5466C11 15.2865 13.243 17.5155 16 17.5155C18.757 17.5155 21 15.2865 21 12.5466ZM18.5 12.5466C18.5 13.9165 17.3785 15.0311 16 15.0311C14.6215 15.0311 13.5 13.9165 13.5 12.5466C13.5 11.1766 14.6215 10.0621 16 10.0621C17.3785 10.0621 18.5 11.1766 18.5 12.5466ZM27.0625 8.38509C27.0625 7.69901 26.5029 7.14286 25.8125 7.14286C25.2956 7.14286 24.875 6.72491 24.875 6.21118C24.875 5.52509 24.3154 4.96894 23.625 4.96894C22.9346 4.96894 22.375 5.52509 22.375 6.21118C22.375 8.09484 23.9171 9.62733 25.8125 9.62733C26.5029 9.62733 27.0625 9.07118 27.0625 8.38509ZM9.75 6.3354C9.75 5.64932 9.19038 5.09317 8.5 5.09317C7.80963 5.09317 7.25 5.64932 7.25 6.3354C7.25 6.84913 6.82944 7.26708 6.3125 7.26708C5.62213 7.26708 5.0625 7.82323 5.0625 8.50932C5.0625 9.1954 5.62213 9.75155 6.3125 9.75155C8.20794 9.75155 9.75 8.21907 9.75 6.3354ZM24.875 18.882C24.875 18.3683 25.2956 17.9503 25.8125 17.9503C26.5029 17.9503 27.0625 17.3942 27.0625 16.7081C27.0625 16.022 26.5029 15.4658 25.8125 15.4658C23.9171 15.4658 22.375 16.9983 22.375 18.882C22.375 19.5681 22.9346 20.1242 23.625 20.1242C24.3154 20.1242 24.875 19.5681 24.875 18.882Z" />
+                    </svg>
+                  </span>
+                  Transfers
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link disabled" id="pills-Activities-tab" data-toggle="pill" href="#pills-Activities"
+                  role="tab" aria-controls="pills-Activities" aria-selected="false">
+                  <span class="tab-img">
+                    <svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+                      <path
+                        d="M2.1875 23.875C2.1875 23.1846 2.74712 22.625 3.43749 22.625H7.4028C7.48468 22.0595 7.62118 21.5115 7.80686 20.9864L4.00949 18.8379C3.40868 18.498 3.19712 17.7353 3.53706 17.1344C3.87693 16.5336 4.63981 16.322 5.24055 16.662L8.97267 18.7736C9.39086 18.1991 9.87761 17.6776 10.4209 17.2213L8.1808 13.5225C7.82318 12.932 8.01199 12.1633 8.60249 11.8057C9.1928 11.4481 9.96155 11.6368 10.3192 12.2273L12.5461 15.9043C13.2575 15.5948 14.018 15.3779 14.8125 15.2689V11.3749C14.8125 10.6845 15.3722 10.1249 16.0625 10.1249C16.7529 10.1249 17.3125 10.6845 17.3125 11.3749V15.2864C18.0793 15.4031 18.8131 15.6208 19.5007 15.9248L21.5323 12.2678C21.8675 11.6644 22.6285 11.4469 23.232 11.7822C23.8355 12.1175 24.053 12.8785 23.7177 13.482L21.6208 17.2564C22.0887 17.6544 22.5138 18.1009 22.8887 18.5882L26.5232 16.5918C27.1284 16.2594 27.8883 16.4804 28.2206 17.0855C28.553 17.6906 28.3319 18.4506 27.7268 18.7829L24.1128 20.7681C24.3398 21.3589 24.504 21.9804 24.5973 22.6248H28.4375C29.1278 22.6248 29.6875 23.1844 29.6875 23.8748C29.6875 24.5652 29.1278 25.1248 28.4375 25.1248H23.4375C22.7471 25.1248 22.1875 24.5652 22.1875 23.8748C22.1875 20.463 19.4118 17.6873 16 17.6873C12.5882 17.6873 9.81249 20.463 9.81249 23.8748C9.81249 24.5652 9.25286 25.1248 8.56249 25.1248C8.55192 25.1248 8.54174 25.1235 8.53124 25.1233C8.52074 25.1235 8.51055 25.1248 8.49999 25.1248H3.43749C2.74712 25.125 2.1875 24.5654 2.1875 23.875ZM30.2055 28.2596C29.6696 27.6179 28.8657 27.25 28 27.25C27.1342 27.25 26.3303 27.618 25.7945 28.2595C25.136 29.0478 24.4819 29.5 24 29.5C23.518 29.5 22.864 29.0479 22.2055 28.2596C21.6697 27.6179 20.8657 27.25 20 27.25C19.1342 27.25 18.3303 27.618 17.7945 28.2595C17.136 29.0478 16.4819 29.5 16 29.5C15.518 29.5 14.864 29.0479 14.2055 28.2596C13.6697 27.6179 12.8657 27.25 12 27.25C11.1342 27.25 10.3303 27.618 9.79449 28.2595C9.13599 29.0478 8.48193 29.5 7.99999 29.5C7.51805 29.5 6.86399 29.0479 6.20555 28.2596C5.66968 27.6179 4.86581 27.25 3.99999 27.25C3.13418 27.25 2.33031 27.618 1.7945 28.2595C1.136 29.0478 0.481937 29.5 0 29.5V32C1.279 32 2.52825 31.2808 3.71324 29.8621C3.77187 29.7919 3.87906 29.75 3.99999 29.75C4.12093 29.75 4.22806 29.7919 4.28681 29.8622C5.47174 31.2808 6.72099 32 7.99999 32C9.27899 32 10.5282 31.2808 11.7132 29.8621C11.7719 29.7919 11.879 29.75 12 29.75C12.1209 29.75 12.228 29.7919 12.2868 29.8622C13.4717 31.2808 14.721 32 16 32C17.279 32 18.5282 31.2808 19.7132 29.8621C19.7718 29.7919 19.879 29.75 20 29.75C20.1209 29.75 20.228 29.7919 20.2868 29.8622C21.4717 31.2808 22.721 32 24 32C25.279 32 26.5282 31.2808 27.7132 29.8621C27.7718 29.7919 27.879 29.75 28 29.75C28.1209 29.75 28.228 29.7919 28.2868 29.8622C29.4717 31.2808 30.721 32 32 32V29.5C31.518 29.5 30.864 29.0478 30.2055 28.2596ZM19.1761 6.81245C22.7841 6.84545 26.0706 8.80002 26.1018 8.81876C26.2993 8.93858 26.5235 8.99958 26.7491 8.99958C26.8945 8.99958 27.0405 8.97427 27.1802 8.92308C27.537 8.79239 27.8151 8.50589 27.9357 8.14564C27.948 8.10901 29.1915 4.4532 31.6106 2.15658C32.1113 1.68127 32.1318 0.890081 31.6565 0.389393C31.1812 -0.111231 30.39 -0.131794 29.8893 0.343456C27.9961 2.14089 26.7482 4.52889 26.0986 6.00458C24.6163 5.31289 22.0327 4.33852 19.1989 4.31258C19.195 4.31258 19.1912 4.31252 19.1872 4.31252C18.5022 4.31252 17.9438 4.86464 17.9375 5.55108C17.9312 6.24139 18.4857 6.80614 19.1761 6.81245ZM7.27055 5.43677C9.9558 5.52695 11.9846 6.74139 12.0012 6.75145C12.2004 6.87433 12.4273 6.9367 12.6557 6.9367C12.8077 6.9367 12.9604 6.90902 13.1059 6.85314C13.4699 6.71333 13.7482 6.41039 13.8577 6.03614C13.865 6.01133 14.6024 3.53845 16.1814 2.20508C16.7089 1.75971 16.7754 0.971018 16.33 0.443581C15.8845 -0.083919 15.096 -0.150419 14.5685 0.295018C13.2967 1.36889 12.4584 2.87633 11.9754 3.96439C10.9071 3.51952 9.27524 3.00277 7.35436 2.93827C6.66674 2.9147 6.0863 3.45564 6.06318 4.14558C6.04005 4.83552 6.58055 5.41364 7.27055 5.43677Z" />
+                    </svg>
+                  </span>
+                  Activities
+                </a>
+
+              <li class="nav-item">
+                <a class="nav-link disabled" id="pills-Insurance-tab" data-toggle="pill" href="#pills-Insurance"
+                  role="tab" aria-controls="pills-Insurance" aria-selected="false">
+                  <span class="tab-img">
+                    <svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+                      <path
+                        d="M27.242 4.60925C24.2218 1.63694 20.2288 0 15.9986 0C11.7684 0 7.77571 1.63681 4.756 4.609C1.73303 7.58438 0.0439949 11.5457 5.15437e-05 15.7633C-0.00526167 16.2751 0.400855 16.6966 0.912611 16.7103C1.42593 16.7247 1.85236 16.3247 1.87443 15.8134C1.8778 15.7354 1.88443 15.6567 1.89418 15.5797C1.89418 15.5796 1.89418 15.5796 1.89418 15.5795C2.07133 14.1802 3.27093 13.125 4.68461 13.125C6.23563 13.125 7.49749 14.3867 7.49749 15.9375C7.49749 16.4552 7.91729 16.875 8.43511 16.875C8.95293 16.875 9.37274 16.4552 9.37274 15.9375C9.37274 14.3867 10.6346 13.125 12.1856 13.125C13.7443 13.125 15.061 14.4129 15.061 15.9375V28.2501C15.061 29.2839 14.2198 30.125 13.1857 30.125C12.1517 30.125 11.3105 29.2839 11.3105 28.25C11.3105 27.7323 10.8907 27.3125 10.3729 27.3125C9.85505 27.3125 9.43525 27.7323 9.43525 28.25C9.43525 30.3177 11.1177 32 13.1857 32C15.2538 32 16.9362 30.3178 16.9362 28.2501V15.9375C16.9362 14.4129 18.253 13.125 19.8116 13.125C21.3626 13.125 22.6245 14.3867 22.6245 15.9375C22.6245 16.4552 23.0443 16.875 23.5621 16.875C24.08 16.875 24.4998 16.4552 24.4998 15.9375C24.4998 14.3867 25.7616 13.125 27.3126 13.125C28.8233 13.125 30.0589 14.3068 30.1256 15.8156C30.1478 16.318 30.5619 16.7117 31.0619 16.7116C31.0706 16.7116 31.0793 16.7115 31.0881 16.7113C31.5996 16.6973 32.0054 16.2757 31.9999 15.7641C31.9549 11.5462 30.2652 7.58469 27.242 4.60925ZM7.70889 12.3586C6.89197 11.6673 5.83614 11.25 4.68461 11.25C3.90195 11.25 3.1586 11.4443 2.50401 11.7893C3.81644 7.58531 7.06987 4.2125 11.2037 2.71487C10.7089 3.34413 10.2473 4.07625 9.82674 4.90756C8.76653 7.0035 8.04306 9.572 7.70889 12.3586ZM15.061 12.2177C14.2341 11.5908 13.2334 11.25 12.1856 11.25C11.2502 11.25 10.3781 11.5258 9.64571 11.9996C9.97863 9.65794 10.6093 7.515 11.5001 5.75381C12.5053 3.76675 13.7657 2.46338 15.061 2.03244V12.2177ZM19.8116 11.25C18.7637 11.25 17.763 11.5908 16.9362 12.2177V2.03244C18.2315 2.46338 19.4919 3.76675 20.4971 5.75381C21.388 7.515 22.0186 9.65794 22.3515 11.9996C21.6191 11.5258 20.7471 11.25 19.8116 11.25ZM27.3126 11.25C26.161 11.25 25.1052 11.6673 24.2883 12.3586C23.9541 9.572 23.2307 7.0035 22.1704 4.90756C21.75 4.07631 21.2884 3.34425 20.7936 2.715C24.9254 4.21206 28.1782 7.58238 29.4929 11.7837C28.8412 11.4424 28.0992 11.25 27.3126 11.25Z" />
+                    </svg>
+                  </span>
+                  Insurance
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div class="tabview-content">
+            <div class="tab-content" id="pills-tabContent">
+              <router-outlet></router-outlet>
+            
+              <div class="tab-pane fade" id="pills-Hotels" role="tabpanel" aria-labelledby="pills-Hotels-tab">
+                <div class="book-btn">
+                  <a class="btn disable-link">Coming Soon...</a>
+                </div>
+              </div>
+              <div class="tab-pane fade" id="pills-Umrah" role="tabpanel" aria-labelledby="pills-Umrah-tab">
+                <div class="book-btn">
+                  <a class="btn disable-link">Coming Soon...</a>
+                </div>
+              </div>
+              <div class="tab-pane fade" id="pills-Holidays" role="tabpanel" aria-labelledby="pills-Holidays-tab">
+                <div class="book-btn">
+                  <a class="btn disable-link">Coming Soon...</a>
+                </div>
+              </div>
+              <div class="tab-pane fade" id="pills-Transfers" role="tabpanel" aria-labelledby="pills-Transfers-tab">
+                <div class="book-btn">
+                  <a class="btn disable-link">Coming Soon...</a>
+                </div>
+              </div>
+              <div class="tab-pane fade" id="pills-Activities" role="tabpanel" aria-labelledby="pills-Activities-tab">
+                <div class="book-btn">
+                  <a class="btn disable-link">Coming Soon...</a>
+                </div>
+              </div>
+              <div class="tab-pane fade" id="pills-Insurance" role="tabpanel" aria-labelledby="pills-Insurance-tab">
+                <div class="book-btn">
+                  <a class="btn disable-link">Coming Soon...</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<app-middle [selectedHomeTab]="selectedTabName"></app-middle>
+<section class="hero-offers">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 col-sm-12 col-xs-12">
+        <div class="header-offer-box wow fadeInUp">
+          <div class="offer-header">
+            <div class="offer-title">
+              <h5 *ngIf="selectedTabName === 'flights'">Super Offers</h5>
+              <h5 *ngIf="selectedTabName === 'visas'">Super Offers to Visas Offers</h5>
+            </div>
+            <div class="offer-link">
+              <a href="javascript:void(0);" [routerLink]="['/offers']">View All</a>
+            </div>
+          </div>
+          <div>
+            <p-carousel [value]="offersList" [numVisible]="4" [numScroll]="4" [circular]="false"
+              [showIndicators]="false" [responsiveOptions]="responsiveOptions">
+              <ng-template let-offer pTemplate="item">
+                <div class="product-item">
+                  <div class="product-item-content">
+                    <div class="offer-img blog-small wow fadeInUp">
+                      <div>
+                        <img src="{{
+                            offer.thumbnailImage
+                              ? getImage(offer.thumbnailImage)
+                              : 'assets/images/home/super-offer-1.png'
+                          }}" class="product-image" alt="" />
+                      </div>
+                      <!-- <div>
+                        <div class="product-name">{{ offer.name }}</div>
+                        <div class="product-description">
+                          Book by
+                          {{ offer.endDate | date: "dd/MM/yyyy" }}
+                        </div>
+                      </div> -->
+                      <div class="p-mt-5">
+                        <p-button label="Book Now" pRipple class="p-button-success" (click)="openOfferDetail(offer.id)">
+                        </p-button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </ng-template>
+            </p-carousel>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="hero-offers">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 col-sm-12 col-xs-12">
+        <div class="header-offer-box wow fadeInUp">
+          <div class="offer-header">
+            <div class="offer-title">
+              <h5 *ngIf="selectedTabName === 'flights'">Popular Blogs</h5>
+              <h5 *ngIf="selectedTabName === 'visa'">Top Visa Destinations</h5>
+            </div>
+            <div class="offer-link">
+              <a href="javascript:void(0);" [routerLink]="['/blog']">View All</a>
+            </div>
+          </div>
+          <p-carousel [value]="blogsList" [numVisible]="4" [numScroll]="4" [circular]="false" [showIndicators]="false"
+            [responsiveOptions]="responsiveOptions">
+            <ng-template let-blog pTemplate="item">
+              <div class="product-item">
+                <div class="product-item-content">
+                  <div class="offer-img blog-small wow fadeInUp">
+                    <!-- <div class="product-name">{{ blog.title }}</div> -->
+                    <div>
+                      <img src="{{
+                          blog.thumbnailImage
+                            ? getImage(blog.thumbnailImage)
+                            : 'assets/images/home/super-offer-5.png'
+                        }}" class="product-image" alt="" />
+                    </div>
+
+                    <div class="p-mt-5">
+                      <p-button label="Read More" pRipple class="p-button-success" (click)="openBlogDetail(blog)">
+                      </p-button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </ng-template>
+          </p-carousel>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="hero-intro">
+  <div class="container">
+    <div class="row" style="padding-bottom: 62px">
+      <div class="col-lg-6 col-sm-12 col-xs-12 wow fadeInLeft">
+        <div class="intro-title">
+          <p>INTRO</p>
+          <h2>Our future</h2>
+        </div>
+        <div class="intro-cont">
+          <p>
+            <span style="font-size: large">Mehman.pk</span> is an online travel
+            agency where you can search and book your local and international
+            flights, hotels and holidays packages at super cheap rates.
+            Travelers can pay online using debit or credit cards or in a mehman
+            branch nearest to your location. Our professional and dedicated
+            staff works round the clock to make your holidays the best and
+            memorable. Mehman.pk is recognized for its credibility and
+            transparency.
+          </p>
+        </div>
+      </div>
+      <div class="col-lg-6 col-sm-12 col-xs-12 wow fadeInRight">
+        <div class="intro-img">
+          <img src="assets/images/home/intro-img.webp" class="img-fluid" alt="mehman.pk introduction" />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="hero-offers hero-offers-2">
+  <div class="container">
+    <div class="row" *ngIf="selectedTabName === 'flights'">
+      <div class="col-lg-2 col-sm-4 col-xs-12">
+        <div class="footer-link footer-link-2 wow fadeInUp">
+          <h5>Top Airlines</h5>
+          <ul>
+            <li>
+              <a href="javascript:void(0);" (click)="staticPagesByTopAirlines('airblue')">Air Blue</a>
+            </li>
+            <li>
+              <a href="javascript:void(0);" (click)="staticPagesByTopAirlines('serene-air')">Serene Air</a>
+            </li>
+            <li>
+              <a href="javascript:void(0);" (click)="staticPagesByTopAirlines('PIA')">PIA</a>
+            </li>
+            <li>
+              <a href="javascript:void(0);" (click)="staticPagesByTopAirlines('airsial')">Airsial</a>
+            </li>
+            <li>
+              <a href="javascript:void(0);" (click)="staticPagesByTopAirlines('etihad-airways')">Etihad Airways</a>
+            </li>
+            <li>
+              <a href="javascript:void(0);" (click)="staticPagesByTopAirlines('kuwait-airways')">Kuwait Airways</a>
+            </li>
+            <li>
+              <a href="javascript:void(0);" (click)="staticPagesByTopAirlines('srilankan-airline')">SriLankan Airlines</a>
+            </li>
+            <li>
+              <a href="javascript:void(0);" (click)="staticPagesByTopAirlines('saudia')">Saudia</a>
+            </li>
+            <li>
+              <a href="javascript:void(0);" (click)="staticPagesByTopAirlines('qatar-airways')">Qatar Airways</a>
+            </li>
+            <li>
+              <a href="javascript:void(0);" (click)="staticPagesByTopAirlines('turkish-airlines')">Turkish Airlines</a>
+            </li>
+            
+            <li>
+              <a href="javascript:void(0);" (click)="staticPagesByTopAirlines('emirates')">Emirates</a>
+            </li>
+            <li>
+              <a href="javascript:void(0);" (click)="staticPagesByTopAirlines('thai')">Thai Airways</a>
+            </li>
+            <li>
+              <a href="javascript:void(0);" (click)="staticPagesByTopAirlines('pegasus')">Pegasus Airlines</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-lg-2 col-sm-4 col-xs-12">
+        <div class="footer-link footer-link-2 wow fadeInUp">
+          <h5>Domestic Flights</h5>
+          <ul>
+            <li>
+              <a href="javascript:void(0);">Karachi to Islamabad flights</a>
+            </li>
+            <li><a href="javascript:void(0);">Karachi to Lahore flights</a></li>
+            <li><a href="javascript:void(0);">Karachi to Quetta flights</a></li>
+            <li>
+              <a href="javascript:void(0);">Islamabad to Lahore flights</a>
+            </li>
+            <li><a href="javascript:void(0);">Karachi to Jeddah Flight</a></li>
+            <li><a href="javascript:void(0);">Flights from Karachi</a></li>
+            <li><a href="javascript:void(0);">Flights from Lahore</a></li>
+            <li><a href="javascript:void(0);">Flights from Sialkot</a></li>
+            <!-- <li style="width: 110%!important;"><a href="javascript:void(0);">Bankok Shopping Packages</a></li> -->
+            <li><a href="javascript:void(0);">Flights from Quetta</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-lg-2 col-sm-4 col-xs-12">
+        <div class="footer-link footer-link-2 wow fadeInUp">
+          <h5>International Flights</h5>
+          <ul>
+            <li>
+              <a href="javascript:void(0);">Flights from Pakistan to UK</a>
+            </li>
+            <li>
+              <a href="javascript:void(0);">Flights from Pakistan to USA</a>
+            </li>
+            <li>
+              <a href="javascript:void(0);">Flights from Pakistan to Saudi Arabia</a>
+            </li>
+            <li>
+              <a href="javascript:void(0);">Flights from Pakistan to Dubai</a>
+            </li>
+            <li>
+              <a href="javascript:void(0);">Flights from Pakistan to Australia</a>
+            </li>
+            <li>
+              <a href="javascript:void(0);">Flights from Pakistan to China</a>
+            </li>
+            <li>
+              <a href="javascript:void(0);">Flights from Pakistan to Canada</a>
+            </li>
+            <li>
+              <a href="javascript:void(0);">Flights from Pakistan to Turkey</a>
+            </li>
+            <li><a href="javascript:void(0);">Lahore to Jeddah Flights</a></li>
+            <li><a href="javascript:void(0);">Lahore to Beijing Flights</a></li>
+            <li>
+              <a href="javascript:void(0);">Karachi to New York Flights</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-lg-2 col-sm-4 col-xs-12">
+        <div class="footer-link footer-link-2 wow fadeInUp">
+          <h5>Vacation Packages</h5>
+          <ul>
+            <li>
+              <a href="javascript:void(0);">Affordable Warm Winter Vacations</a>
+            </li>
+            <li><a href="javascript:void(0);">London Family vacations</a></li>
+            <li><a href="javascript:void(0);">Dubai Family vacations</a></li>
+            <li><a href="javascript:void(0);">Europe vacations</a></li>
+            <li>
+              <a href="javascript:void(0);">Cheapest Turkey Tour Packages</a>
+            </li>
+            <li>
+              <a href="javascript:void(0);">Cheapest Signapore Tour Packages</a>
+            </li>
+            <li>
+              <a href="javascript:void(0);">Disneyland Vacation Packages</a>
+            </li>
+            <li>
+              <a href="javascript:void(0);">Bankok Thopping Tour Packages</a>
+            </li>
+            <li>
+              <a href="javascript:void(0);">Best Azerbaijan Tour Packages</a>
+            </li>
+            <li><a href="javascript:void(0);">Family Vacation Packages</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-lg-2 col-sm-4 col-xs-12">
+        <div class="footer-link footer-link-2 wow fadeInUp">
+          <h5>Hajj & Umrah Packages</h5>
+          <ul>
+            <li><a href="javascript:void(0);">Cheap Umrah Packages</a></li>
+            <li><a href="javascript:void(0);">Economy Umrah Packages</a></li>
+            <li><a href="javascript:void(0);">3 Star Umrah Packages</a></li>
+            <li><a href="javascript:void(0);">4 Star Umrah Packages</a></li>
+            <li><a href="javascript:void(0);">5 Star Umrah Packages</a></li>
+            <li><a href="javascript:void(0);">Cheap Hajj Packages</a></li>
+            <li><a href="javascript:void(0);">Private Hajj Packages</a></li>
+            <li><a href="javascript:void(0);">Immigration Visas</a></li>
+            <li><a href="javascript:void(0);">5 Star Hajj Packages</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-lg-2 col-sm-4 col-xs-12">
+        <div class="footer-link footer-link-2 wow fadeInUp">
+          <h5>Top Hotel Cities</h5>
+          <ul>
+            <li><a href="javascript:void(0);">Hotels in Lahore</a></li>
+            <li><a href="javascript:void(0);">Hotels in Islamabad</a></li>
+            <li><a href="javascript:void(0);">Murree Hotels</a></li>
+            <li><a href="javascript:void(0);">Naran Hotels</a></li>
+            <li><a href="javascript:void(0);">Hotels in Karachi</a></li>
+            <li><a href="javascript:void(0);">Hotels in Murree</a></li>
+            <li><a href="javascript:void(0);">Nathia gali Hotels</a></li>
+            <li><a href="javascript:void(0);">Malam jabba Hotels </a></li>
+            <li><a href="javascript:void(0);">Lahore Hotels</a></li>
+            <li><a href="javascript:void(0);">Islamabad Hotels </a></li>
+            <li><a href="javascript:void(0);">Hotels in Nathia gali</a></li>
+            <li><a href="javascript:void(0);">Shogran Hotels</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="row" *ngIf="selectedTabName === 'visas'">
+      <div class="col-lg-2 col-sm-4 col-xs-12">
+        <div class="footer-link footer-link-2 wow fadeInUp">
+          <h5>Western Europe</h5>
+          <ul>
+            <li>
+              <a href="javascript:void(0);">Belgium Visa</a>
+            </li>
+            <li>
+              <a href="javascript:void(0);">France Visa</a>
+            </li>
+            <li>
+              <a href="javascript:void(0);">Germany Visa</a>
+            </li>
+            <li>
+              <a href="javascript:void(0);">Itlay Visa</a>
+            </li>
+            <li>
+              <a href="javascript:void(0);">Portugal Visa</a>
+            </li>
+            <li>
+              <a href="javascript:void(0);">United Kingdom Visa</a>
+            </li>
+            <li>
+              <a href="javascript:void(0);">Netherlands Visa</a>
+            </li>
+            <li>
+              <a href="javascript:void(0);">Switzerland Visa</a>
+            </li>
+            <li>
+              <a href="javascript:void(0);">Spain Visa</a>
+            </li>
+            <li>
+              <a href="javascript:void(0);">Sweden Visa</a>
+            </li>
+            <li>
+              <a href="javascript:void(0);">Denmark Visa</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-lg-2 col-sm-4 col-xs-12">
+        <div class="footer-link footer-link-2 wow fadeInUp">
+          <h5>Middle East</h5>
+          <ul>
+            <li>
+              <a href="javascript:void(0);">Saudi Arabia Visa</a>
+            </li>
+            <li><a href="javascript:void(0);">Qatar Visa</a></li>
+            <li><a href="javascript:void(0);">Bahrain Visa</a></li>
+            <li>
+              <a href="javascript:void(0);">Oman Visa</a>
+            </li>
+            <li><a href="javascript:void(0);">Kuwait Visa</a></li>
+            <li><a href="javascript:void(0);">UAE Visa</a></li>
+            <li><a href="javascript:void(0);">Iran Visa</a></li>
+            <li><a href="javascript:void(0);">Iraq Visa</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-lg-2 col-sm-4 col-xs-12">
+        <div class="footer-link footer-link-2 wow fadeInUp">
+          <h5>Asia</h5>
+          <ul>
+            <li>
+              <a href="javascript:void(0);">Thailand Visa</a>
+            </li>
+            <li>
+              <a href="javascript:void(0);">Cambodia Visa</a>
+            </li>
+            <li>
+              <a href="javascript:void(0);">Japan Visa</a>
+            </li>
+            <li>
+              <a href="javascript:void(0);">Turkey Visa</a>
+            </li>
+            <li>
+              <a href="javascript:void(0);">India Visa</a>
+            </li>
+            <li>
+              <a href="javascript:void(0);">Malaysia Visa</a>
+            </li>
+            <li>
+              <a href="javascript:void(0);">Maldives Visa</a>
+            </li>
+            <li>
+              <a href="javascript:void(0);">Hong kong Visa</a>
+            </li>
+            <li><a href="javascript:void(0);">China Visa</a></li>
+            <li><a href="javascript:void(0);">Benin Visa</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-lg-2 col-sm-4 col-xs-12">
+        <div class="footer-link footer-link-2 wow fadeInUp">
+          <h5>Eastern Europe</h5>
+          <ul>
+            <li>
+              <a href="javascript:void(0);">Hungary Visa</a>
+            </li>
+            <li><a href="javascript:void(0);">Poland Via</a></li>
+            <li><a href="javascript:void(0);">Uzbekistan Visa</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-lg-2 col-sm-4 col-xs-12">
+        <div class="footer-link footer-link-2 wow fadeInUp">
+          <h5>Africa</h5>
+          <ul>
+            <li><a href="javascript:void(0);">South Africa Visa</a></li>
+            <li><a href="javascript:void(0);">Uganda Visa</a></li>
+            <li><a href="javascript:void(0);">Tanzania Visa</a></li>
+            <li><a href="javascript:void(0);">Rwand Visa</a></li>
+            <li><a href="javascript:void(0);">East Africa Visa</a></li>
+            <li><a href="javascript:void(0);">Egypt Visa</a></li>
+            <li><a href="javascript:void(0);">Nigeria Visa</a></li>
+            <li><a href="javascript:void(0);">Morroco visa</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-lg-2 col-sm-4 col-xs-12">
+        <div class="footer-link footer-link-2 wow fadeInUp">
+          <h5>Others</h5>
+          <ul>
+            <li><a href="javascript:void(0);">Australia Visa</a></li>
+            <li><a href="javascript:void(0);">USA Visa</a></li>
+            <li><a href="javascript:void(0);">Canada Visa</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

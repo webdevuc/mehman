@@ -1,0 +1,1054 @@
+<section class="hero-headermain">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 col-sm-12 col-xs-12">
+        <div class="review-booking-box">
+          <div class="header-title booking-title wow fadeIn">
+            <h1>Make Payment</h1>
+          </div>
+          <div class="booking-rang-slider wow fadeIn">
+            <div class="slider-nmbr">
+              <ul>
+                <li class="check-icon"><img src="assets/images/search/check.png" class="img-fluid" alt=""></li>
+                <li class="check-icon"><img src="assets/images/search/check.png" class="img-fluid" alt=""></li>
+                <li class="check-icon"><img src="assets/images/search/check.png" class="img-fluid" alt=""></li>
+                <li>4</li>
+              </ul>
+            </div>
+            <div class="rang-slider">
+              <div class="inline-slider step-3"></div>
+            </div>
+            <div class="slider-list">
+              <ul>
+                <li>Flight Selected</li>
+                <li>Review</li>
+                <li>Traveler Details</li>
+                <li>Make Payment</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="hero-contact hero-contact-2">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-xs-12 col-xs-12">
+        <div class="contact-box contact-makepayment">
+          <div class="contact-header wow fadeIn">
+            <h2><b>Payment Methods</b></h2>
+          </div>
+          <div class="col-xs-12">
+            <p-tabView [(activeIndex)]="selectedIndex" (onChange)="tabValueCheck($event)">
+              <!-- <p-tabPanel header="Debit/Credit Cards" *ngIf="role != 'TravelAgent'">
+                <ng-template pTemplate="content">
+
+
+                  <div class="traveller-form wow fadeIn mt-4">
+
+                    <div [formGroup]="alphaPaymentForm">
+                      <div class="travel-form-box row">
+                        <div class="col-sm-12 col-xs-12">
+                          <p-tabView>
+                            <div class="traveller-form wow fadeIn mt-4">
+
+                              <div
+                                [formGroup]="transactionFormType==='initiate-transaction'?alphaPaymentForm:alphaMakePaymentForm"
+                                *ngIf="alphaTransactionStatus !== 'PAID'">
+                                <div class="travel-form-box row" *ngIf="transactionFormType==='initiate-transaction'">
+                                  <div class="col-sm-12 col-xs-12">
+                                    <div class="form-group">
+                                      <label class="control-label travel-form-box-lable">Wallet/Bank Alfalah Acc
+                                        Number:<span aria-hidden="true" class="required">*</span></label>
+                                      <input type="number" pInputText placeholder="Wallet/Bank Alfalah Acc Number"
+                                        formControlName="AccountNumber"
+                                        [ngClass]="{ 'is-invalid': (submitted || alphaPaymentForm.get('AccountNumber').touched) && alphaPaymentForm.get('AccountNumber').errors }" />
+                                      <div
+                                        *ngIf="alphaPaymentForm.get('AccountNumber').errors && (submitted || alphaPaymentForm.get('AccountNumber').touched)"
+                                        class="invalid-feedback">
+                                        <div *ngIf="alphaPaymentForm.get('AccountNumber').errors.required">Wallet/Bank
+                                          Alfalah
+                                          Acc Number is required.</div>
+                                      </div>
+                                    </div>
+                                    <div class="form-group">
+                                      <label class="control-label travel-form-box-lable">Mobile Number<span
+                                          aria-hidden="true" class="required">*</span></label>
+                                      <input type="text" pInputText placeholder="Enter Mobile Number"
+                                        formControlName="MobileNumber"
+                                        [ngClass]="{ 'is-invalid': (submitted || alphaPaymentForm.get('MobileNumber').touched) && alphaPaymentForm.get('MobileNumber').errors }" />
+                                      <div
+                                        *ngIf="alphaPaymentForm.get('MobileNumber').errors && (submitted || alphaPaymentForm.get('MobileNumber').touched)"
+                                        class="invalid-feedback">
+                                        <div *ngIf="alphaPaymentForm.get('MobileNumber').errors.required">Mobile
+                                          Number is
+                                          required.</div>
+                                      </div>
+                                    </div>
+                                    <div class="form-group">
+                                      <label class="control-label travel-form-box-lable">Email Address<span
+                                          aria-hidden="true" class="required">*</span></label>
+                                      <input type="text" pInputText placeholder="Enter Email Address"
+                                        formControlName="EmailAddress"
+                                        [ngClass]="{ 'is-invalid': (submitted || alphaPaymentForm.get('EmailAddress').touched) && alphaPaymentForm.get('EmailAddress').errors }" />
+                                      <div
+                                        *ngIf="alphaPaymentForm.get('EmailAddress').errors && (submitted || alphaPaymentForm.get('EmailAddress').touched)"
+                                        class="invalid-feedback">
+                                        <div *ngIf="alphaPaymentForm.get('EmailAddress').errors.required">Email
+                                          Address is
+                                          required.</div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="travel-form-box row" *ngIf="transactionFormType==='otp-form'">
+                                  <div class="col-sm-12 col-xs-12">
+                                    <p-tabView>
+                                      <p-tabPanel header="Online Payment">
+                                        <div class="form-group">
+                                          <label class="control-label travel-form-box-lable">OTP:<span
+                                              aria-hidden="true" class="required">*</span></label>
+                                          <input type="text" pInputText placeholder="Enter OTP" formControlName="SMSOTP"
+                                            [ngClass]="{ 'is-invalid': (submitted || alphaMakePaymentForm.get('SMSOTP').touched) && alphaMakePaymentForm.get('SMSOTP').errors }" />
+                                          <div
+                                            *ngIf="alphaMakePaymentForm.get('SMSOTP').errors && (submitted || alphaMakePaymentForm.get('SMSOTP').touched)"
+                                            class="invalid-feedback">
+                                            <div *ngIf="alphaMakePaymentForm.get('SMSOTP').errors.required">OTP is
+                                              required.</div>
+                                          </div>
+                                        </div>
+                                      </p-tabPanel>
+                                    </p-tabView>
+
+                                  </div>
+                                </div>
+                                <div class="travel-form-box row">
+                                  <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+
+                                  </div>
+                                </div>
+                                <div class="travel-form-box row">
+                                  <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+
+                                  </div>
+                                </div>
+                                <div *ngIf="submitted && !isAcceptedTermsAndConditions" class="invalid-feedback"
+                                  style="margin: 0 18px;">
+                                  <div>Please accept terms & conditions.</div>
+                                </div>
+                                <div class="book-submit-btn">
+                                  <button *ngIf="selectedIndex === 5 && transactionFormType ==='initiate-transaction'"
+                                    type="button" class="custom-submit-button btn" (click)="initiateTransaction()"
+                                    [disabled]=" (alphaPaymentForm.invalid || !isAcceptedTermsAndConditions) || submitted">
+                                    Initiate Transaction
+                                  </button>
+                                  <button *ngIf="selectedIndex === 5 && transactionFormType ==='otp-form'" type="button"
+                                    class="custom-submit-button btn" (click)="makeTransaction()"
+                                    [disabled]=" (alphaMakePaymentForm.invalid || !isAcceptedTermsAndConditions) || submitted">
+                                    Pay Now
+                                  </button>
+                                </div>
+                              </div>
+                              <div class="payment-successfull" *ngIf="alphaTransactionStatus === 'PAID'">
+                                <div class="travel-form-box row">
+                                  <div class="col-sm-12 col-xs-12">
+                                    <p-tabView>
+                                      <p-tabPanel header="Online Payment">
+                                        <h1>Payment Successfull.Thanks for using Alpha Payment.</h1>
+                                      </p-tabPanel>
+                                    </p-tabView>
+
+                                  </div>
+                                </div>
+                              </div>
+                            </div>                            
+                            <p>Now you will be redirected to our Partner Bank (Bank Alfalah) for Payment. Please make
+                              payment as per instructions.</p>
+
+                          </p-tabView>
+
+                        </div>
+                      </div>
+                      <div class="travel-form-box row">
+                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+
+                        </div>
+                      </div>
+                      <div class="travel-form-box row">
+                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+
+                        </div>
+                      </div>
+                      <div class="travel-form-box row">
+                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                          <div class="form-group">
+                            <label class="control-label travel-form-box-lable"><strong>Price you pay</strong></label>
+                            <h2><span style="color: #57B957;">{{ flight?.currencyCode }} {{ flight?.totalFare +
+                                serviceCharge | number
+                                }}</span></h2>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="agree-box" style="margin: 0 18px;">
+                        <div class="agree-icon">
+                          <div class="tool-check fliht-check">
+                            <input type="checkbox" id="agree" class="tool-input"
+                              [(ngModel)]="isAcceptedTermsAndConditions" [ngModelOptions]="{standalone: true}">
+                            <label for="agree"></label>
+                          </div>
+                        </div>
+                        <div class="agree-cont">
+                          <p>I understand and agree with the Fare Rules , the Visa Rules , the Privacy Policy , the User
+                            Agreement and Terms of Service of <a href="javascript:void(0);"> Mehman.pk</a></p>
+                        </div>
+                      </div>
+                      <div *ngIf="submitted && !isAcceptedTermsAndConditions" class="invalid-feedback"
+                        style="margin: 0 18px;">
+                        <div>Please accept terms & conditions.</div>
+                      </div>
+                      <div class="book-submit-btn">
+                        <button *ngIf="selectedIndex !== 0" type="submit" class="custom-submit-button btn"
+                          (click)="confirmBooking('PayAtBranch')"
+                          [disabled]=" (paymentForm.invalid || !isAcceptedTermsAndConditions) && submitted">
+                          Pay Now
+                        </button>
+                        <button *ngIf="selectedIndex === 0" type="button" class="custom-submit-button btn"
+                          (click)="makeTransaction()">
+                          Pay Now
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </ng-template>
+              </p-tabPanel> -->
+              <p-tabPanel header="Online Banking" *ngIf="role != 'TravelAgent'">
+                <ng-template pTemplate="content">
+                  <img src="assets/images/paypro/Online_Banking.jpg" style="padding: 5px;" class="img-fluid"
+                    alt="OnlineBanking">
+                  <div class="travel-form-box row">
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                      <div class="form-group">
+                        <label class="control-label travel-form-box-lable"><strong>Price you pay</strong></label>
+                        <h2><span style="color: #57B957;">{{ flight?.currencyCode }} {{ flight?.totalFare | number
+                            }}</span></h2>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="agree-box" style="margin: 0 18px;">
+                    <div class="agree-icon">
+                      <div class="tool-check fliht-check">
+                        <input type="checkbox" id="agree" class="tool-input" [(ngModel)]="isAcceptedTermsAndConditions"
+                          [ngModelOptions]="{standalone: true}">
+                        <label for="agree"></label>
+                      </div>
+                    </div>
+                    <div class="agree-cont">
+                      <p>I understand and agree with the Fare Rules , the Visa Rules , the Privacy Policy , the User
+                        Agreement and Terms of Service of <a href="javascript:void(0);"> Mehman.pk</a></p>
+                    </div>
+                  </div>
+                  <div *ngIf="submitted && !isAcceptedTermsAndConditions" class="invalid-feedback"
+                    style="margin: 0 18px;">
+                    <div>Please accept terms & conditions.</div>
+                  </div>
+                  <div class="book-submit-btn">
+                    <button type="submit" class="custom-submit-button btn" (click)="confirmBooking('PayPro')"
+                      [disabled]="(paymentForm.invalid || !isAcceptedTermsAndConditions) && submitted">
+                      Pay Now
+                    </button>
+                  </div>
+                </ng-template>
+
+              </p-tabPanel>
+              <p-tabPanel header="ATM" *ngIf="role != 'TravelAgent'">
+                <ng-template pTemplate="content">
+                  <img src="assets/images/paypro/ATM.jpg" style="padding: 5px;" class="img-fluid" alt="ATM">
+                  <div class="travel-form-box row">
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                      <div class="form-group">
+                        <label class="control-label travel-form-box-lable"><strong>Price you pay</strong></label>
+                        <h2><span style="color: #57B957;">{{ flight?.currencyCode }} {{ flight?.totalFare | number
+                            }}</span></h2>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="agree-box" style="margin: 0 18px;">
+                    <div class="agree-icon">
+                      <div class="tool-check fliht-check">
+                        <input type="checkbox" id="agree" class="tool-input" [(ngModel)]="isAcceptedTermsAndConditions"
+                          [ngModelOptions]="{standalone: true}">
+                        <label for="agree"></label>
+                      </div>
+                    </div>
+                    <div class="agree-cont">
+                      <p>I understand and agree with the Fare Rules , the Visa Rules , the Privacy Policy , the User
+                        Agreement and Terms of Service of <a href="javascript:void(0);"> Mehman.pk</a></p>
+                    </div>
+                  </div>
+                  <div *ngIf="submitted && !isAcceptedTermsAndConditions" class="invalid-feedback"
+                    style="margin: 0 18px;">
+                    <div>Please accept terms & conditions.</div>
+                  </div>
+                  <div class="book-submit-btn">
+                    <button type="submit" class="custom-submit-button btn" (click)="confirmBooking('PayPro')"
+                      [disabled]="(paymentForm.invalid || !isAcceptedTermsAndConditions) && submitted">
+                      Pay Now
+                    </button>
+                  </div>
+                </ng-template>
+              </p-tabPanel>
+              <p-tabPanel header="OTC (Over the Counter)" *ngIf="role != 'TravelAgent'">
+                <ng-template pTemplate="content">
+                  <img src="assets/images/paypro/OTC_over_the_Counter.jpg" style="padding: 5px;" class="img-fluid"
+                    alt="OTC">
+                  <div class="travel-form-box row">
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                      <div class="form-group">
+                        <label class="control-label travel-form-box-lable"><strong>Price you pay</strong></label>
+                        <h2><span style="color: #57B957;">{{ flight?.currencyCode }} {{ flight?.totalFare | number
+                            }}</span></h2>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="agree-box" style="margin: 0 18px;">
+                    <div class="agree-icon">
+                      <div class="tool-check fliht-check">
+                        <input type="checkbox" id="agree" class="tool-input" [(ngModel)]="isAcceptedTermsAndConditions"
+                          [ngModelOptions]="{standalone: true}">
+                        <label for="agree"></label>
+                      </div>
+                    </div>
+                    <div class="agree-cont">
+                      <p>I understand and agree with the Fare Rules , the Visa Rules , the Privacy Policy , the User
+                        Agreement and Terms of Service of <a href="javascript:void(0);"> Mehman.pk</a></p>
+                    </div>
+                  </div>
+                  <div *ngIf="submitted && !isAcceptedTermsAndConditions" class="invalid-feedback"
+                    style="margin: 0 18px;">
+                    <div>Please accept terms & conditions.</div>
+                  </div>
+                  <div class="book-submit-btn">
+                    <button type="submit" class="custom-submit-button btn" (click)="confirmBooking('PayPro')"
+                      [disabled]="(paymentForm.invalid || !isAcceptedTermsAndConditions) && submitted">
+                      Pay Now
+                    </button>
+                  </div>
+                </ng-template>
+
+              </p-tabPanel>
+              <p-tabPanel header="Pay Later" *ngIf="role != 'TravelAgent'">
+                <ng-template pTemplate="content">
+                  <div class="traveller-form wow fadeIn mt-4">
+                    <div [formGroup]="paymentForm">
+                      <div class="travel-form-box row">
+                        <div class="col-sm-12 col-xs-12">
+                          <p-tabView >
+                            <p-tabPanel header="Cash">
+                              <div class="form-group">
+                                <label class="control-label travel-form-box-lable">City<span aria-hidden="true"
+                                    class="required">*</span></label>
+                                <p-dropdown [options]="branchByCitys" optionLabel="key" formControlName="city"
+                                  optionValue="key" [showClear]="true" (onChange)="onChangeCity($event)"
+                                  placeholder="Select a City" required>
+                                </p-dropdown>
+                                <div
+                                  *ngIf="paymentForm.get('city').errors && (submitted || paymentForm.get('city').touched)"
+                                  class="invalid-feedback">
+                                  <div *ngIf="paymentForm.get('city').errors.required">City is required.</div>
+                                </div>
+                              </div>
+                              <div class="form-group">
+                                <label class="control-label travel-form-box-lable">Branch<span aria-hidden="true"
+                                    class="required">*</span></label>
+                                <p-dropdown [options]="brancheData" formControlName="branch" required
+                                  optionLabel="branchName" optionValue="id" [showClear]="true"
+                                  placeholder="Select a Branch" (onChange)="onChangeBranch($event)"
+                                  [ngClass]="{ 'is-invalid': (submitted || paymentForm.get('branch').touched) && paymentForm.get('branch').errors }">
+                                </p-dropdown>
+                                <div
+                                  *ngIf="paymentForm.get('branch').errors && (submitted || paymentForm.get('branch').touched)"
+                                  class="invalid-feedback">
+                                  <div *ngIf="paymentForm.get('branch').errors.required">Branch is required.</div>
+                                </div>
+                              </div>
+                              <div class="form-group">
+                                <label class="control-label travel-form-box-lable">Address</label>
+                                <div class="address-cont">
+                                  <p>{{branchAddress}}
+                                  </p>
+                                </div>
+                              </div>
+                              <div class="form-group">
+                                <label class="control-label travel-form-box-lable">Contact Number</label>
+                                <div class="address-cont">
+                                  <p>{{branchPhone}}
+                                  </p>
+                                </div>
+                              </div>
+
+                            </p-tabPanel>
+                          </p-tabView>
+                        </div>
+                      </div>
+                      <div class="travel-form-box row">
+                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+
+                        </div>
+                      </div>
+                      <div class="travel-form-box row">
+                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+
+                        </div>
+                      </div>
+                      <div class="travel-form-box row">
+                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                          <div class="form-group">
+                            <label class="control-label travel-form-box-lable"><strong>Price you pay</strong></label>
+                            <h2><span style="color: #57B957;">{{ flight?.currencyCode }} {{ flight?.totalFare +
+                                serviceCharge | number
+                                }}</span></h2>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="agree-box" style="margin: 0 18px;">
+                        <div class="agree-icon">
+                          <div class="tool-check fliht-check">
+                            <input type="checkbox" id="agree" class="tool-input"
+                              [(ngModel)]="isAcceptedTermsAndConditions" [ngModelOptions]="{standalone: true}">
+                            <label for="agree"></label>
+                          </div>
+                        </div>
+                        <div class="agree-cont">
+                          <p>I understand and agree with the Fare Rules , the Visa Rules , the Privacy Policy , the User
+                            Agreement and Terms of Service of <a href="javascript:void(0);"> Mehman.pk</a></p>
+                        </div>
+                      </div>
+                      <div *ngIf="submitted && !isAcceptedTermsAndConditions" class="invalid-feedback"
+                        style="margin: 0 18px;">
+                        <div>Please accept terms & conditions.</div>
+                      </div>
+                      <div class="book-submit-btn">
+                        <button type="submit" class="custom-submit-button btn"
+                          (click)="confirmBooking('PayAtBranch')"
+                          [disabled]="(paymentForm.invalid || !isAcceptedTermsAndConditions) && submitted">
+                          {{'Pay Now'}}
+                        </button>
+                      </div>
+                    </div>
+
+                  </div>
+                </ng-template>
+              </p-tabPanel>
+              <p-tabPanel header="Credit" *ngIf="role === 'TravelAgent'">
+                <ng-template pTemplate="content">
+                  <div class="traveller-form wow fadeIn mt-4">
+                    <div [formGroup]="paymentForm">
+                      <div class="travel-form-box row">
+                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                          <div class="form-group">
+                            <label class="control-label travel-form-box-lable"><strong>Price you pay</strong></label>
+                            <h2><span style="color: #57B957;">{{ flight?.currencyCode }} {{ flight?.totalFare | number
+                                }}</span></h2>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="agree-box" style="margin: 0 18px;">
+                        <div class="agree-icon">
+                          <div class="tool-check fliht-check">
+                            <input type="checkbox" id="agree" class="tool-input"
+                              [(ngModel)]="isAcceptedTermsAndConditions" [ngModelOptions]="{standalone: true}">
+                            <label for="agree"></label>
+                          </div>
+                        </div>
+                        <div class="agree-cont">
+                          <p>I understand and agree with the Fare Rules , the Visa Rules , the Privacy Policy , the User
+                            Agreement and Terms of Service of <a href="javascript:void(0);"> Mehman.pk</a></p>
+                        </div>
+                      </div>
+                      <div *ngIf="submitted && !isAcceptedTermsAndConditions" class="invalid-feedback"
+                        style="margin: 0 18px;">
+                        <div>Please accept terms & conditions.</div>
+                      </div>
+                      <div class="book-submit-btn">
+                        <button type="submit" class="custom-submit-button btn"
+                          (click)="confirmBooking('Credit')"
+                          [disabled]="(paymentForm.invalid || !isAcceptedTermsAndConditions) && submitted">
+                          {{'Book Now'}}
+                        </button>
+                      </div>
+                    </div>
+
+                  </div>
+                </ng-template>
+              </p-tabPanel>              
+              <!-- <p-tabPanel *ngIf="role != 'TravelAgent'" header="Alfalah Payment Gateway">
+                <ng-template pTemplate="content">
+
+
+                  <div class="traveller-form wow fadeIn mt-4">
+
+                    <div [formGroup]="alphaPaymentForm">
+                      <div class="travel-form-box row">
+                        <div class="col-sm-12 col-xs-12">
+                          <p-tabView>
+                            <p-tabPanel header="Online Payment">
+                              <div class="form-group">
+                                <label class="control-label travel-form-box-lable">Transaction Type:<span
+                                    aria-hidden="true" class="required">*</span></label>
+                                <p-dropdown [options]="transactionTypes" optionLabel="key"
+                                  formControlName="TransactionTypeId" optionValue="value" [showClear]="true"
+                                  placeholder="Select Transaction Type" required>
+                                </p-dropdown>
+                                <div
+                                  *ngIf="alphaPaymentForm.get('TransactionTypeId').errors && (submitted || alphaPaymentForm.get('TransactionTypeId').touched)"
+                                  class="invalid-feedback">
+                                  <div *ngIf="alphaPaymentForm.get('TransactionTypeId').errors.required">Transaction
+                                    Type is
+                                    required.</div>
+                                </div>
+                              </div>
+                              <div class="form-group">
+                                <label class="control-label travel-form-box-lable">Transaction Amount<span
+                                    aria-hidden="true" class="required">*</span></label>
+                                <input type="text" pInputText placeholder="Enter Transaction Amount"
+                                  formControlName="TransactionAmount"
+                                  [ngClass]="{ 'is-invalid': (submitted || alphaPaymentForm.get('TransactionAmount').touched) && alphaPaymentForm.get('TransactionAmount').errors }" />
+                                <div
+                                  *ngIf="alphaPaymentForm.get('TransactionAmount').errors && (submitted || alphaPaymentForm.get('TransactionAmount').touched)"
+                                  class="invalid-feedback">
+                                  <div *ngIf="alphaPaymentForm.get('TransactionAmount').errors.required">Transaction
+                                    Amount is required.</div>
+                                </div>
+                              </div>
+                            </p-tabPanel>
+                          </p-tabView>
+
+                        </div>
+                      </div>
+                      <div class="travel-form-box row">
+                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+
+                        </div>
+                      </div>
+                      <div class="travel-form-box row">
+                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+
+                        </div>
+                      </div>
+                      <div class="travel-form-box row">
+                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                          <div class="form-group">
+                            <label class="control-label travel-form-box-lable"><strong>Price you pay</strong></label>
+                            <h2><span style="color: #57B957;">{{ flight?.currencyCode }} {{ flight?.totalFare +
+                                serviceCharge | number
+                                }}</span></h2>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="agree-box" style="margin: 0 18px;">
+                        <div class="agree-icon">
+                          <div class="tool-check fliht-check">
+                            <input type="checkbox" id="agree" class="tool-input"
+                              [(ngModel)]="isAcceptedTermsAndConditions" [ngModelOptions]="{standalone: true}">
+                            <label for="agree"></label>
+                          </div>
+                        </div>
+                        <div class="agree-cont">
+                          <p>I understand and agree with the Fare Rules , the Visa Rules , the Privacy Policy , the User
+                            Agreement and Terms of Service of <a href="javascript:void(0);"> Mehman.pk</a></p>
+                        </div>
+                      </div>
+                      <div *ngIf="submitted && !isAcceptedTermsAndConditions" class="invalid-feedback"
+                        style="margin: 0 18px;">
+                        <div>Please accept terms & conditions.</div>
+                      </div>
+                      <div class="book-submit-btn">
+                        <button *ngIf="selectedIndex !== 5" type="submit" class="custom-submit-button btn"
+                          (click)="confirmBooking('PayAtBranch')"
+                          [disabled]=" (paymentForm.invalid || !isAcceptedTermsAndConditions) && submitted">
+                          Pay Now
+                        </button>
+                        <button *ngIf="selectedIndex === 5" type="button" class="custom-submit-button btn"
+                          (click)="makeTransaction()"
+                          [disabled]=" (alphaPaymentForm.invalid || !isAcceptedTermsAndConditions) || submitted">
+                          Pay Now Alfa
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </ng-template>
+              </p-tabPanel> -->
+            </p-tabView>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-4 col-xs-12 col-xs-12">
+        <ng-container *ngIf="flight?.flightSegments && flight?.flightSegments.length > 0">
+          <div class="contact-box search-box">
+            <div class="contact-header wow fadeInUp">
+              <h2>Flight Summary</h2>
+            </div>
+            <div class="summary-body wow fadeIn">
+              <ng-container *ngIf="departureSegments && departureSegments.length > 0">
+                <div class="summary-header">
+                  <img src="assets/images/search/depareture.png" class="img-fluid" alt="">
+                  <h5>Departure</h5>
+                </div>
+                <div class="summary-cont">
+                  <div id="accordion">
+                    <div class="card">
+                      <div class="card-header" id="heading4">
+                        <h5 class="mb-0">
+                          <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapse4"
+                            aria-expanded="true" aria-controls="collapse4">
+                            <div class="base">
+                              <span class="add-tag"><img src="assets/images/search/add.png" class="img-fluid"
+                                  alt=""></span>
+                              <h5> {{ flight.originLocation }} > {{ flight.destinationLocation }} </h5>
+                            </div>
+                          </button>
+                        </h5>
+                      </div>
+
+                      <div id="collapse4" class="collapse" aria-labelledby="heading4" data-parent="#accordion">
+                        <div class="card-body">
+                          <ng-container *ngFor="let segment of departureSegments">
+                            <div class="flight-cont">
+                              <div class="flt-cont-box">
+                                <div class="flt-date">
+                                  <h5>{{ segment.departureTimeFormat }}</h5>
+                                  <p>{{ segment.departureAirport }}</p>
+                                  <p>{{ segment.departureDateFormat }}</p>
+                                </div>
+                                <div class="flt-arrow">
+                                  <p>{{ segment.duration }}</p>
+                                  <img src="assets/images/search/arrow-first.png" alt="" class="img-fluid">
+                                  <p class="economy">{{ segment.travelClass }} ({{ segment.fareClass }})</p>
+                                </div>
+                                <div class="flt-date">
+                                  <h5>{{ segment.arrivalTimeFormat }}</h5>
+                                  <p>{{ segment.arrivalAirport }}</p>
+                                  <p>{{ segment.arrivalDateFormat }}</p>
+                                </div>
+                              </div>
+                            </div>
+                          </ng-container>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </ng-container>
+              <ng-container *ngIf="returnSegments && returnSegments.length > 0">
+                <div class="summary-header">
+                  <img src="assets/images/search/depareture.png" class="img-fluid return" alt="">
+                  <h5>Return</h5>
+                </div>
+                <div class="summary-cont">
+                  <div id="accordion1">
+                    <div class="card">
+                      <div class="card-header" id="heading5">
+                        <h5 class="mb-0">
+                          <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapse5"
+                            aria-expanded="true" aria-controls="collapse5">
+                            <div class="base">
+                              <span class="add-tag"><img src="assets/images/search/add.png" class="img-fluid"
+                                  alt=""></span>
+                              <h5> {{ flight.destinationLocation }} > {{ flight.originLocation }} </h5>
+                            </div>
+                          </button>
+                        </h5>
+                      </div>
+
+                      <div id="collapse5" class="collapse" aria-labelledby="heading5" data-parent="#accordion">
+                        <div class="card-body">
+                          <ng-container *ngFor="let segment of returnSegments">
+                            <div class="flight-cont">
+                              <div class="flt-cont-box">
+                                <div class="flt-date">
+                                  <h5>{{ segment.departureTimeFormat }}</h5>
+                                  <p>{{ segment.departureAirport }}</p>
+                                  <p>{{ segment.departureDateFormat }}</p>
+                                </div>
+                                <div class="flt-arrow">
+                                  <p>{{ segment.duration }}</p>
+                                  <img src="assets/images/search/arrow-first.png" alt="" class="img-fluid">
+                                  <p class="economy">{{ segment.travelClass }} ({{ segment.fareClass }})</p>
+                                </div>
+                                <div class="flt-date">
+                                  <h5>{{ segment.arrivalTimeFormat }}</h5>
+                                  <p>{{ segment.arrivalAirport }}</p>
+                                  <p>{{ segment.arrivalDateFormat }}</p>
+                                </div>
+                              </div>
+                            </div>
+                          </ng-container>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </ng-container>
+            </div>
+          </div>
+        </ng-container>
+        <div class="contact-box Fare-box">
+          <div class="contact-header wow fadeIn">
+            <h2>Traveller Information</h2>
+          </div>
+          <div class="summery-accordion wow fadeIn">
+            <div id="accordion">
+              <div class="card" *ngIf="adults && adults.length > 0">
+                <div class="card-header" id="heading1">
+                  <h5 class="mb-0">
+                    <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseAdult"
+                      aria-expanded="true" aria-controls="collapse1">
+                      <div class="base">
+                        <img src="assets/images/search/add.png" class="img-fluid" alt=""><span>Adult(s)</span>
+                      </div>
+                    </button>
+                  </h5>
+                </div>
+
+                <div id="collapseAdult" class="collapse" aria-labelledby="heading1" data-parent="#accordion">
+                  <div class="card-body">
+                    <div class="base" *ngFor="let adult of adults">
+                      <span class="details">{{ adult.firstName }} {{ adult.lastName }}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card" *ngIf="childs && childs.length > 0">
+                <div class="card-header" id="heading1">
+                  <h5 class="mb-0">
+                    <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseChild"
+                      aria-expanded="true" aria-controls="collapse1">
+                      <div class="base">
+                        <img src="assets/images/search/add.png" class="img-fluid" alt=""><span>Child(s)</span>
+                      </div>
+                    </button>
+                  </h5>
+                </div>
+
+                <div id="collapseChild" class="collapse" aria-labelledby="heading1" data-parent="#accordion">
+                  <div class="card-body">
+                    <div class="base" *ngFor="let child of childs">
+                      <span class="details">{{ child.firstName }} {{ child.lastName }}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card" *ngIf="infants && infants.length > 0">
+                <div class="card-header" id="heading1">
+                  <h5 class="mb-0">
+                    <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseInfant"
+                      aria-expanded="true" aria-controls="collapse1">
+                      <div class="base">
+                        <img src="assets/images/search/add.png" class="img-fluid" alt=""><span>Infant(s)</span>
+                      </div>
+                    </button>
+                  </h5>
+                </div>
+
+                <div id="collapseInfant" class="collapse" aria-labelledby="heading1" data-parent="#accordion">
+                  <div class="card-body">
+                    <div class="base" *ngFor="let infant of infants">
+                      <span class="details">{{ infant.firstName }} {{ infant.lastName }}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card" *ngIf="booking && booking.trip && booking.trip.contactInfo">
+                <div class="card-header" id="heading2">
+                  <h5 class="mb-0">
+                    <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseContact"
+                      aria-expanded="false" aria-controls="collapse2">
+                      <div class="base">
+                        <img src="assets/images/search/add.png" class="img-fluid" alt=""><span>Contact
+                          Information</span>
+                      </div>
+                    </button>
+                  </h5>
+                </div>
+                <div id="collapseContact" class="collapse" aria-labelledby="heading2" data-parent="#accordion">
+                  <div class="card-body">
+                    <div class="base" *ngIf="booking.trip.contactInfo.firstName">
+                      <span class="details">First Name</span>
+                      <span class="details pull-right">{{ booking.trip.contactInfo.firstName }}</span>
+                    </div>
+                    <div class="base" *ngIf="booking.trip.contactInfo.lastName">
+                      <span class="details">Last Name</span>
+                      <span class="details pull-right">{{ booking.trip.contactInfo.lastName }}</span>
+                    </div>
+                    <div class="base" *ngIf="booking.trip.contactInfo.email">
+                      <span class="details">Email</span>
+                      <span class="details pull-right">{{ booking.trip.contactInfo.email }}</span>
+                    </div>
+                    <div class="base" *ngIf="booking.trip.contactInfo.mobileNumber">
+                      <span class="details">Mobile No.</span>
+                      <span class="details pull-right">{{ booking.trip.contactInfo.mobileNumber }}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <ng-container *ngIf="flight?.fareDetails">
+          <div class="contact-box Fare-box">
+            <div class="contact-header wow fadeInUp">
+              <h2>Fare Summary</h2>
+            </div>
+            <div class="summery-accordion wow fadeIn">
+              <div id="accordion">
+                <div class="card">
+                  <div class="card-header" id="headingOne">
+                    <h5 class="mb-0">
+                      <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseOne"
+                        aria-expanded="true" aria-controls="collapseOne" style="width:100%;">
+                        <div class="base" style="text-align: left;">
+                          <img src="assets/images/search/add.png" class="img-fluid" alt="">
+                          <span>Base Fare</span>
+                          <span class="pull-right">{{ flight.fareDetails.farePrices.currencyCode }} {{
+                            flight.fareDetails.farePrices.totalBaseFare | number }}</span>
+                        </div>
+                      </button>
+                    </h5>
+                  </div>
+
+                  <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                    <div class="card-body">
+                      <div class="base" *ngIf="flight.fareDetails.farePrices.adultCount">
+                        <span class="details">Adult(s) ({{ flight.fareDetails.farePrices.adultCount | number }} x {{
+                          flight.fareDetails.farePrices.currencyCode }} {{
+                          flight.fareDetails.farePrices.adultEquivAmount | number }})</span>
+                        <span class="details pull-right">{{ flight.fareDetails.farePrices.currencyCode }} {{
+                          flight.fareDetails.farePrices.adultBaseFare | number }}</span>
+                      </div>
+                      <div class="base" *ngIf="flight.fareDetails.farePrices.childCount">
+                        <span class="details">Child(s) ({{ flight.fareDetails.farePrices.childCount }} x {{
+                          flight.fareDetails.farePrices.currencyCode }} {{
+                          flight.fareDetails.farePrices.childEquivAmount | number }})</span>
+                        <span class="details pull-right">{{ flight.fareDetails.farePrices.currencyCode }} {{
+                          flight.fareDetails.farePrices.childBaseFare | number }}</span>
+                      </div>
+                      <div class="base" *ngIf="flight.fareDetails.farePrices.infantCount">
+                        <span class="details">Infant(s) ({{ flight.fareDetails.farePrices.infantCount }} x {{
+                          flight.fareDetails.farePrices.currencyCode }} {{
+                          flight.fareDetails.farePrices.infantEquivAmount | number }})</span>
+                        <span class="details pull-right">{{ flight.fareDetails.farePrices.currencyCode }} {{
+                          flight.fareDetails.farePrices.infantBaseFare | number }}</span>
+                      </div>
+                      <!--<div class="base">
+                        <img src="assets/images/search/add.png" class="img-fluid" alt=""><span>Base Fare</span>
+                      </div>
+                      <div class="base">
+                        <img src="assets/images/search/add.png" class="img-fluid" alt=""><span>Base Fare</span>
+                      </div>-->
+                    </div>
+                  </div>
+                </div>
+                <div class="card">
+                  <div class="card-header" id="headingTwo">
+                    <h5 class="mb-0">
+                      <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo"
+                        aria-expanded="false" aria-controls="collapseTwo" style="width:100%;">
+                        <div class="base" style="text-align: left;">
+                          <img src="assets/images/search/add.png" class="img-fluid" alt="">
+                          <span>Surcharges</span>
+                          <span class="pull-right">{{ flight.fareDetails.farePrices.currencyCode }} {{
+                            flight.fareDetails.farePrices.totalFeeAndTax | number }}</span>
+                        </div>
+                      </button>
+                    </h5>
+                  </div>
+                  <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                    <div class="card-body">
+                      <div class="base" *ngIf="flight.fareDetails.farePrices.adultCount">
+                        <span class="details">Adult(s) ({{ flight.fareDetails.farePrices.adultCount }} x {{
+                          flight.fareDetails.farePrices.currencyCode }} {{ flight.fareDetails.farePrices.adultTaxAmount
+                          | number
+                          }})</span>
+                        <span class="details pull-right">{{ flight.fareDetails.farePrices.currencyCode }} {{
+                          flight.fareDetails.farePrices.adultFeeAndTax | number }}</span>
+                      </div>
+                      <div class="base" *ngIf="flight.fareDetails.farePrices.childCount">
+                        <span class="details">Child(s) ({{ flight.fareDetails.farePrices.childCount }} x {{
+                          flight.fareDetails.farePrices.currencyCode }} {{ flight.fareDetails.farePrices.childTaxAmount
+                          | number
+                          }})</span>
+                        <span class="details pull-right">{{ flight.fareDetails.farePrices.currencyCode }} {{
+                          flight.fareDetails.farePrices.childFeeAndTax | number }}</span>
+                      </div>
+                      <div class="base" *ngIf="flight.fareDetails.farePrices.infantCount">
+                        <span class="details">Infant(s) ({{ flight.fareDetails.farePrices.infantCount }} x {{
+                          flight.fareDetails.farePrices.currencyCode }} {{ flight.fareDetails.farePrices.infantTaxAmount
+                          | number
+                          }})</span>
+                        <span class="details pull-right">{{ flight.fareDetails.farePrices.currencyCode }} {{
+                          flight.fareDetails.farePrices.infantFeeAndTax | number }}</span>
+                      </div>
+                      <!--<div class="base">
+                        <img src="assets/images/search/add.png" class="img-fluid" alt=""><span>Surcharges</span>
+                      </div>
+                      <div class="base">
+                        <img src="assets/images/search/add.png" class="img-fluid" alt=""><span>Surcharges</span>
+                      </div>-->
+                    </div>
+                  </div>
+                </div>
+                <div class="card" *ngIf="selectedIndex === 4">
+                  <div class="card-header" id="headingOne">
+                    <h5 class="mb-0">
+                      <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree"
+                        aria-expanded="true" aria-controls="collapseOne" style="width:100%;">
+                        <div class="base" style="text-align: left;">
+                          <img src="assets/images/search/add.png" class="img-fluid" alt="">
+                          <span>Other Charges</span>
+                          <span class="pull-right">{{ flight?.currencyCode }} {{
+                            serviceCharge | number }}</span>
+                        </div>
+                      </button>
+                    </h5>
+                  </div>
+                  <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+                    <div class="card-body">
+                      <div class="base" *ngIf="flight.fareDetails.farePrices.adultCount">
+                        <span class="details">Service Charges</span>
+                        <span class="details pull-right">{{ flight?.currencyCode }} {{ serviceCharge | number }}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="summary-tottle">
+                <h5>Total</h5>
+                <h5 class="text-right" *ngIf="selectedIndex === 4">{{ flight?.currencyCode }} {{ flight?.totalFare +
+                  serviceCharge | number }}</h5>
+                <h5 class="text-right" *ngIf="selectedIndex !== 4">{{ flight?.currencyCode }} {{ flight?.totalFare |
+                  number }}</h5>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- my trip pop up -->
+<p-dialog header="Booking Status" [closable]="false" [modal]="true" [draggable]="false" [resizable]="false"
+  [closeOnEscape]="false" [(visible)]="displayDialogBox" [style]="{width: '50vw'}" [baseZIndex]="10000">
+  <div class="agree-box" style="margin: 0 18px;">
+    <ng-container *ngIf="isError">
+      <div class="alert alert-danger col-lg-12 col-sm-12 col-xs-12" role="alert">
+        {{ errMsg }}
+      </div>
+    </ng-container>
+    <ng-container *ngIf="!isError">
+      <div class="agree-cont">
+        <h2 *ngIf="role != 'TravelAgent'">Dear Customer,</h2>
+        <h2 *ngIf="role == 'TravelAgent'">Dear Travel Partner,</h2>
+        <h3 *ngIf="role != 'TravelAgent'">Your Booking Reference is <strong>{{ pnr }}</strong></h3>
+        <h3 *ngIf="role == 'TravelAgent'">Your Booking has been confirmed and your reference number is <strong>{{ pnr
+            }}</strong></h3>
+
+        <h4 *ngIf="role != 'TravelAgent'">
+          Thank you for choosing mehman.pk as your travel partner. Your booking has been confirmed and your e ticket
+          will be
+          emailed to you shortly. If you have already made payment, we will reconfirm payment and we will issue the
+          ticket. If you
+          haven’t made a payment, please do it as soon as possible. Otherwise, your booking will be cancelled within 30
+          min.
+        </h4>
+        <h4 *ngIf="role == 'TravelAgent'">
+          Click on My Trips button to open booking and raise a request to issue ticket or cancel the booking.
+        </h4>
+        <h4 *ngIf="role != 'TravelAgent'">Please remember, above booking confirmation is not your ticket. You must need
+          to buy a ticket to fly. If you
+          have
+          provided your valid contact details, our customer service team may call you to discuss your booking.</h4>
+        <h4 *ngIf="role == 'TravelAgent'">Keep in mind that unnecessory bookings, expired bookings and fake bookings may
+          result in fine from the airlines.</h4>
+        <h4 *ngIf="role != 'TravelAgent'">Safe Journey, </h4>
+        <h3>Mehman Team </h3>
+        <h4 *ngIf="role != 'TravelAgent'">Email :<a
+            href="https://mail.google.com/mail/?view=cm&fs=1&tf=1&to=mehmanpk@gmail.com"
+            target="_blank">mehmanpk@gmail.com</a></h4>
+        <h4 *ngIf="role != 'TravelAgent'"><a href=\contact-us\>Contact us</a></h4>
+      </div>
+      <!-- <div class="agree-cont">
+        <div class="popup-header">
+          <h2>Pack your bag, You’re all set to travel</h2>
+        </div>
+        <h2>Dear Customer,</h2>
+        <h3>Thanks for your booking. Your Booking Reference is <strong>{{ pnr }}</strong></h3>
+
+        <h4>Can you make payment using one of following payment methods</h4>
+        <ol style="margin-left: 40px;">
+          <li>Pay cash in local branch – Check branch address on our <a href=\contact-us\>Contact us</a> Page</li>
+          <li>Pay in Bank – You can pay in one of our bank accounts. Bank details can be found <a href=\banks\>here</a>.
+            After making payment, please <a href="https://mail.google.com/mail/?view=cm&fs=1&tf=1&to=mehmanpk@gmail.com"
+              target="_blank">mehmanpk@gmail.com</a> email us the scan copy of the challan form so we can issue a
+            ticket.</li>
+        </ol>
+        <h4>If you have provided your email, you shall also receive booking confirmation in the email. Don’t forget to
+          check your junk folder in case email has moved to junk folder. </h4>
+        <h4>Please remember, above booking is not your ticket. You must need to buy a ticket to fly. If you have
+          provided your valid contact details, our customer service team will call you as soon as possible to confirm
+          status of payment. If we are unable to contact you via phone or email, we will cancel your bookings and you
+          will have to create new booking to buy a ticket. </h4>
+        <h4>Safe Journey, </h4>
+        <h3>Mehman Team </h3>
+      </div> -->
+    </ng-container>
+  </div>
+  <ng-template pTemplate="footer">
+    <p-button icon="pi pi-home" (click)="closePopup()" label="My Trips" class="p-button-text"></p-button>
+  </ng-template>
+</p-dialog>
+
+
+<!-- <div class="modal makepayment-model fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+  aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <button type="button" class="close" aria-label="Close" (click)="closePopup()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <div class="payment-popupbox">
+          <div class="popup-contbox">
+            <ng-container *ngIf="isError">
+              <div class="alert alert-danger col-lg-12 col-sm-12 col-xs-12" role="alert">
+                {{ errMsg }}
+              </div>
+            </ng-container>
+            <ng-container *ngIf="!isError">
+              <div class="popup-header">
+                <h2>Pack your bag, You’re all set to travel</h2>
+                <h3>Your PNR is <strong>{{ pnr }}</strong></h3>
+                <h5>Apparently we had reached a great height in the atmosphere, for the sky was a dead black, and the
+                  stars had ceased to twinkle.</h5>
+              </div>
+              <div class="popup-cont">
+                <p>By the same illusion which lifts the horizon of the sea to the level of the spectator on a hillside,
+                  the sable cloud beneath was dished out, and the car seemed to float in the middle of an immense dark
+                  sphere, whose upper half was strewn with silver.</p>
+              </div>
+            </ng-container>
+            <div class="book-submit-btn popup-btn">
+              <a class="btn" *ngIf="!isError" (click)="closePopup()">My Trips</a>
+            </div>
+          </div>
+
+          <div class="popup-img" *ngIf="!isError">
+            <img src="assets/images/search/makepayment-img.png" class="img-fluid" alt="">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->

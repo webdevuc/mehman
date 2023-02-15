@@ -1,0 +1,29 @@
+<div class="tab-pane fade" id="pills-Visas" role="tabpanel" aria-labelledby="pills-Visas-tab">
+    <div class="container">
+     <!-- <input type="text" class="visa-input" placeholder="Enter Country">  -->
+      <div class="row">
+        <div class="col-lg-6 col-sm-12 col-xs-12 wow fadeInLeft">
+          <p-dropdown [options]="countries" [(ngModel)]="selectedCountry" optionLabel="name" [filter]="true"
+            filterBy="name" [showClear]="true" placeholder="Select a Country">
+            <ng-template pTemplate="selectedItem">
+              <div class="country-item country-item-value" *ngIf="selectedCountry">
+                <div>{{selectedCountry.name}}</div>
+              </div>
+            </ng-template>
+            <ng-template let-country pTemplate="item">
+              <div class="country-item">
+                <div>{{country.name}}</div>
+              </div>
+            </ng-template>
+          </p-dropdown>
+           <!-- <p-autoComplete [(ngModel)]="selectedCountry" [suggestions]="filteredCountries" (completeMethod)="filterCountry($event)"
+                          field="name" [minLength]="1" placeholder="Enter Country"></p-autoComplete> -->
+        </div>
+
+        <div class="col-lg-6 col-sm-12 col-xs-12 wow fadeInLeft">
+          <p-button label="Check Requirements" pRipple class="p-button-success" (click)="getVisaByCountry()">
+          </p-button>
+        </div>
+      </div>
+    </div>
+  </div>

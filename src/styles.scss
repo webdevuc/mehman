@@ -1,0 +1,192 @@
+/* You can add global styles to this file, and also import other style files */
+@import "./assets/css/loading.scss";
+@import "./assets/css/style.scss";
+@import "./assets/css/responsive.scss";
+@import '~ngx-print-element/styles.css';
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin     : 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.manage-table .booking-table .dx-datagrid-headers td,
+.manage-table .booking-table .dx-header-row td,
+.manage-table .booking-table .dx-datagrid-headers .dx-header-row td {
+  border          : none;
+  text-align      : left;
+  font-size       : 16px;
+  line-height     : 30px;
+  font-family     : "SFUIDisplay-Semibold";
+  color           : #fff !important;
+  letter-spacing  : 0.5px;
+  background-color: #57be4f !important;
+}
+
+.loading:not(:required):after {
+  content          : "";
+  display          : block;
+  font-size        : 10px;
+  width            : 1em;
+  height           : 1em;
+  margin-top       : -0.5em;
+  -webkit-animation: spinner 1500ms infinite linear;
+  animation        : spinner 1500ms infinite linear;
+  border-radius    : 0.5em;
+  box-shadow       : rgba(87, 190, 79, 0.75) 1.5em 0 0 0,
+    rgba(87, 190, 79, 0.75) 1.1em 1.1em 0 0, rgba(87, 190, 79, 0.75) 0 1.5em 0 0,
+    rgba(87, 190, 79, 0.75) -1.1em 1.1em 0 0,
+    rgba(87, 190, 79, 0.75) -1.5em 0 0 0,
+    rgba(87, 190, 79, 0.75) -1.1em -1.1em 0 0,
+    rgba(87, 190, 79, 0.75) 0 -1.5em 0 0,
+    rgba(87, 190, 79, 0.75) 1.1em -1.1em 0 0 !important;
+}
+
+.ngx-pagination .current {
+  padding   : 0.1875rem 0.625rem;
+  background: #57b957 !important;
+  color     : #fefefe;
+  cursor    : default;
+}
+
+.popular-blogs .owl-carousel .owl-item img,
+.top-offers .owl-carousel .owl-item img {
+  display   : block;
+  width     : 400px !important;
+  height    : 400px !important;
+  object-fit: contain;
+}
+
+.p-datatable .p-sortable-column:not(.p-highlight):hover,
+.p-datatable .p-sortable-column.p-highlight,
+.p-datatable .p-sortable-column {
+  background: #57be4f !important;
+  color     : #ffffff !important;
+}
+
+.p-datatable .p-sortable-column.p-highlight .p-sortable-column-icon,
+.p-datatable .p-sortable-column.p-highlight .p-sortable-column-icon:hover {
+  color: #ffffff !important;
+}
+
+.p-datatable .p-sortable-column .p-sortable-column-icon,
+.p-datatable .p-sortable-column .p-sortable-column-icon:hover {
+  color: #ffffff !important;
+}
+
+.p-datatable .p-sortable-column:focus {
+  box-shadow: none !important;
+}
+
+.p-radiobutton .p-radiobutton-box.p-highlight {
+  border-color: #57b957 !important;
+  background  : #57b957 !important;
+}
+
+.p-radiobutton .p-radiobutton-box:not(.p-disabled):not(.p-highlight):hover {
+  border-color: #57b957 !important;
+}
+
+.theme-green .bs-datepicker-head {
+  background-color: #57b957 !important;
+}
+
+.theme-green .bs-datepicker-body table td span.selected,
+.theme-green .bs-datepicker-body table td.selected span,
+.theme-green .bs-datepicker-body table td span[class*="select-"]:after,
+.theme-green .bs-datepicker-body table td[class*="select-"] span:after {
+  background-color: #57b957 !important;
+}
+
+.p-inputtext,
+.p-dropdown {
+  width: 100%;
+}
+
+.sidenav {
+  height     : 100%;
+  position   : relative;
+  z-index    : 1;
+  top        : 0;
+  left       : 0;
+  overflow-x : hidden;
+  transition : 0.5s;
+  padding-top: 0px;
+
+}
+
+.sidenav a {
+  padding        : 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size      : 18px;
+  font-family    : "SFUIDisplay-Semibold";
+  color          : #181B31;
+  display        : block;
+  transition     : 0.3s;
+}
+
+.sidenav a:hover {
+  color: green;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {
+    padding-top: 15px;
+  }
+
+  .sidenav a {
+    font-size: 18px;
+  }
+}
+
+.fill {
+  object-fit: fill;
+}
+
+.contain {
+  object-fit: contain;
+}
+
+.cover {
+  object-fit: cover;
+}
+
+.scale-down {
+  object-fit: scale-down;
+}
+
+.none {
+  object-fit: none;
+}
+
+.product-item {
+  .product-item-content {
+    margin    : .3rem;
+    text-align: center;
+    padding   : 1rem 0;
+  }
+
+  .product-name {
+    font-size  : 1.0rem;
+    font-weight: 700;
+  }
+
+  .product-description {
+    margin: 0 0 1rem 0;
+  }
+
+  .product-image {
+    width     : 70%;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    margin    : 0 0 1rem 0;
+  }
+}
+
+.p-tabview .p-tabview-nav li.p-highlight .p-tabview-nav-link {
+    background: #4CAF50;
+    border-color: #4CAF50;
+    color: white;
+}

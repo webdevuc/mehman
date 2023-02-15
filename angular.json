@@ -1,0 +1,165 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "mehman-booking-engine": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "",
+      "sourceRoot": "src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "allowedCommonJsDependencies": [
+              "lodash"
+            ],
+            "outputPath": "dist/mehman-booking-engine",
+            "index": "src/index.html",
+            "main": "src/main.ts",
+            "polyfills": "src/polyfills.ts",
+            "tsConfig": "tsconfig.app.json",
+            "assets": [
+              "src/favicon.ico",
+              "src/assets",
+              "src/web.config",
+              "src/robots.txt",
+              "src/sitemap.xml"
+            ],
+            "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+              "./node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "src/assets/css/lightpick.css",
+              "./node_modules/ngx-toastr/toastr.css",
+              "./node_modules/font-awesome/css/font-awesome.css",
+              "src/assets/custom-css/daterangepicker.css",
+              "src/assets/css/owl.carousel.scss",
+              "src/assets/css/owl.theme.default.scss",
+              "./node_modules/primeng/resources/themes/saga-green/theme.css",
+              "./node_modules/primeng/resources/primeng.min.css",
+              "./node_modules/primeflex/primeflex.css",
+              "./node_modules/primeicons/primeicons.css",
+              "./node_modules/ngx-bootstrap/datepicker/bs-datepicker.css",
+              "src/assets/css/responsive.scss",
+              "src/styles.scss"
+            ],
+            "scripts": [
+              "src/assets/custom-js/popper.min.js",
+              "./node_modules/jquery/dist/jquery.min.js",
+              "src/assets/js/moment.min.js",
+              "src/assets/js/daterangepicker.min.js",
+              "src/assets/js/owl.carousel.js",
+              "src/assets/js/wow.js",
+              "src/assets/js/custom.js",
+              "./node_modules/bootstrap/dist/js/bootstrap.min.js",
+              "src/assets/js/popper.min.js",
+              "src/assets/js/lightpick.min.js",
+              "./node_modules/jspdf/dist/jspdf.umd.min.js",
+              "./node_modules/jspdf-autotable/dist/jspdf.plugin.autotable.js" 
+            ],
+            "vendorChunk": true,
+            "extractLicenses": false,
+            "buildOptimizer": false,
+            "sourceMap": {
+              "scripts": true,
+              "styles": true,
+              "vendor": true
+            },
+            "optimization": true,
+            "namedChunks": true
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": {
+                "scripts": true,
+                "styles": true,
+                "vendor": true
+              },
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "5mb",
+                  "maximumError": "8mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          },
+          "defaultConfiguration": ""
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "mehman-booking-engine:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "mehman-booking-engine:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "mehman-booking-engine:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "src/test.ts",
+            "polyfills": "src/polyfills.ts",
+            "tsConfig": "tsconfig.spec.json",
+            "karmaConfig": "karma.conf.js",
+            "assets": [
+              "src/favicon.ico",
+              "src/assets"
+            ],
+            "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+              "src/styles.scss"
+            ],
+            "scripts": []
+          }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "e2e/protractor.conf.js",
+            "devServerTarget": "mehman-booking-engine:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "mehman-booking-engine:serve:production"
+            }
+          }
+        }
+      }
+    }
+  },
+  "cli": {
+    "analytics": false
+  }
+}

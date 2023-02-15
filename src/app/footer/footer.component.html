@@ -1,0 +1,229 @@
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 col-sm-12 col-xs-12">
+        <div class="newsletter">
+          <div class="newsletter-content">
+            <h5>Subscribe</h5>
+            <p>to our newsletter</p>
+          </div>
+          <!-- <div class="signup-form">
+            <form [formGroup]="newsLetterSubscriptionForm">
+              <label>Email</label>
+              <input type="text" class="sign-input" placeholder="Email" formControlName="email" #emailInput
+                [ngClass]="{ 'is-invalid': (submitted || newsLetterSubscriptionForm.get('email').touched) && newsLetterSubscriptionForm.get('email').errors }"
+                required>
+              <div
+                *ngIf="newsLetterSubscriptionForm.get('email').errors && (submitted || newsLetterSubscriptionForm.get('email').touched)"
+                class="invalid-feedback">
+                <div *ngIf="newsLetterSubscriptionForm.get('email').errors.required">Email is required.</div>
+                <div *ngIf="newsLetterSubscriptionForm.get('email').errors.email">Enter a valid email.</div>
+              </div>
+              <button type="submit" class="input-btn" (click)="submit()"
+                [disabled]="newsLetterSubscriptionForm.invalid && submitted">
+                Subscribe
+              </button>
+            </form>
+          </div> -->
+          <!-- <div class="newsletter-input-box">
+            <form [formGroup]="newsLetterSubscriptionForm">
+              <input type="email" class="email-input" placeholder="Enter Email..">
+              <a href="javascript" class="input-btn">Subscribe</a>
+            </form>
+          </div> -->
+          <div class="newsletter-input-box">
+            <form [formGroup]="newsLetterSubscriptionForm">
+              <input type="email" class="email-input" placeholder="Enter email.." formControlName="email" #emailInput
+                [ngClass]="{ 'is-invalid': (submitted || newsLetterSubscriptionForm.get('email').touched) && newsLetterSubscriptionForm.get('email').errors }">
+              <div
+                *ngIf="newsLetterSubscriptionForm.get('email').errors && (submitted || newsLetterSubscriptionForm.get('email').touched)"
+                class="invalid-feedback">
+                <div *ngIf="newsLetterSubscriptionForm.get('email').errors.required">Email is required.</div>
+                <div *ngIf="newsLetterSubscriptionForm.get('email').errors.email">Enter enter a valid email.</div>
+              </div>
+              <button type="submit" class="input-btn subscribe" (click)="submit()"
+                [disabled]="newsLetterSubscriptionForm.invalid && submitted">
+                Subscribe</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-2 col-sm-4 col-xs-12">
+        <div class="footer-link">
+          <h5>Company</h5>
+          <ul>
+            <!-- <li><a href="javascript:void(0);" [routerLink]="['/about-us']" routerLinkActive="active">About us</a></li>
+            <li><a href="javascript:void(0);">Why Mehman?</a></li> -->
+            <li><a href="javascript:void(0);" [routerLink]="['/about-us']" routerLinkActive="active">Who We Are</a></li>
+            <li><a href="javascript:void(0);" [routerLink]="['/contact-us']" routerLinkActive="active">Where We
+                Operate</a></li>
+            <li><a href="javascript:void(0);" [routerLink]="['/about-us']" routerLinkActive="active">Media</a></li>
+            <li><a href="javascript:void(0);" [routerLink]="['/blog']" routerLinkActive="active">Travel Blog</a></li>
+            <li><a href="javascript:void(0);" [routerLink]="['/offers']" routerLinkActive="active">Offers</a></li>
+
+          </ul>
+        </div>
+      </div>
+      <div class="col-lg-2 col-sm-4 col-xs-12">
+        <div class="footer-link">
+          <h5>Partners</h5>
+          <ul>
+            <li><a href="javascript:void(0);" [routerLink]="['/travel-agent/auth/home']"
+                routerLinkActive="active">Travel Partners
+              </a></li>
+            <li><a href="javascript:void(0);" [routerLink]="['/business-user/auth/home']"
+                routerLinkActive="active">Business
+                Partners</a>
+            </li>
+            <li><a href="javascript:void(0);" [routerLink]="['/underconstruction']"
+                routerLinkActive="active">Franchise</a>
+            </li>
+            <li><a href="javascript:void(0);" [routerLink]="['/underconstruction']" routerLinkActive="active">Travel
+                APIs</a>
+            </li>
+
+          </ul>
+        </div>
+      </div>
+      <div class="col-lg-2 col-sm-4 col-xs-12">
+        <div class="footer-link">
+          <h5>How to Pay</h5>
+          <ul>
+            <li><a href="javascript:void(0);" [routerLink]="['/banks']" routerLinkActive="active">Banks</a>
+            </li>
+            <li><a href="javascript:void(0);" [routerLink]="['/underconstruction']"
+                routerLinkActive="active">JazzCash</a>
+            </li>
+            <li><a href="javascript:void(0);" [routerLink]="['/underconstruction']"
+                routerLinkActive="active">EasyPay</a>
+            </li>
+            <li><a href="javascript:void(0);" [routerLink]="['/underconstruction']" routerLinkActive="active">Debit &
+                Credit Cards</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-lg-2 col-sm-4 col-xs-12">
+        <div class="footer-link">
+          <h5>Contact</h5>
+          <ul>
+            <li><a href="javascript:void(0);" [routerLink]="['/contact-us']" routerLinkActive="active">Contact us</a>
+            </li>
+            <li><a href="javascript:void(0);" [routerLink]="['/about-us']" routerLinkActive="active">About us</a></li>
+            <li><a href="javascript:void(0);" [routerLink]="['/underconstruction']" routerLinkActive="active">FAQs</a>
+            </li>
+            <li><a href="javascript:void(0);" [routerLink]="['/underconstruction']"
+                routerLinkActive="active">Careers</a>
+            </li>
+
+            <!-- <li><a href="javascript:void(0);" [routerLink]="['/travel-agent/auth/home']"
+                routerLinkActive="active">Travel Partners</a></li> -->
+          </ul>
+        </div>
+      </div>
+      <!-- <div class="col-lg-2 col-sm-4 col-xs-12">
+        <div class="footer-link">
+          <h5>Help</h5>
+          <ul>
+            <li><a href="javascript:void(0);">Travel features</a></li>
+            <li><a href="javascript:void(0);">Cookie policy</a></li>
+            <li><a href="javascript:void(0);">Policy</a></li>
+            <li><a href="javascript:void(0);">Terms of service</a></li>
+          </ul>
+        </div>
+      </div> -->
+
+      <!-- <div class="col-lg-2 col-sm-4 col-xs-12">
+        <div class="footer-link">
+          <h5>Explore</h5>
+          <ul>
+            <li><a href="javascript:void(0);">Cities</a></li>
+            <li><a href="javascript:void(0);">Weekend</a></li>
+            <li><a href="javascript:void(0);">Countries</a></li>
+            <li><a href="javascript:void(0);">Flights</a></li>
+            <li><a href="javascript:void(0);">Hotels</a></li>
+          </ul>
+        </div>
+      </div> -->
+
+      <div class="col-lg-2 col-sm-4 col-xs-12">
+        <div class="footer-link">
+          <h5>Follow Mehman</h5>
+          <div class="footer-logo">
+            <a href="javascript:void(0);"><img src="assets/images/home/footer-logo.webp" class="img-fluid" alt="mehman.pk logo"></a>
+          </div>
+          <div class="social-link">
+            <ul>
+              <li><a href="javascript:void(0);" (click)="onNavigate('https://www.facebook.com/mehman.pk')"><i
+                    class="fa fa-facebook" aria-hidden="true"></i></a></li>
+              <!-- <li><a href="javascript:void(0);"><i class="fa fa-twitter" aria-hidden="true"></i></a></li> -->
+              <!-- <li><a href="javascript:void(0);"><i class="fa fa-tumblr" aria-hidden="true"></i></a></li> -->
+              <li><a href="javascript:void(0);" (click)="onNavigate('https://www.linkedin.com/company/mehmanpk')"><i
+                    class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+              <li><a href="javascript:void(0);" (click)="onNavigate('https://www.instagram.com/mehmanpk/')"><i
+                    class="fa fa-instagram" aria-hidden="true"></i></a></li>
+
+              <li><a href="javascript:void(0);"
+                  (click)="onNavigate('https://www.youtube.com/channel/UCatMGnX4bIudf0DPK04gYrA')"><i
+                    class="fa fa-youtube" aria-hidden="true"></i></a></li>
+            </ul>
+          </div>
+          <div class="app-link">
+            <ul>
+              <li> <a href="javascript:void(0);"><img src="assets/images/home/appstore.webp" class="img-fluid app-store"
+                    alt="mehman.pk apple store application"></a>
+              <li> <a href="javascript:void(0);"><img src="assets/images/home/playstore.webp" class="img-fluid app-store"
+                    alt="mehman.pk playstore application"></a>
+            </ul>
+          </div>
+          <!-- <div class="social-link">
+            <ul>
+              <li><a href="javascript:void(0);"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+              <li><a href="javascript:void(0);"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+              <li><a href="javascript:void(0);"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+              <li><a href="javascript:void(0);"><i class="fa fa-youtube" aria-hidden="true"></i></a></li>
+            </ul>
+          </div> -->
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+<div class="footer-nav">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 col-sm-12 col-xs-12">
+        <div class="footer-navigation">
+          <ul>
+            <li><a href="javascript:void(0);" [routerLink]="['/privacy-policy']" routerLinkActive="active">PRIVACY
+                POLICY</a>
+            </li>
+            <li><a href="javascript:void(0);" [routerLink]="['/terms-and-condition']" routerLinkActive="active">TERMS
+                AND
+                CONDITIONS</a></li>
+            <li><a href="javascript:void(0);" [routerLink]="['/underconstruction']"
+                routerLinkActive="active">SITEMAP</a>
+            </li>
+            <li><a href="javascript:void(0);" [routerLink]="['/contact-us']" routerLinkActive="active">CONTACT US</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="copy-right">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 col-sm-12 col-xs-12">
+        <div class="copy-cont">
+          <p>COPYRIGHT © | <a href="javascript:void(0);" [routerLink]="['/']" routerLinkActive="active">Mehman Travel &
+              Tours</a> (PVT) Limited. All rights reserved</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

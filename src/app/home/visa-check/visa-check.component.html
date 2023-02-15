@@ -1,0 +1,225 @@
+<!-- blog header -->
+<section class="hero-headermain">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 col-sm-12 col-xs-12">
+        <div class="header-title wow fadeInUp">
+
+          <div class="container">
+            <!-- <input type="text" class="visa-input" placeholder="Enter Country" /> -->
+            <h1>{{country}} Visa</h1>
+            <div class="row">
+
+              <div class="col-lg-6 col-sm-12 col-xs-12 wow fadeInLeft">
+                <p-dropdown [options]="countries" [(ngModel)]="selectedCountry" optionLabel="name" [filter]="true"
+                  filterBy="name" [showClear]="true" placeholder="Select a Country">
+                  <ng-template pTemplate="selectedItem">
+                    <div class="country-item country-item-value" *ngIf="selectedCountry">
+                      <div>{{selectedCountry.name}}</div>
+                    </div>
+                  </ng-template>
+                  <ng-template let-country pTemplate="item">
+                    <div class="country-item">
+                      <div>{{country.name}}</div>
+                    </div>
+                  </ng-template>
+                </p-dropdown>
+              </div>
+
+              <div class="col-lg-6 col-sm-12 col-xs-12 wow fadeInLeft">
+                <p-button (onClick)="getVisaByCountry()" label="Check Requirements" pRipple class="p-button-success">
+                </p-button>
+              </div>
+            </div>
+            <div class="row" style="margin-top: 5px;">
+              <div class="visa-info__banner__phone_number">
+                <div class="visa-info__banner__phone_help vi__phone_help phone_hide">Need help?
+                  <div class="call-button__custom-btn call-button__custom-btn-phone">
+                    <div style="padding-left: 15px;">
+                      Call us -<a href="https://wa.me/923254888818" target="_blank"><span><img
+                            src="assets/images/home/WhatsApp.svg" class="img-fluid" width="20px"
+                            alt="whatsapp" /></span>{{ phone }}</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="hero-contact hero-contact-2">
+  <div class="container">
+    <div class="row">
+      <div class="col-xl-12 float-left">
+        <div class="col-xl-12">
+          <img width="100%" src="../../../assets/images/visa/Visa-Online-Files.webp" alt="">
+        </div>
+      </div>
+      <!-- features -->
+    </div>
+    <div class="row" style="margin-top: 10px;">
+      <div class="col-lg-12 col-sm-12 col-xs-12">
+        <p-tabView>
+          <p-tabPanel [header]="item.visaName" *ngFor="let item of visaDeailsByCountry; let i = index"
+            [selected]="i == 0">
+            <ng-template pTemplate="content">
+              <div class="container">
+                <div class="row">
+                  <div class="col-lg-9 col-sm-12 col-xs-12">
+                    <div class="article-box">
+                      <div style="margin-top: 5px;">
+                        <div [innerHTML]="item.content"></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-lg-3 col-sm-12 col-xs-12">
+                    <div class="contact-box Fare-box">
+                      <div class="contact-header wow fadeInUp">
+                        <div class="flight-summary visa-price-summary2 text-center float-left col-xl-12">
+                          <h3 class="rubik-medium">{{item.priceType}}</h3>
+                          <ul class="list-unstyled text-left">
+                            <li class="style1">Adult Price <span
+                                class="float-right rubik-medium text-right">{{item.adultPrice | currency:'PKR '
+                                :'symbol':'1.0-0'}}</span>
+                            </li>
+                            <li class="style1">Child Price <span
+                                class="float-right rubik-medium text-right">{{item.childPrice | currency:'PKR '
+                                :'symbol':'1.0-0'}}</span>
+                            </li>
+                          </ul>
+                        </div>
+                        <div>
+                          <p-button label="Apply Now" (onClick)="applyVisa()" pRipple class="p-button-success">
+                          </p-button>
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
+            </ng-template>
+          </p-tabPanel>
+        </p-tabView>
+                            <div>
+                              <app-mat-faq [faqList]="faqs"></app-mat-faq>
+                            </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<p-dialog [closable]="true" header="Enter following details to apply" [modal]="true" [draggable]="false"
+  [resizable]="false" [closeOnEscape]="true" [(visible)]="displayDialogBox"
+  [breakpoints]="{'960px': '75vw', '640px': '100vw'}" [style]="{width: '40vw'}" [baseZIndex]="10000">
+  <div style="margin: 0 18px;">
+    <ng-container>
+      <div class="traveller-form wow fadeIn mt-4">
+        <div [formGroup]="contactUsForm">
+          <div class="travel-form-box row">
+            <div class="col-sm-12 col-xs-12">
+
+
+              <div class="form-group">
+                <label class="control-label travel-form-box-lable">Your Name: </label>
+                <input type="text" pInputText formControlName="name" [ngClass]="{'is-invalid':(submitted || contactUsForm.get('name').touched) && contactUsForm.get('name').errors}"
+                  placeholder="Enter your name here" />
+
+                <div *ngIf="contactUsForm.get('name').errors && (submitted || contactUsForm.get('name').touched)" class="invalid-feedback">
+                  <div *ngIf="contactUsForm.get('name').errors.required">
+                    Name is required.
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="control-label travel-form-box-lable">Your Email: </label>
+                <input type="email"  pInputText formControlName="email" placeholder="Enter your email here"
+                  [ngClass]="{'is-invalid':(submitted || contactUsForm.get('email').touched) && contactUsForm.get('email').errors}" />
+                <div *ngIf="contactUsForm.get('email').errors && (submitted || contactUsForm.get('email').touched)" class="invalid-feedback">
+                  <div *ngIf="contactUsForm.get('email').errors.required">
+                    Email is required.
+                  </div>
+                  <div *ngIf="contactUsForm.get('email').errors.email">
+                    Email a valid email.
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label travel-form-box-lable">Your Phone: (without zero e.g. instead of 03001234567 enter 3001234567)</label>
+                <p-inputMask mask="9999999999" formControlName="mobileNumber" placeholder="Enter your Mobile No "
+                  [ngClass]="{ 'is-invalid': (submitted || contactUsForm.get('mobileNumber').touched) && contactUsForm.get('mobileNumber').errors }">
+                </p-inputMask>
+                <div *ngIf="contactUsForm.get('mobileNumber').errors && (submitted || contactUsForm.get('mobileNumber').touched)" class="invalid-feedback">
+                  <div *ngIf="contactUsForm.get('mobileNumber').errors.required">
+                    Phone is required.
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label travel-form-box-lable">Your City: </label>
+                <input type="text" pInputText placeholder="Enter your City here" formControlName="city"
+                  [ngClass]="{'is-invalid':(submitted || contactUsForm.get('city').touched) && contactUsForm.get('city').errors}" />
+
+                <div *ngIf="contactUsForm.get('city').errors && (submitted || contactUsForm.get('city').touched)" class="invalid-feedback">
+                  <div *ngIf="contactUsForm.get('city').errors.required">
+                    City is required.
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label travel-form-box-lable">No of Persons: </label>
+                <input type="number"  pInputText placeholder="Enter No of Persons here"
+                  formControlName="noOfPerson" [ngClass]="{'is-invalid':
+                  (submitted || contactUsForm.get('noOfPerson').touched) && contactUsForm.get('noOfPerson').errors}" />
+
+                <div *ngIf="contactUsForm.get('noOfPerson').errors && (submitted || contactUsForm.get('noOfPerson').touched)"
+                  class="invalid-feedback">
+                  <div *ngIf="contactUsForm.get('noOfPerson').errors.required">
+                    No of Persons is required.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+  <ng-template pTemplate="footer">
+    <p-button styleClass="p-button-lg" label="Apply Now" (click)="submit()"
+      [disabled]="contactUsForm.invalid && submitted">
+    </p-button>
+  </ng-template>
+</p-dialog>
+<p-dialog header="" [closable]="false" [modal]="true" [draggable]="false" [resizable]="false"
+  [closeOnEscape]="false" [(visible)]="displayConfirmDialogBox" [style]="{width: '50vw'}" [baseZIndex]="10000">
+  <div class="agree-box" style="margin: 0 18px;">
+    <ng-container *ngIf="isError">
+      <div class="alert alert-danger col-lg-12 col-sm-12 col-xs-12" role="alert">
+        {{ errMsg }}
+      </div>
+    </ng-container>
+    <ng-container *ngIf="!isError">
+      <div class="agree-cont">
+        <h4>
+          Thank you for choosing mehman.pk as your Visa partner.  We have received your Visa application. Our Visa team will
+          contact you and will guide your next steps of your visa Application
+        </h4>
+        <h3>Mehman Team </h3>
+        <h4>Email :<a href="https://mail.google.com/mail/?view=cm&fs=1&tf=1&to=mehmanpk@gmail.com"
+            target="_blank">mehmanpk@gmail.com</a></h4>
+        <h4><a href=\contact-us\>Contact us</a></h4>
+      </div>
+
+    </ng-container>
+  </div>
+  <ng-template pTemplate="footer">
+    <p-button icon="pi  pi-check" (click)="closePopup()" label="Close" class="p-button-text"></p-button>
+  </ng-template>
+</p-dialog>

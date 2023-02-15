@@ -1,0 +1,73 @@
+<p-toolbar styleClass="p-mb-4">
+    <ng-template pTemplate="left">
+        <button pButton pRipple label="Add Refunds" icon="pi pi-plus" class="p-button-success p-mr-2" ></button>
+    </ng-template>
+    <ng-template pTemplate="right">
+        <div class="p-d-flex">            
+            <span class="p-input-icon-left">
+                <i class="pi pi-search"></i>
+                <input pInputText type="text" (input)="myTab.filterGlobal($event.target.value, 'contains')"
+                    placeholder="Search..." />
+            </span>
+        </div>            
+    </ng-template>
+</p-toolbar>
+<p-table #myTab [value]="refundFlights" [rowHover]="true" [responsive]="true" responsiveLayout="scroll" [rows]="10" [showCurrentPageReport]="true"
+    [rowsPerPageOptions]="[5, 10,25,50]" [paginator]="true"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+    [globalFilterFields]="['requestType', 'airline', 'passengerTicketNumber','pnr','passangerName', 'route']">
+    <ng-template pTemplate="caption">
+
+
+    </ng-template>
+    <ng-template pTemplate="header">
+        <tr>
+            <th pSortableColumn="createdOn">Submit Date<p-sortIcon field="createdOn"></p-sortIcon></th>
+            <th pSortableColumn="requestType">Request Type <p-sortIcon field="requestType"></p-sortIcon>
+            </th>
+            <th pSortableColumn="airline">Airline<p-sortIcon field="airline"></p-sortIcon>
+            </th>
+            <th pSortableColumn="passengerTicketNumber">Ticket No <p-sortIcon
+                    field="passengerTicketNumber"></p-sortIcon>
+            </th>
+            <th pSortableColumn="pnr">PNR <p-sortIcon field="pnr">
+                </p-sortIcon>
+            </th>
+            <th pSortableColumn="passengerName">Passenger Name<p-sortIcon field="passengerName">
+                </p-sortIcon>
+            </th>
+            <th pSortableColumn="travelDate">Travel Date <p-sortIcon field="travelDate">
+                </p-sortIcon>
+            </th>
+            <th pSortableColumn="route">Route <p-sortIcon field="route">
+                </p-sortIcon>
+            </th>
+            <th pSortableColumn="amount">Amount<p-sortIcon field="amount">
+                </p-sortIcon>
+            </th>
+            <th pSortableColumn="status">Status<p-sortIcon field="status"></p-sortIcon>
+            </th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-refund>
+        <tr>
+            <td>{{refund.createdDate | date :'dd/MM/YYYY HH:MM:SS' }}</td>
+            <td>{{refund.requestType | titlecase}}</td>
+            <td>{{refund.airLine}}</td>
+            <td>{{refund.passangerTicketNumber}}</td>
+            <td>{{refund.pnr}}</td>
+            <td>{{refund.passangerName}}</td>
+            <td>{{refund.travelDate | date :'dd/MM/YYYY HH:MM:SS' }}</td>
+            <td>{{refund.route}}</td>
+            <td>{{refund.amount | number: '1.0-0' }}</td>
+            <td>{{statuses[refund.status]}}</td>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage" let-user>
+        <tr>
+            <td colspan="10" class="text-center">
+                No records found
+            </td>
+        </tr>
+    </ng-template>
+</p-table>

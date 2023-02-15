@@ -1,0 +1,27 @@
+<div class="row">    
+    <h2 style="margin: auto;">Example of Ngx-Bootstrap Progress Bar</h2>    
+    <div class="col-sm-8" style="margin: 10px;">    
+      <div style="margin: 10px;">    
+        <button (click)="showProgressBar(1)" class="btn btn-primary">Show Normal Progress Bar</button>    
+      </div>    
+      <div *ngIf="normalPB" class="mb-2">    
+        <progressbar [value]="55"></progressbar>    
+      </div>    
+    </div>    
+    <div class="col-sm-8" style="margin: 10px;">    
+      <div style="margin: 10px;">    
+        <button (click)="showProgressBar(2)" class="btn btn-primary">Show Striped Progress Bar</button>    
+      </div>    
+      <div *ngIf="stripedPB" class="mb-2">    
+        <progressbar [value]="35" type="danger" [striped]="true">35%</progressbar>    
+      </div>    
+    </div>    
+    <div class="col-sm-8" style="margin: 10px;">    
+      <div style="margin: 10px;">    
+        <button (click)="showProgressBar(3)" class="btn btn-primary">Show Animated Progress Bar</button>    
+      </div>    
+      <div *ngIf="animatedPB" class="mb-2">    
+        <progressbar max="200" [value]="180" type="success" [striped]="true" [animate]="true"><i>180 / 200</i></progressbar>    
+      </div>    
+    </div>    
+  </div>    

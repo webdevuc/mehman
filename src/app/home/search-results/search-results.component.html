@@ -1,0 +1,657 @@
+<app-shared-search-results [searchfilters]="searchfilters"></app-shared-search-results>
+
+<!-- <section class="hero-headermain">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 col-sm-12 col-xs-12">
+        <div class="search-result-box wow fadeInUp">
+          <ul>
+            <li class="trip_type">
+              <div class="dropdown">
+                <a class="dropdown-toggle" role="button" id="dropdownMenuLink" data-toggle="dropdown"
+                  aria-haspopup="true" aria-expanded="true" style="cursor: pointer">
+                  <div class="result-cont trip_type">
+                    <p>Trip Type</p>
+                    <h5>{{ TripTypeName }}</h5>
+                  </div>
+                </a>
+                <div class="dropdown-menu">
+                  <a class="dropdown-item" (click)="onTripTypeChanged(tripTypeEnum.OneWay)" style="cursor: pointer">
+                    <div class="result-cont">
+                      <h5>One Way</h5>
+                    </div>
+                  </a>
+                  <a class="dropdown-item" (click)="onTripTypeChanged(tripTypeEnum.RoundTrip)" style="cursor: pointer">
+                    <div class="result-cont">
+                      <h5>Round Trip</h5>
+                    </div>
+                  </a>
+                </div>
+              </div>
+            </li>
+            <li id="liDeparture" data-trigger="manual" data-toggle="popover" data-placement="top"
+              data-content="<span><i class='fa fa-exclamation-triangle'></i> Enter valid From airport</span>">
+              <div class="book-details book-details1" [title]="departureTitle">
+                <p>Airport Departure</p>
+                <input type="text" class="mehman-inputfiled" value="{{ departureAirportName }}" readonly />
+              </div>
+              <div class="exchange" (click)="swapLocations()" style="cursor: pointer">
+                <a><img src="assets/images/home/exchange.svg" class="img-fluid" alt="" /></a>
+              </div>
+              <div class="inputfiled-formboxes selectbox1">
+                <div class="inputfiled-formbox">
+                  <div class="input-search">
+                    <input type="text" id="txtFrom" class="input-from" placeholder="From"
+                      (keyup)="searchDeparturePopup()" autofocus />
+                    <div class="seach-icon">
+                      <i class="fa fa-search" aria-hidden="true"></i>
+                    </div>
+                  </div>
+                  <ul *ngIf="
+                              popularCities &&
+                              popularCities.length > 0 &&
+                              isSuggest === true
+                            ">
+                    <li>
+                      <p class="recent-tag">Popular Cities</p>
+                    </li>
+                    <li *ngFor="let airport of popularCities" role="option" (click)="selectedOrigin(airport)"
+                      style="cursor: pointer">
+                      <div class="hrtlCenter" (click)="hideDepartureAirportResults()">
+                        <div class="recent-searches">
+                          <p>
+                            {{ airport.city }}, {{ airport.country }}
+                          </p>
+                          <p class="blackText">{{ airport.name }}</p>
+                        </div>
+                        <div class="searches-code">
+                          <p>{{ airport.code }}</p>
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+                  <ul *ngIf="
+                      departureAirportResults &&
+                      departureAirportResults.length > 0
+                    ">
+                    <li>
+                      <p class="recent-tag">SUGGESTIONS</p>
+                    </li>
+                    <li *ngFor="let airport of departureAirportResults" role="option" (click)="selectedOrigin(airport)"
+                      style="cursor: pointer">
+                      <div class="hrtlCenter" (click)="hideDepartureAirportResults()">
+                        <div class="recent-searches">
+                          <p>{{ airport.city }}, {{ airport.country }}</p>
+                          <p class="blackText">{{ airport.name }}</p>
+                        </div>
+                        <div class="searches-code">
+                          <p>{{ airport.code }}</p>
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </li>
+            <li id="liArrival" data-trigger="manual" data-toggle="popover" data-placement="top"
+              [attr.data-content]="liArrivalErrMsg">
+              <div class="book-details book-details2" [title]="arrivalTitle">
+                <p>Airport Arrival</p>
+                <input type="text" class="mehman-inputfiled" value="{{ arrivalAirportName }}" readonly />
+              </div>
+              <div class="inputfiled-formboxes selectbox2">
+                <div class="inputfiled-formbox">
+                  <div class="input-search">
+                    <input type="text" id="txtTo" class="input-from" placeholder="To" (keyup)="searchArrivalPopup()"
+                      autofocus />
+                    <div class="seach-icon">
+                      <i class="fa fa-search" aria-hidden="true"></i>
+                    </div>
+                  </div>
+                  <ul class="arriveselect" *ngIf="popularCities && popularCities.length > 0 && isSuggest === true">
+                    <li>
+                      <p class="recent-tag">POPULAR CITIES</p>
+                    </li>
+                    <li *ngFor="let airport of popularCities" role="option" (click)="selectedDestination(airport)"
+                      style="cursor: pointer">
+                      <div class="hrtlCenter" (click)="hideArrivalAirportResults()">
+                        <div class="recent-searches">
+                          <p>
+                            {{ airport.city }}, {{ airport.country }}
+                          </p>
+                          <p class="blackText">{{ airport.name }}</p>
+                        </div>
+                        <div class="searches-code">
+                          <p>{{ airport.code }}</p>
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+                  <ul class="arriveselect" *ngIf="
+                      arrivalAirportResults && arrivalAirportResults.length > 0
+                    ">
+                    <li>
+                      <p class="recent-tag">SUGGESTIONS</p>
+                    </li>
+                    <li *ngFor="let airport of arrivalAirportResults" role="option"
+                      (click)="selectedDestination(airport)" style="cursor: pointer">
+                      <div class="hrtlCenter" (click)="hideArrivalAirportResults()">
+                        <div class="recent-searches">
+                          <p>{{ airport.city }}, {{ airport.country }}</p>
+                          <p class="blackText">{{ airport.name }}</p>
+                        </div>
+                        <div class="searches-code">
+                          <p>{{ airport.code }}</p>
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </li>
+            <li class="dates" style="cursor: pointer" (click)="singleDatePicker()">
+              <div class="book-details">
+                <p>Departure</p>
+                <h2>{{ leaveDate | date: "d MMM yy" }}</h2>
+                <div class="date">
+                  <input type="text" name="daterange" id="dpLeaveDate" readonly />
+                </div>
+              </div>
+            </li>
+            <li class="dates" style="cursor: pointer" (click)="rangeDatePicker()">
+              <div class="book-details">
+                <p>Return</p>
+                <div *ngIf="returnDate">
+                  <h2>{{ returnDate | date: "d MMM yy" }}</h2>
+                </div>
+                <div *ngIf="!returnDate" class="nodate">
+                  <p>Tap to add a return date from bigger discounts</p>
+                </div>
+                <div class="date">
+                  <input type="text" name="daterange" id="dpReturnDate" readonly />
+                </div>
+              </div>
+            </li>
+            <li id="liTravellers" style="cursor: pointer" data-trigger="manual" data-toggle="popover"
+              data-placement="top"
+              data-content="<span><i class='fa fa-exclamation-triangle'></i> Upto 9 passengers allowed</span>">
+              <div class="book-details adult-details result-cont">
+                <p>Travellers</p>
+                <ng-container *ngIf="Travellers == 1">
+                  <h2>{{ Travellers }} Traveller</h2>
+                </ng-container>
+                <ng-container *ngIf="Travellers > 1">
+                  <h2>{{ Travellers }} Travellers</h2>
+                </ng-container>
+              </div>
+              <div class="book-peron book-peron1">
+                <div class="adult">
+                  <h5>ADULTS (12y +)</h5>
+                  <ul class="adults">
+                    <li>
+                      <input type="radio" name="adult" value="1" id="rbAdult1" class="Adult" [(ngModel)]="adult"
+                        (ngModelChange)="validateTravellers()" />
+                      <label for="rbAdult1" [ngClass]="{ active: adult == 1 }">1</label>
+                    </li>
+                    <li>
+                      <input type="radio" name="adult" value="2" id="rbAdult2" class="Adult" [(ngModel)]="adult"
+                        (ngModelChange)="validateTravellers()" />
+                      <label for="rbAdult2" [ngClass]="{ active: adult == 2 }">2</label>
+                    </li>
+                    <li>
+                      <input type="radio" name="adult" value="3" id="rbAdult3" class="Adult" [(ngModel)]="adult"
+                        (ngModelChange)="validateTravellers()" />
+                      <label for="rbAdult3" [ngClass]="{ active: adult == 3 }">3</label>
+                    </li>
+                    <li>
+                      <input type="radio" name="adult" value="4" id="rbAdult4" class="Adult" [(ngModel)]="adult"
+                        (ngModelChange)="validateTravellers()" />
+                      <label for="rbAdult4" [ngClass]="{ active: adult == 4 }">4</label>
+                    </li>
+                    <li>
+                      <input type="radio" name="adult" value="5" id="rbAdult5" class="Adult" [(ngModel)]="adult"
+                        (ngModelChange)="validateTravellers()" />
+                      <label for="rbAdult5" [ngClass]="{ active: adult == 5 }">5</label>
+                    </li>
+                    <li>
+                      <input type="radio" name="adult" value="6" id="rbAdult6" class="Adult" [(ngModel)]="adult"
+                        (ngModelChange)="validateTravellers()" />
+                      <label for="rbAdult6" [ngClass]="{ active: adult == 6 }">6</label>
+                    </li>
+                    <li>
+                      <input type="radio" name="adult" value="7" id="rbAdult7" class="Adult" [(ngModel)]="adult"
+                        (ngModelChange)="validateTravellers()" />
+                      <label for="rbAdult7" [ngClass]="{ active: adult == 7 }">7</label>
+                    </li>
+                    <li>
+                      <input type="radio" name="adult" value="8" id="rbAdult8" class="Adult" [(ngModel)]="adult"
+                        (ngModelChange)="validateTravellers()" />
+                      <label for="rbAdult8" [ngClass]="{ active: adult == 8 }">8</label>
+                    </li>
+                    <li>
+                      <input type="radio" name="adult" value="9" id="rbAdult9" class="Adult" [(ngModel)]="adult"
+                        (ngModelChange)="validateTravellers()" />
+                      <label for="rbAdult9" [ngClass]="{ active: adult == 9 }">9</label>
+                    </li>
+                  </ul>
+                </div>
+                <div class="adult">
+                  <h5>CHILDREN (2y - 12y)</h5>
+                  <ul class="child">
+                    <li>
+                      <input type="radio" name="child" value="0" id="rbChild0" class="Adult" [(ngModel)]="child"
+                        (ngModelChange)="validateTravellers()" />
+                      <label for="rbChild0" [ngClass]="{ active: child == 0 }">0</label>
+                    </li>
+                    <li>
+                      <input type="radio" name="child" value="1" id="rbChild1" class="Adult" [(ngModel)]="child"
+                        (ngModelChange)="validateTravellers()" />
+                      <label for="rbChild1" [ngClass]="{ active: child == 1 }">1</label>
+                    </li>
+                    <li>
+                      <input type="radio" name="child" value="2" id="rbChild2" class="Adult" [(ngModel)]="child"
+                        (ngModelChange)="validateTravellers()" />
+                      <label for="rbChild2" [ngClass]="{ active: child == 2 }">2</label>
+                    </li>
+                    <li>
+                      <input type="radio" name="child" value="3" id="rbChild3" class="Adult" [(ngModel)]="child"
+                        (ngModelChange)="validateTravellers()" />
+                      <label for="rbChild3" [ngClass]="{ active: child == 3 }">3</label>
+                    </li>
+                    <li>
+                      <input type="radio" name="child" value="4" id="rbChild4" class="Adult" [(ngModel)]="child"
+                        (ngModelChange)="validateTravellers()" />
+                      <label for="rbChild4" [ngClass]="{ active: child == 4 }">4</label>
+                    </li>
+                    <li>
+                      <input type="radio" name="child" value="5" id="rbChild5" class="Adult" [(ngModel)]="child"
+                        (ngModelChange)="validateTravellers()" />
+                      <label for="rbChild5" [ngClass]="{ active: child == 5 }">5</label>
+                    </li>
+                    <li>
+                      <input type="radio" name="child" value="6" id="rbChild6" class="Adult" [(ngModel)]="child"
+                        (ngModelChange)="validateTravellers()" />
+                      <label for="rbChild6" [ngClass]="{ active: child == 6 }">6</label>
+                    </li>
+                  </ul>
+                </div>
+                <div class="adult">
+                  <h5>INFANTS (below 2y)</h5>
+                  <ul class="infant">
+                    <li>
+                      <input type="radio" name="infant" value="0" id="rbInfant0" class="Adult" [(ngModel)]="infant"
+                        (ngModelChange)="validateTravellers()" />
+                      <label for="rbInfant0" [ngClass]="{ active: infant == 0 }">0</label>
+                    </li>
+                    <li>
+                      <input type="radio" name="infant" value="1" id="rbInfant1" class="Adult" [(ngModel)]="infant"
+                        (ngModelChange)="validateTravellers()" />
+                      <label for="rbInfant1" [ngClass]="{ active: infant == 1 }">1</label>
+                    </li>
+                    <li>
+                      <input type="radio" name="infant" value="2" id="rbInfant2" class="Adult" [(ngModel)]="infant"
+                        (ngModelChange)="validateTravellers()" />
+                      <label for="rbInfant2" [ngClass]="{ active: infant == 2 }">2</label>
+                    </li>
+                    <li>
+                      <input type="radio" name="infant" value="3" id="rbInfant3" class="Adult" [(ngModel)]="infant"
+                        (ngModelChange)="validateTravellers()" />
+                      <label for="rbInfant3" [ngClass]="{ active: infant == 3 }">3</label>
+                    </li>
+                    <li>
+                      <input type="radio" name="infant" value="4" id="rbInfant4" class="Adult" [(ngModel)]="infant"
+                        (ngModelChange)="validateTravellers()" />
+                      <label for="rbInfant4" [ngClass]="{ active: infant == 4 }">4</label>
+                    </li>
+                    <li>
+                      <input type="radio" name="infant" value="5" id="rbInfant5" class="Adult" [(ngModel)]="infant"
+                        (ngModelChange)="validateTravellers()" />
+                      <label for="rbInfant5" [ngClass]="{ active: infant == 5 }">5</label>
+                    </li>
+                    <li>
+                      <input type="radio" name="infant" value="6" id="rbInfant6" class="Adult" [(ngModel)]="infant"
+                        (ngModelChange)="validateTravellers()" />
+                      <label for="rbInfant6" [ngClass]="{ active: infant == 6 }">6</label>
+                    </li>
+                  </ul>
+                  <a href="javascript:void(0);" class="book-btn apply-travellers" (click)="applyTravellers()">Apply</a>
+                </div>
+                <div class="adult">
+                  <span style="color: red" *ngIf="Travellers > 9">
+                    Upto 9 passengers allowed
+                  </span>
+                </div>
+              </div>
+            </li>
+
+            <li class="primium">
+              <div class="book-details class-details result-cont">
+                <p>CLASS</p>
+                <h2>{{ travelClassName }}</h2>
+              </div>
+              <div class="book-peron book-peron2">
+                <div class="adult">
+                  <h5>CHOOSE TRAVEL CLASS</h5>
+                  <ul class="buisness">
+                    <li>
+                      <input type="radio" name="travel-class" value="Y" id="rbTravelClassEconomy" class="Adult Business"
+                        [(ngModel)]="travelClass" (click)="getTravelClass()" />
+                      <label for="rbTravelClassEconomy"
+                        [ngClass]="{ active: travelClassName == 'Economy' }">Economy</label>
+                    </li>
+                    <li>
+                      <input type="radio" name="travel-class" id="rbTravelClassBusiness" value="C"
+                        class="Adult Business" [(ngModel)]="travelClass" (click)="getTravelClass()" />
+                      <label for="rbTravelClassBusiness"
+                        [ngClass]="{ active: travelClassName == 'Business' }">Business</label>
+                    </li>
+                    <li>
+                      <input type="radio" name="travel-class" id="rbTravelClassFirst" value="F" class="Adult Business"
+                        [(ngModel)]="travelClass" (click)="getTravelClass()" />
+                      <label for="rbTravelClassFirst" [ngClass]="{ active: travelClassName == 'First' }">First</label>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </li>
+            <li class="result-btn">
+              <a (click)="searchResults()">Search</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero-notification" *ngIf="isLoaded">
+  <div class="container">
+    <div class="row cust-box-row" *ngIf="searchResult">
+      <div [className]="getSelected(date) ? 'cust-boxs shadow-sm active' : 'cust-boxs'" *ngFor="let date of list"
+        (click)="selectDate(date)">
+        {{date.label}}
+      </div>
+      <div (click)="selectDate(date)" [className]="'cust-boxs cust-boxs-price'" *ngFor="let date of list">
+        PKR {{getPrice(date) | number}}
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero-filter">
+  <div class="container">
+    <div class="row" *ngIf="!isLoaded">
+      <div class="col-lg-12 col-sm-12 col-xs-12">
+        <img class="flight-img" src="../../../assets/images/search/flights.gif" />
+      </div>
+    </div>
+    <div class="row" *ngIf="isSearchResultsError">
+      <div class="col-lg-12 col-sm-12 col-xs-12">
+        <div class="flt-details wow fadeIn">
+          <div class="alert alert-danger col-lg-12 col-sm-12 col-xs-12" role="alert">
+            {{ searchResultsErrMsg }}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-3 col-sm-12 col-xs-12">
+        <div class="header-offer-box sort-filter wow fadeInUp" *ngIf="
+            searchResult &&
+            ((searchResult.stopFilters &&
+              searchResult.stopFilters.length > 0) ||
+              (searchResult.airlineFliters &&
+                searchResult.airlineFliters.length > 0))
+          ">
+          <div class="offer-header">
+            <div class="offer-title offer-title-2">
+              <h5>
+                Filter by
+                <span *ngIf="searchResult && searchResult.flights && isLoaded">({{ searchResult.flights.length }}
+                  <ng-container *ngIf="searchResult.flights.length == 1">result</ng-container>
+                  <ng-container *ngIf="searchResult.flights.length != 1">results</ng-container>
+                  found)
+                </span>
+              </h5>
+            </div>
+          </div>
+          <div class="filter-cont">
+            <div class="flt-check" *ngIf="
+                searchResult.stopFilters && searchResult.stopFilters.length > 0
+              ">
+              <h5>Stops</h5>
+
+              <label class="containerlabel" *ngFor="let filter of searchResult.stopFilters; let i = index">
+                {{ filter.text }}
+                <input type="radio" id="stop-filter_{{ i }}" name="stop-filter" [value]="filter.value"
+                  [(ngModel)]="stopFilter" (ngModelChange)="applyFilter()" />
+                <span class="checkmark"></span>
+              </label>
+            </div>
+            <div class="flt-check" *ngIf="
+                searchResult.airlineFliters &&
+                searchResult.airlineFliters.length > 0
+              ">
+              <h5>Preffered Airlines</h5>
+
+              <label class="containerlabel" *ngFor="
+                  let filter of searchResult.airlineFliters;
+                  let i = index
+                ">
+                <ng-container *ngIf="!filter.logo">{{
+                  filter.name
+                  }}</ng-container>
+                <img [src]="'assets/images/search/' + filter.logo" class="img-fluid" alt="" *ngIf="filter.logo" />
+                <input type="radio" id="airline-filter_{{ i }}" name="airline-filter" [value]="filter.code"
+                  [(ngModel)]="airlineFilter" (ngModelChange)="applyFilter()" />
+                <span class="checkmark"></span>
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="header-offer-box sort-filter Arrenge-box wow fadeInUp" *ngIf="
+            isLoaded &&
+            searchResult &&
+            searchResult.flights &&
+            searchResult.flights.length > 0
+          ">
+          <div class="offer-header">
+            <div class="offer-title offer-title-2">
+              <h5>Arrange by</h5>
+            </div>
+          </div>
+          <div class="filter-cont">
+            <div class="flt-check">
+              <label class="containerlabel">
+                Lowest Fare
+                <input type="radio" id="arrange-by_lowest-fare" name="arrange-by" value="lowest_fare"
+                  [(ngModel)]="arrangeFilter" (ngModelChange)="applyFilter()" />
+                <span class="checkmark"></span>
+              </label>
+
+              <label class="containerlabel">
+                Shortest Travel Time
+                <input type="radio" id="arrange-by_shortest-travel-time" name="arrange-by" value="shortest_travel_time"
+                  [(ngModel)]="arrangeFilter" (ngModelChange)="applyFilter()" />
+                <span class="checkmark"></span>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div class="mobile-sort" [routerLink]="['/sort-filter']" routerLinkActive="active">
+          <div class="sort-result">
+            <p>
+              <span><i class="fa fa-sort-amount-asc" aria-hidden="true"></i></span> Sort Results
+            </p>
+          </div>
+          <div class="sort-result">
+            <p>
+              <span><i class="fa fa-filter" aria-hidden="true"></i></span> Filter Flights
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-9 col-sm-12 col-xs-12">
+        <ng-container *ngIf="
+            !isSearchResultsError &&
+            searchResult &&
+            searchResult.flights &&
+            searchResult.flights.length <= 0 &&
+            isLoaded
+          ">
+          <div class="flt-details wow fadeIn">
+            <div class="alert alert-danger col-lg-12 col-sm-12 col-xs-12" role="alert">
+              No results found!
+            </div>
+          </div>
+        </ng-container>
+        <ng-container *ngIf="
+            searchResult &&
+            searchResult.flights &&
+            searchResult.flights.length > 0
+          ">
+          <div class="row" *ngFor="let flight of searchResult.flights;let i=index">
+            <div class="flt-details wow fadeIn">
+              <div class="flight-logo">
+                <h2 class="text-center" style="color: #57b957" *ngIf="!flight.airlineLogo">
+                  {{ flight.airline }}
+                </h2>
+                <img [src]="'assets/images/search/' + flight.airlineLogo" class="img-fluid" alt=""
+                  *ngIf="flight.airlineLogo" />
+              </div>
+              <div class="flight-cont">
+                <div class="flt-cont-box">
+                  <div class="flt-date">
+                    <h5>
+                      {{ flight.flightMini.departure.departureDateTimeFormat }}
+                    </h5>
+                    <p>{{ flight.flightMini.departure.originLocation }}</p>
+                    <p>{{ flight.flightMini.departure.departureDateFormat }}</p>
+                  </div>
+                  <div class="flt-arrow">
+                    <p>{{ flight.elapsedTime }}</p>
+                    <img src="assets/images/search/arrow-first.png" class="img-fluid" alt=""
+                      pTooltip="{{flight.flightMini.departure.changePlanesNote}}" />
+                    <p>{{ flight.flightMini.departure.travelRoute }}</p>
+                  </div>
+                  <div class="flt-date">
+                    <h5>
+                      {{ flight.flightMini.departure.arrivalDateTimeFormat }}
+                    </h5>
+                    <p>{{ flight.flightMini.departure.destinationLocation }}</p>
+                    <p>{{ flight.flightMini.departure.arrivalDateFormat }}</p>
+                  </div>
+                </div>
+                <div class="flt-cont-box flt-cont-box-2"
+                  *ngIf="flight.tripType == 'Return' && flight.flightMini.return">
+                  <div class="flt-date">
+                    <h5>
+                      {{ flight.flightMini.return.departureDateTimeFormat }}
+                    </h5>
+                    <p>{{ flight.flightMini.return.originLocation }}</p>
+                    <p>{{ flight.flightMini.return.departureDateFormat }}</p>
+                  </div>
+                  <div class="flt-arrow">
+                    <p>{{ flight.flightMini.return.totalDuration }}</p>
+                    <img src="assets/images/search/arrow-second.png" class="img-fluid" alt="" />
+                    <p>{{ flight.flightMini.return.travelRoute }}</p>
+                  </div>
+                  <div class="flt-date">
+                    <h5>{{ flight.flightMini.return.arrivalDateTimeFormat }}</h5>
+                    <p>{{ flight.flightMini.return.destinationLocation }}</p>
+                    <p>{{ flight.flightMini.return.arrivalDateFormat }}</p>
+                  </div>
+                </div>
+              </div>
+              <div class="flt-pkr">
+                <h5>{{ flight.currencyCode }} {{ flight.totalFare | number }}</h5>
+                <div class="flt-pkr-btn">
+                  <a (click)="reviewBooking(flight)" style="cursor: pointer">Book Now</a>
+                  <div class="flt-arrowbtn">
+                    <svg width="8" height="14" viewBox="0 0 8 14" xmlns="http://www.w3.org/2000/svg">
+                      <path fill-rule="evenodd" clip-rule="evenodd"
+                        d="M0.292893 1.70712C-0.0976311 1.3166 -0.0976311 0.683433 0.292893 0.292909C0.683418 -0.0976158 1.31658 -0.0976158 1.70711 0.292909L7.70711 6.29291C8.09763 6.68343 8.09763 7.3166 7.70711 7.70712L1.70711 13.7071C1.31658 14.0976 0.683417 14.0976 0.292893 13.7071C-0.0976316 13.3166 -0.0976316 12.6834 0.292893 12.2929L5.58579 7.00002L0.292893 1.70712Z" />
+                    </svg>
+                  </div>
+                </div>
+                <div class="flt-pkr-btn switch" *ngIf="flight?.childs.length > 0">
+                  <a data-toggle="collapse" href="#collapseExample{{i}}"
+                    style="cursor: pointer">{{flight?.childs.length}} more
+                    option available
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-12 collapse p-0 " id="collapseExample{{i}}">
+              <div class="flt-details wow fadeIn child" *ngFor="let child of flight?.childs">
+                <div class="flight-logo">
+                  <h2 class="text-center" style="color: #57b957" *ngIf="!child.airlineLogo">
+                    {{ child.airline }}
+                  </h2>
+                  <img [src]="'assets/images/search/' + child.airlineLogo" class="img-fluid" alt=""
+                    *ngIf="child.airlineLogo" />
+                </div>
+                <div class="flight-cont">
+                  <div class="flt-cont-box">
+                    <div class="flt-date">
+                      <h5>
+                        {{ child.flightMini.departure.departureDateTimeFormat }}
+                      </h5>
+                      <p>{{ child.flightMini.departure.originLocation }}</p>
+                      <p>{{ child.flightMini.departure.departureDateFormat }}</p>
+                    </div>
+                    <div class="flt-arrow">
+                      <p>{{ child.flightMini.departure.totalDuration }}</p>
+                      <img src="assets/images/search/arrow-first.png" class="img-fluid" alt="" />
+                      <p>{{ child.flightMini.departure.travelRoute }}</p>
+                    </div>
+                    <div class="flt-date">
+                      <h5>
+                        {{ child.flightMini.departure.arrivalDateTimeFormat }}
+                      </h5>
+                      <p>{{ child.flightMini.departure.destinationLocation }}</p>
+                      <p>{{ child.flightMini.departure.arrivalDateFormat }}</p>
+                    </div>
+                  </div>
+                  <div class="flt-cont-box flt-cont-box-2"
+                    *ngIf="child.tripType == 'Return' && child.flightMini.return">
+                    <div class="flt-date">
+                      <h5>
+                        {{ child.flightMini.return.departureDateTimeFormat }}
+                      </h5>
+                      <p>{{ child.flightMini.return.originLocation }}</p>
+                      <p>{{ child.flightMini.return.departureDateFormat }}</p>
+                    </div>
+                    <div class="flt-arrow">
+                      <p>{{ child.flightMini.return.totalDuration }}</p>
+                      <img src="assets/images/search/arrow-second.png" class="img-fluid" alt="" />
+                      <p>{{ child.flightMini.return.travelRoute }}</p>
+                    </div>
+                    <div class="flt-date">
+                      <h5>{{ child.flightMini.return.arrivalDateTimeFormat }}</h5>
+                      <p>{{ child.flightMini.return.destinationLocation }}</p>
+                      <p>{{ child.flightMini.return.arrivalDateFormat }}</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="flt-pkr">
+                  <h5>{{ child.currencyCode }} {{ child.totalFare | number }}</h5>
+                  <div class="flt-pkr-btn">
+                    <a (click)="reviewBooking(child)" style="cursor: pointer">Book Now</a>
+                    <div class="flt-arrowbtn">
+                      <svg width="8" height="14" viewBox="0 0 8 14" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                          d="M0.292893 1.70712C-0.0976311 1.3166 -0.0976311 0.683433 0.292893 0.292909C0.683418 -0.0976158 1.31658 -0.0976158 1.70711 0.292909L7.70711 6.29291C8.09763 6.68343 8.09763 7.3166 7.70711 7.70712L1.70711 13.7071C1.31658 14.0976 0.683417 14.0976 0.292893 13.7071C-0.0976316 13.3166 -0.0976316 12.6834 0.292893 12.2929L5.58579 7.00002L0.292893 1.70712Z" />
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</section> -->

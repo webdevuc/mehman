@@ -1,0 +1,58 @@
+<app-travel-agent-inner-header> </app-travel-agent-inner-header>
+<div id="sidenav" class="sidebar" ngClass.lt-md="collapse">
+  <h3 class="text-center travel-agency mt-5">
+    Agent Id : <span> {{ userAgentId }}</span>
+  </h3>
+  <!-- <h3 class="text-center travel-agency">Opning Balance: <span class="badge badge-light">PKR{{ userOpningBalance }}</span></h3> -->
+  <h3 class="text-center travel-agency">
+    Credit Limit :
+    <span class="badge badge-light">{{
+      userCreditLimit != null ? userCreditLimit : 0
+    }}</span>
+  </h3>
+  <h3 class="text-center travel-agency">
+    Balance :
+    <span class="badge badge-light">
+      {{ userBalance != null ? userBalance : 0 }}</span
+    >
+  </h3>
+  <hr style="background-color: #f1f1f1" />
+  <ng-container *ngFor="let menu of menus">
+    <a
+      *ngIf="menu.key !== 'comission-structure'"
+      [routerLinkActive]="['active']"
+      (click)="setTitle(menu)"
+      [routerLink]="[menu?.url]"
+      >{{ menu?.name }}</a
+    >
+    <a
+      *ngIf="menu.key == 'comission-structure'"
+      href="https://1drv.ms/x/s!AgS8lY1PwbULjNs8g9LaSRzW9XEwNg?e=Q8BcJw"
+      target="_blank"
+      >{{ menu?.name }}</a
+    >
+  </ng-container>
+</div>
+<div class="page-content-panel-inner">
+  <section class="hero-header-user">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12 col-sm-12 col-xs-12">
+          <div class="header-title wow fadeInUp">
+            <h1>{{ pageTitle }}</h1>
+          </div>
+        </div>
+        <!-- <div *ngIf="isBack" class="col-lg-2 col-sm-2 col-xs-2">
+                    <div class="header-title wow fadeInUp">
+                        <button [routerLinkActive]="['active']" (click)="setTitle('Bookings')" [routerLink]="['/travel-agent/bookings']">Back</button>
+                    </div>
+                </div> -->
+      </div>
+    </div>
+  </section>
+
+  <router-outlet></router-outlet>
+</div>
+<div class="footer_content">
+  <ng-template [ngComponentOutlet]="footerComponent | async"></ng-template>
+</div>

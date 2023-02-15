@@ -1,0 +1,29 @@
+<div id="sidenav" class="sidebar">
+  <h3 class="text-center">Hello <br />{{ userName }}</h3>
+  <!-- <hr style="background-color: #f1f1f1;"> -->
+  <a [routerLinkActive]="['active']" (click)="setTitle('My Bookings')" [routerLink]="['/user/bookings']">My Bookings</a>
+  <a routerLink="/">Create New Booking</a>
+  <a [routerLinkActive]="['active']" (click)="setTitle('Manage Alerts')" [routerLink]="['/user/manage-alerts']">Manage
+    Alerts</a>
+  <a [routerLink]="['/auth/signin']" (click)="logout()">Log out</a>
+</div>
+<div class="page-content-panel-inner">
+  <app-user-header>
+
+  </app-user-header>
+  <section class="hero-header-user">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12 col-sm-12 col-xs-12">
+          <div class="header-title wow fadeInUp">
+            <h1>{{pageTitle}}</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <router-outlet></router-outlet>
+</div>
+
+
+<!-- <app-footer class="footer_content"></app-footer> -->

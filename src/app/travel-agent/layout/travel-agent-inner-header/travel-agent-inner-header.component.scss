@@ -1,0 +1,16 @@
+.dropdown-menu {
+    left: auto;
+    right: 0!important;
+}
+@media (min-width:319px) and (max-width:820px) {
+    .navbar-collapse{
+        flex-basis: 0%;
+        flex-grow: 0;
+        padding-right: 15px;
+    }
+    .navbar-brand{
+        width:154px;
+        margin: 0px;
+    }
+
+}

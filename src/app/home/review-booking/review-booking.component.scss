@@ -1,0 +1,35 @@
+.custom-title {
+  font-size     : 28px;
+  line-height   : 33px;
+  color         : #181B31;
+  letter-spacing: 0.5px;
+  font-family   : "SFUIDisplay-Semibold";
+}
+
+.custom-airline {
+  font-size  : 12px;
+  font-family: "SFUIDisplay-Bold";
+}
+
+// @media only screen and (max-width: 600px) {
+//   .custom-title {
+//     font-size: 20px;
+//   }
+// }
+
+@media only screen and (max-width: 600px) {
+  .custom-title {
+    font-size: 15px;
+  }
+
+  .custom-airline {
+    font-size  : 11px;
+    font-family: "SFUIDisplay-Bold";
+  }
+
+  .book-submit-btn a {
+    padding  : 10px 0;
+    font-size: 18px;
+    margin   : auto;
+  }
+}

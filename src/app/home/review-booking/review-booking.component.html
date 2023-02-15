@@ -1,0 +1,560 @@
+<section class="hero-headermain">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 col-sm-12 col-xs-12">
+        <div class="review-booking-box wow fadeInUp">
+          <div class="header-title booking-title">
+            <h1>Review your booking</h1>
+          </div>
+          <div class="booking-rang-slider">
+            <div class="slider-nmbr">
+              <ul>
+                <li class="check-icon"><img src="assets/images/search/check.png" class="img-fluid" alt=""></li>
+                <li>2</li>
+                <li>3</li>
+                <li>4</li>
+              </ul>
+            </div>
+            <div class="rang-slider">
+              <div class="inline-slider"></div>
+            </div>
+            <div class="slider-list">
+              <ul>
+                <li>Flight Selected</li>
+                <li>Review</li>
+                <li>Traveler Details</li>
+                <li>Make Payment</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>   
+</section>
+
+
+<!-- review booking -->
+<section class="hero-book">
+  <div class="container p-shadow-24">
+    <div class="row">
+      <div class="col-lg-12 col-xs-12 col-xs-12 book-scroll">
+        <p-tabView>
+          <p-tabPanel header="Flight Details">
+            <ng-template pTemplate="content" *ngIf="isFlightFound">
+              <mat-card>
+                <mat-card-content>
+                  <div class="departure-box">
+                    <ng-container *ngIf="flight.flightSegments && flight.flightSegments.length > 0">
+                      <ng-container
+                        *ngIf="flight.flightSegments && flight.flightSegments.length > 0 && departureSegments && departureSegments.length > 0">
+                        <div class="depareture-cont"
+                          [ngStyle]="{'border-right': flight.tripType == 'Return' ? '1px solid #e8e8ea':'0'}">
+                          <h2 class="custom-title">Departure <span class="custom-airline">(by {{ flight.airline
+                              }})</span></h2>
+                          <ng-container *ngFor="let segment of departureSegments">
+                            <div class="airline-box">
+                              <div class="airline-cont">
+                                <div class="flight-cont">
+                                  <div class="flt-cont-box">
+                                    <div class="flt-date">
+                                      <h5>{{ segment.departureTimeFormat }}</h5>
+                                      <p>{{ segment.departureAirport }}</p>
+                                      <p>{{ segment.departureDateFormat }}</p>
+                                    </div>
+                                    <div class="flt-arrow">
+                                      <p style="margin-left: 15px;">{{ segment.duration }}</p>
+                                      <img src="assets/images/search/arrow-first.png" class="img-fluid" alt="">
+                                      <p class="economy">{{segment.operatingAirlineCode}}{{segment.flightNumber}} - {{
+                                        segment.travelClass }} ({{ segment.fareClass }})</p>
+                                    </div>
+                                    <div class="flt-date">
+                                      <h5>{{ segment.arrivalTimeFormat }}</h5>
+                                      <p>{{ segment.arrivalAirport }}</p>
+                                      <p>{{ segment.arrivalDateFormat }}</p>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="airline-btn">
+                                <a href="javascript:void(0);"><span *ngIf="segment.isRefundable">Refundable</span><span
+                                    *ngIf="!segment.isRefundable">Non_Refundable</span></a>
+                              </div>
+                            </div>
+                            <div class="Terminals" *ngIf="segment.changePlanesNote">
+                              <p>{{ segment.changePlanesNote }}</p>
+                            </div>
+                          </ng-container>
+                        </div>
+                      </ng-container>
+                      <ng-container *ngIf="returnSegments && returnSegments.length > 0">
+                        <div class="depareture-cont">
+                          <h2 class="custom-title">Return <span class="custom-airline">(by {{ flight.airline }})</span>
+                          </h2>
+                          <ng-container *ngFor="let segment of returnSegments">
+                            <div class="airline-box">
+                              <div class="airline-cont">
+                                <div class="flight-cont">
+                                  <div class="flt-cont-box">
+                                    <div class="flt-date">
+                                      <h5>{{ segment.departureTimeFormat }}</h5>
+                                      <p>{{ segment.departureAirport }}</p>
+                                      <p>{{ segment.departureDateFormat }}</p>
+                                    </div>
+                                    <div class="flt-arrow">
+                                      <p style="margin-left: 15px;">{{ segment.duration }}</p>
+                                      <img src="assets/images/search/arrow-first.png" class="img-fluid" alt="">
+                                      <p class="economy">{{segment.operatingAirlineCode}}{{segment.flightNumber}} - {{
+                                        segment.travelClass }} ({{ segment.fareClass }})</p>
+                                    </div>
+                                    <div class="flt-date">
+                                      <h5>{{ segment.arrivalTimeFormat }}</h5>
+                                      <p>{{ segment.arrivalAirport }}</p>
+                                      <p>{{ segment.arrivalDateFormat }}</p>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="airline-btn">
+                                <a href="javascript:void(0);"><span *ngIf="segment.isRefundable">Refundable</span><span
+                                    *ngIf="!segment.isRefundable">Non_Refundable</span></a>
+                              </div>
+                            </div>
+                            <div class="Terminals" *ngIf="segment.changePlanesNote">
+                              <p>{{ segment.changePlanesNote }}</p>
+                            </div>
+                          </ng-container>
+                        </div>
+                      </ng-container>
+                    </ng-container>
+                  </div>
+                </mat-card-content>
+                <mat-card-footer>
+                  <div class="book-submit-btn">
+                    <a [routerLink]="'/traveller-details/' + flightId">Continue</a>
+                  </div>
+                </mat-card-footer>
+              </mat-card>
+            </ng-template>
+          </p-tabPanel>
+          <p-tabPanel header="Fare Details">
+            <ng-template pTemplate="content" *ngIf="isFlightFound">
+              <mat-card *ngIf="flight.fareDetails">
+                <mat-card-content>
+                  <div class="base-table" *ngIf="flight.fareDetails.farePrices">
+                    <div class="base-title">
+                      <h5>Fare Details</h5>
+                    </div>
+                    <div class="table-responsive">
+                      <table class="table">
+                        <tbody>
+                          <tr>
+                            <td>Fare Summary</td>
+                            <td>ADT X {{ flight.fareDetails.farePrices.adultCount }}</td>
+                            <td *ngIf="flight.fareDetails.farePrices.childCount">CHD X {{
+                              flight.fareDetails.farePrices.childCount }}</td>
+                            <td *ngIf="flight.fareDetails.farePrices.infantCount">INF X {{
+                              flight.fareDetails.farePrices.infantCount }}</td>
+                          </tr>
+                          <tr>
+                            <td>Base Fare</td>
+                            <td>{{ flight.fareDetails.farePrices.currencyCode }} {{
+                              flight.fareDetails.farePrices.adultBaseFare | number }}</td>
+                            <td *ngIf="flight.fareDetails.farePrices.childCount">{{
+                              flight.fareDetails.farePrices.currencyCode }} {{
+                              flight.fareDetails.farePrices.childBaseFare }}</td>
+                            <td *ngIf="flight.fareDetails.farePrices.infantCount">{{
+                              flight.fareDetails.farePrices.currencyCode }} {{
+                              flight.fareDetails.farePrices.infantBaseFare }}</td>
+                          </tr>
+                          <tr>
+                            <td>Fee & Tax</td>
+                            <td>{{ flight.fareDetails.farePrices.currencyCode }} {{
+                              flight.fareDetails.farePrices.adultFeeAndTax | number }}</td>
+                            <td *ngIf="flight.fareDetails.farePrices.childCount">{{
+                              flight.fareDetails.farePrices.currencyCode }} {{
+                              flight.fareDetails.farePrices.childFeeAndTax }}</td>
+                            <td *ngIf="flight.fareDetails.farePrices.infantCount">{{
+                              flight.fareDetails.farePrices.currencyCode }} {{
+                              flight.fareDetails.farePrices.infantFeeAndTax }}</td>
+                          </tr>
+                          <tr class="head">
+                            <td>Grand Total</td>
+                            <ng-container
+                              *ngIf="flight.fareDetails.farePrices.childCount && flight.fareDetails.farePrices.infantCount">
+                              <td colspan="3" class="head-col">{{ flight.fareDetails.farePrices.currencyCode }} {{
+                                flight.fareDetails.farePrices.grandTotal | number }}</td>
+                            </ng-container>
+                            <ng-container
+                              *ngIf="!(flight.fareDetails.farePrices.childCount && flight.fareDetails.farePrices.infantCount) && flight.fareDetails.farePrices.childCount">
+                              <td colspan="2" class="head-col">{{ flight.fareDetails.farePrices.currencyCode }} {{
+                                flight.fareDetails.farePrices.grandTotal | number }}</td>
+                            </ng-container>
+                            <ng-container
+                              *ngIf="!(flight.fareDetails.farePrices.childCount && flight.fareDetails.farePrices.infantCount) && flight.fareDetails.farePrices.infantCount">
+                              <td colspan="2" class="head-col">{{ flight.fareDetails.farePrices.currencyCode }} {{
+                                flight.fareDetails.farePrices.grandTotal | number }}</td>
+                            </ng-container>
+                            <ng-container
+                              *ngIf="!(flight.fareDetails.farePrices.childCount && flight.fareDetails.farePrices.infantCount) && !flight.fareDetails.farePrices.childCount && !flight.fareDetails.farePrices.infantCount">
+                              <td class="head-col">{{ flight.fareDetails.farePrices.currencyCode }} {{
+                                flight.fareDetails.farePrices.grandTotal | number }}</td>
+                            </ng-container>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+
+                  </div>
+                  <div class="base-table">
+                    <div class="base-title">
+                      <h5>Fare Rules</h5>
+                    </div>
+                    <div class="table-responsive">
+                      <table class="table">
+                        <thead>
+                          <tr>
+                            <th scope="col"></th>
+                            <th scope="col">Adult</th>
+                            <th scope="col">Child </th>
+                            <th scope="col">Infant</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr class="green-tag">
+                            <td>Exchange Penalty</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                          </tr>
+                          <tr>
+                            <td>Before Departure</td>
+                            <td>
+                              <span *ngIf="flight.fareDetails.fareRules.exchangePenality.isChangeable">{{
+                                flight.fareDetails.fareRules.exchangePenality.currencyCode }} </span>
+                              <span
+                                *ngIf="flight.fareDetails.fareRules.exchangePenality.isChangeable && flight.fareDetails.fareRules.exchangePenality.adultBeforeDeparture">{{
+                                flight.fareDetails.fareRules.exchangePenality.adultBeforeDeparture | number
+                                }}</span>
+                              <span
+                                *ngIf="flight.fareDetails.fareRules.exchangePenality.isChangeable && !flight.fareDetails.fareRules.exchangePenality.adultBeforeDeparture">0</span>
+                              <span
+                                *ngIf="!flight.fareDetails.fareRules.exchangePenality.isChangeable">Non-Changeable</span>
+                            </td>
+                            <td>
+                              <span *ngIf="flight.fareDetails.fareRules.exchangePenality.isChangeable">{{
+                                flight.fareDetails.fareRules.exchangePenality.currencyCode }} </span>
+                              <span
+                                *ngIf="flight.fareDetails.fareRules.exchangePenality.isChangeable && flight.fareDetails.fareRules.exchangePenality.childBeforeDeparture">{{
+                                flight.fareDetails.fareRules.exchangePenality.childBeforeDeparture | number
+                                }}</span>
+                              <span
+                                *ngIf="flight.fareDetails.fareRules.exchangePenality.isChangeable && !flight.fareDetails.fareRules.exchangePenality.childBeforeDeparture">0</span>
+                              <span
+                                *ngIf="!flight.fareDetails.fareRules.exchangePenality.isChangeable">Non-Changeable</span>
+                            </td>
+                            <td>
+                              <span *ngIf="flight.fareDetails.fareRules.exchangePenality.isChangeable">{{
+                                flight.fareDetails.fareRules.exchangePenality.currencyCode }} </span>
+                              <span
+                                *ngIf="flight.fareDetails.fareRules.exchangePenality.isChangeable && flight.fareDetails.fareRules.exchangePenality.infantBeforeDeparture">{{
+                                flight.fareDetails.fareRules.exchangePenality.infantBeforeDeparture | number
+                                }}</span>
+                              <span
+                                *ngIf="flight.fareDetails.fareRules.exchangePenality.isChangeable && !flight.fareDetails.fareRules.exchangePenality.infantBeforeDeparture">0</span>
+                              <span
+                                *ngIf="!flight.fareDetails.fareRules.exchangePenality.isChangeable">Non-Changeable</span>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>After Departure</td>
+                            <td>
+                              <span *ngIf="flight.fareDetails.fareRules.exchangePenality.isChangeable">{{
+                                flight.fareDetails.fareRules.exchangePenality.currencyCode }} </span>
+                              <span
+                                *ngIf="flight.fareDetails.fareRules.exchangePenality.isChangeable && flight.fareDetails.fareRules.exchangePenality.adultAfterDeparture">{{
+                                flight.fareDetails.fareRules.exchangePenality.adultAfterDeparture | number }}</span>
+                              <span
+                                *ngIf="flight.fareDetails.fareRules.exchangePenality.isChangeable && !flight.fareDetails.fareRules.exchangePenality.adultAfterDeparture">0</span>
+                              <span
+                                *ngIf="!flight.fareDetails.fareRules.exchangePenality.isChangeable">Non-Changeable</span>
+                            </td>
+                            <td>
+                              <span *ngIf="flight.fareDetails.fareRules.exchangePenality.isChangeable">{{
+                                flight.fareDetails.fareRules.exchangePenality.currencyCode }} </span>
+                              <span
+                                *ngIf="flight.fareDetails.fareRules.exchangePenality.isChangeable && flight.fareDetails.fareRules.exchangePenality.childAfterDeparture">{{
+                                flight.fareDetails.fareRules.exchangePenality.childAfterDeparture | number }}</span>
+                              <span
+                                *ngIf="flight.fareDetails.fareRules.exchangePenality.isChangeable && !flight.fareDetails.fareRules.exchangePenality.childAfterDeparture">0</span>
+                              <span
+                                *ngIf="!flight.fareDetails.fareRules.exchangePenality.isChangeable">Non-Changeable</span>
+                            </td>
+                            <td>
+                              <span *ngIf="flight.fareDetails.fareRules.exchangePenality.isChangeable">{{
+                                flight.fareDetails.fareRules.exchangePenality.currencyCode }} </span>
+                              <span
+                                *ngIf="flight.fareDetails.fareRules.exchangePenality.isChangeable && flight.fareDetails.fareRules.exchangePenality.infantAfterDeparture">{{
+                                flight.fareDetails.fareRules.exchangePenality.infantAfterDeparture | number
+                                }}</span>
+                              <span
+                                *ngIf="flight.fareDetails.fareRules.exchangePenality.isChangeable && !flight.fareDetails.fareRules.exchangePenality.infantAfterDeparture">0</span>
+                              <span
+                                *ngIf="!flight.fareDetails.fareRules.exchangePenality.isChangeable">Non-Changeable</span>
+                            </td>
+                          </tr>
+                          <tr class="green-tag">
+                            <td>Refund Penalty</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                          </tr>
+                          <tr>
+                            <td>Before Departure</td>
+                            <td>
+                              <span *ngIf="flight.fareDetails.fareRules.refundPenality.isRefundable">{{
+                                flight.fareDetails.fareRules.refundPenality.currencyCode }} </span>
+                              <span
+                                *ngIf="flight.fareDetails.fareRules.refundPenality.isRefundable && flight.fareDetails.fareRules.refundPenality.adultBeforeDeparture">{{
+                                flight.fareDetails.fareRules.refundPenality.adultBeforeDeparture | number }}</span>
+                              <span
+                                *ngIf="flight.fareDetails.fareRules.refundPenality.isRefundable && !flight.fareDetails.fareRules.refundPenality.adultBeforeDeparture">0</span>
+                              <span
+                                *ngIf="!flight.fareDetails.fareRules.refundPenality.isRefundable">Non-Refundable</span>
+                            </td>
+                            <td>
+                              <span *ngIf="flight.fareDetails.fareRules.refundPenality.isRefundable">{{
+                                flight.fareDetails.fareRules.refundPenality.currencyCode }} </span>
+                              <span
+                                *ngIf="flight.fareDetails.fareRules.refundPenality.isRefundable && flight.fareDetails.fareRules.refundPenality.childBeforeDeparture">{{
+                                flight.fareDetails.fareRules.refundPenality.childBeforeDeparture | number }}</span>
+                              <span
+                                *ngIf="flight.fareDetails.fareRules.refundPenality.isRefundable && !flight.fareDetails.fareRules.refundPenality.childBeforeDeparture">0</span>
+                              <span
+                                *ngIf="!flight.fareDetails.fareRules.refundPenality.isRefundable">Non-Refundable</span>
+                            </td>
+                            <td>
+                              <span *ngIf="flight.fareDetails.fareRules.refundPenality.isRefundable">{{
+                                flight.fareDetails.fareRules.refundPenality.currencyCode }} </span>
+                              <span
+                                *ngIf="flight.fareDetails.fareRules.refundPenality.isRefundable && flight.fareDetails.fareRules.refundPenality.infantBeforeDeparture">{{
+                                flight.fareDetails.fareRules.refundPenality.infantBeforeDeparture | number }}</span>
+                              <span
+                                *ngIf="flight.fareDetails.fareRules.refundPenality.isRefundable && !flight.fareDetails.fareRules.refundPenality.infantBeforeDeparture">0</span>
+                              <span
+                                *ngIf="!flight.fareDetails.fareRules.refundPenality.isRefundable">Non-Refundable</span>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>After Departure</td>
+                            <td>
+                              <span *ngIf="flight.fareDetails.fareRules.refundPenality.isRefundable">{{
+                                flight.fareDetails.fareRules.refundPenality.currencyCode }} </span>
+                              <span
+                                *ngIf="flight.fareDetails.fareRules.refundPenality.isRefundable && flight.fareDetails.fareRules.refundPenality.adultAfterDeparture">{{
+                                flight.fareDetails.fareRules.refundPenality.adultAfterDeparture | number }}</span>
+                              <span
+                                *ngIf="flight.fareDetails.fareRules.refundPenality.isRefundable && !flight.fareDetails.fareRules.refundPenality.adultAfterDeparture">0</span>
+                              <span
+                                *ngIf="!flight.fareDetails.fareRules.refundPenality.isRefundable">Non-Refundable</span>
+                            </td>
+                            <td>
+                              <span *ngIf="flight.fareDetails.fareRules.refundPenality.isRefundable">{{
+                                flight.fareDetails.fareRules.refundPenality.currencyCode }} </span>
+                              <span
+                                *ngIf="flight.fareDetails.fareRules.refundPenality.isRefundable && flight.fareDetails.fareRules.refundPenality.childAfterDeparture">{{
+                                flight.fareDetails.fareRules.refundPenality.childAfterDeparture | number }}</span>
+                              <span
+                                *ngIf="flight.fareDetails.fareRules.refundPenality.isRefundable && !flight.fareDetails.fareRules.refundPenality.childAfterDeparture">0</span>
+                              <span
+                                *ngIf="!flight.fareDetails.fareRules.refundPenality.isRefundable">Non-Refundable</span>
+                            </td>
+                            <td>
+                              <span *ngIf="flight.fareDetails.fareRules.refundPenality.isRefundable">{{
+                                flight.fareDetails.fareRules.refundPenality.currencyCode }} </span>
+                              <span
+                                *ngIf="flight.fareDetails.fareRules.refundPenality.isRefundable && flight.fareDetails.fareRules.refundPenality.infantAfterDeparture">{{
+                                flight.fareDetails.fareRules.refundPenality.infantAfterDeparture | number }}</span>
+                              <span
+                                *ngIf="flight.fareDetails.fareRules.refundPenality.isRefundable && !flight.fareDetails.fareRules.refundPenality.infantAfterDeparture">0</span>
+                              <span
+                                *ngIf="!flight.fareDetails.fareRules.refundPenality.isRefundable">Non-Refundable</span>
+                            </td>
+                          </tr>
+                          <tr class="green-tag">
+                            <td>Checkin Service Fee (CSF)</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                          </tr>
+                          <tr>
+                            <td colspan="3">Offline Cancellation Service Fee</td>
+                            <td>{{ flight.fareDetails.fareRules.checkinServiceFee.currencyCode }} <span
+                                *ngIf="flight.fareDetails.fareRules.checkinServiceFee.offlineCancellationServiceFee">{{
+                                flight.fareDetails.fareRules.checkinServiceFee.offlineCancellationServiceFee |
+                                number
+                                }}</span><span
+                                *ngIf="!flight.fareDetails.fareRules.checkinServiceFee.offlineCancellationServiceFee">0</span>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td colspan="3">Online Cancellation Service Fee</td>
+                            <td>{{ flight.fareDetails.fareRules.checkinServiceFee.currencyCode }} <span
+                                *ngIf="flight.fareDetails.fareRules.checkinServiceFee.onlineCancellationServiceFee">{{
+                                flight.fareDetails.fareRules.checkinServiceFee.onlineCancellationServiceFee | number
+                                }}</span><span
+                                *ngIf="!flight.fareDetails.fareRules.checkinServiceFee.onlineCancellationServiceFee">0</span>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td colspan="3">Rescheduling Service Fee</td>
+                            <td>{{ flight.fareDetails.fareRules.checkinServiceFee.currencyCode }} <span
+                                *ngIf="flight.fareDetails.fareRules.checkinServiceFee.reschedulingServiceFee">{{
+                                flight.fareDetails.fareRules.checkinServiceFee.reschedulingServiceFee | number
+                                }}</span><span
+                                *ngIf="!flight.fareDetails.fareRules.checkinServiceFee.reschedulingServiceFee">0</span>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td colspan="3">General Service Fee (International Flight)</td>
+                            <td>{{ flight.fareDetails.fareRules.checkinServiceFee.currencyCode }} <span
+                                *ngIf="flight.fareDetails.fareRules.checkinServiceFee.internationalFlightGeneralServiceFee">{{
+                                flight.fareDetails.fareRules.checkinServiceFee.internationalFlightGeneralServiceFee
+                                |
+                                number }}</span><span
+                                *ngIf="!flight.fareDetails.fareRules.checkinServiceFee.internationalFlightGeneralServiceFee">0</span>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td colspan="3">General Service Fee (Domestic Flight)</td>
+                            <td>{{ flight.fareDetails.fareRules.checkinServiceFee.currencyCode }} <span
+                                *ngIf="flight.fareDetails.fareRules.checkinServiceFee.domesticFlightGeneralServiceFee">{{
+                                flight.fareDetails.fareRules.checkinServiceFee.domesticFlightGeneralServiceFee |
+                                number }}</span><span
+                                *ngIf="!flight.fareDetails.fareRules.checkinServiceFee.domesticFlightGeneralServiceFee">0</span>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td colspan="4">We would recommend that you reschedule/cancel your tickets at least 72
+                              hours prior to the flight departure.</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+
+                  </div>
+                </mat-card-content>
+                <mat-card-footer>
+                  <div class="book-submit-btn">
+                    <a [routerLink]="'/traveller-details/' + flightId">Continue</a>
+                  </div>
+                </mat-card-footer>
+              </mat-card>
+            </ng-template>
+          </p-tabPanel>
+          <p-tabPanel header="Baggage">
+            <ng-template pTemplate="content" *ngIf="isFlightFound">
+              <mat-card>
+                <mat-card-content>
+                  <div class="base-table">
+                    <div class="base-title">
+                      <h5>Departure</h5>
+                    </div>
+                    <ng-container *ngFor="let dep of departureSegments">
+                      <div class="table-responsive">
+                        <table class="table" [ngStyle]="{ 'margin-bottom': departureSegments.length > 1 ? '20px': '' }">
+                          <thead>
+                            <tr>
+                              <th scope="col">{{ dep.departureAirport }} to {{ dep.arrivalAirport }}</th>
+                              <th scope="col">Cabin </th>
+                              <th scope="col">Check in</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td *ngIf="flight.airlineType === 'sabre'">Adult</td>
+                              <td *ngIf="flight.airlineType === 'sabre'">{{ dep.baggage.adultCabin }} {{ dep.baggage.unit }}</td>                              
+                              <td *ngIf="flight.airlineType === 'sabre'">{{ dep.baggage.adultCheckIn }} {{ dep.baggage.unit }} <span
+                                  *ngIf="dep.baggage.description1">({{
+                                  dep.baggage.description1 }})</span></td>
+
+                              <td *ngIf="flight.airlineType === 'LCC'">{{flight.fareDetails.farePrices.familyDescription}}</td>
+                              <td *ngIf="flight.airlineType === 'LCC'">{{ flight.fareDetails.farePrices.cabinName }}</td>
+                              <td *ngIf="flight.airlineType === 'LCC'">{{ flight.fareDetails.farePrices.familyName }}</td>
+                            </tr>
+                            <tr *ngIf="dep.baggage.childCabin">
+                              <td>Child</td>
+                              <td>{{ dep.baggage.childCabin }} kg</td>
+                              <td>{{ dep.baggage.childCheckIn }} {{ dep.baggage.unit }} <span
+                                  *ngIf="dep.baggage.description1">({{
+                                  dep.baggage.description1 }})</span></td>
+                            </tr>
+                            <tr *ngIf="dep.baggage.infantCabin">
+                              <td>Infant</td>
+                              <td>{{ dep.baggage.infantCabin }} kg</td>
+                              <td>{{ dep.baggage.infantCheckIn }} {{ dep.baggage.unit }} <span
+                                  *ngIf="dep.baggage.description1">({{
+                                  dep.baggage.description1 }})</span></td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+
+                    </ng-container>
+                    <ng-container *ngIf="flight.tripType == 'Return'">
+                      <div class="base-title">
+                        <h5>Return</h5>
+                      </div>
+                      <ng-container *ngFor="let ret of returnSegments">
+                        <div class="table-responsive">
+                          <table class="table" [ngStyle]="{ 'margin-bottom': returnSegments.length > 1 ? '20px': '' }">
+                            <thead>
+                              <tr>
+                                <th scope="col">{{ ret.departureAirport }} to {{ ret.arrivalAirport }}</th>
+                                <th scope="col">Cabin </th>
+                                <th scope="col">Check in</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td>Adult</td>
+                                <td>{{ ret.baggage.adultCabin }} kg</td>
+                                <td>{{ ret.baggage.adultCheckIn }} {{ ret.baggage.unit }} <span
+                                    *ngIf="ret.baggage.description1">({{
+                                    ret.baggage.description1 }})</span></td>
+                              </tr>
+                              <tr *ngIf="ret.baggage.childCabin">
+                                <td>Child</td>
+                                <td>{{ ret.baggage.childCabin }} kg</td>
+                                <td>{{ ret.baggage.childCheckIn }} {{ ret.baggage.unit }} <span
+                                    *ngIf="ret.baggage.description1">({{
+                                    ret.baggage.description1 }})</span></td>
+                              </tr>
+                              <tr *ngIf="ret.baggage.infantCabin">
+                                <td>Infant</td>
+                                <td>{{ ret.baggage.infantCabin }} kg</td>
+                                <td>{{ ret.baggage.infantCheckIn }} {{ ret.baggage.unit }} <span
+                                    *ngIf="ret.baggage.description1">({{
+                                    ret.baggage.description1 }})</span></td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+
+                      </ng-container>
+                    </ng-container>
+                  </div>
+                </mat-card-content>
+                <mat-card-footer>
+                  <div class="book-submit-btn">
+                    <a [routerLink]="'/traveller-details/' + flightId">Continue</a>
+                  </div>
+                </mat-card-footer>
+              </mat-card>
+            </ng-template>
+          </p-tabPanel>
+        </p-tabView>
+      </div>
+    </div>
+  </div>
+</section>

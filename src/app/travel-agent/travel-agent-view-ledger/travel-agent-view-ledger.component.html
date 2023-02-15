@@ -1,0 +1,70 @@
+<section class="my-5 pb-md-4">
+    <div class="container">
+        <p-toolbar styleClass="p-mb-4">
+            <ng-template pTemplate="left">
+                <div class=" flex-wrap display-small w-100">
+                    <div class="col-md-3">
+                        <div class="display-small w-100 mb-4">
+                            <label for="" class="d-flex  text-primary align-items-center mr-2 mb-0">From Date: </label>
+                            <p-calendar dateFormat="ddMMyy" [(ngModel)]="fromDate"
+                                placeholder="Select Date" [showIcon]="true" ></p-calendar>
+                        </div>
+                        <p class="text-danger" *ngIf="isSearch && !fromDate">Select From Date</p>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="display-small w-100 mb-4">
+                            <label for="" class="d-flex  text-primary align-items-center mr-2 mb-0">To Date: </label>
+                            <p-calendar dateFormat="ddMMyy" [minDate]="fromDate" placeholder="Select Date"
+                                [(ngModel)]="toDate" [disabled]="!fromDate" [showIcon]="true"></p-calendar>
+                        </div>
+                        <p class="text-danger" *ngIf="isSearch && ! toDate">Select To Date</p>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="display-small w-100 mb-4">
+                            
+                            <button  pButton label="Search" icon="pi pi-search" iconPos="right" style="margin-right: 5px;" class="p-button-raised p-button-success margin-small" (click)="search()"></button>
+                            <button pButton pRipple label="Clear" icon="pi pi-times" class="p-button-danger margin-small" style="margin-right: 5px;" (click)="clearSearch()"></button>
+                            <p-splitButton label="Export"  [model]="items" styleClass="p-button-help "></p-splitButton>                            
+                        </div>
+                    </div>
+                </div>
+            </ng-template>
+
+        </p-toolbar>
+        <div class="card shadow-sm mb-2 border-0">
+            <div class="card-body" id="htmlData">
+                <p-table #myTab [value]="ledgerDetails" [columns]="cols" [rowHover]="true" [responsive]="true" responsiveLayout="scroll"
+                    [rows]="20" [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,20,25,50]" [paginator]="true"
+                    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th *ngFor="let col of cols" pSortableColumn="{{col.field}}">
+                                {{col.header}} <p-sortIcon field="{{col.field}}">
+                                </p-sortIcon>
+                            </th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-item>
+                        <tr>
+                            <td>{{item.completedDate| date :'dd/MM/YYYY HH:MM:SS'}}</td>
+                            <td>{{item.entryType}}</td>
+                            <td>{{item.ticketNumber == 0? "-" : item.ticketNumber}}</td>
+                            <td>{{item.narration}}</td>
+                            <td>{{item.debitAmount == 0 || item.debitAmount == null ? "-" : item.debitAmount}}</td>
+                            <td>{{item.creditAmount == 0 ? "-": item.creditAmount}}</td>
+                            <td>{{item.balance}}</td>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="emptymessage" let-user>
+                        <tr>
+                            <td colspan="10" class="text-center">
+                                No records found
+                            </td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+        </div>
+
+    </div>
+</section>

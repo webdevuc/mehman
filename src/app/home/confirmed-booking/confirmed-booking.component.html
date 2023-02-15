@@ -1,0 +1,72 @@
+<section class="hero-headermain">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12 col-sm-12 col-xs-12">
+          <div class="review-booking-box wow fadeInUp">
+            <div class="header-title booking-title">
+              <h1>Confirmed Booking</h1>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+<section class="hero-book">
+    <div class="container p-shadow-24">
+      <div class="row">
+        <div class="col-lg-12 col-xs-12 col-xs-12 book-scroll">
+            <mat-card>
+                <mat-card-content>
+                    <div class="agree-box" style="margin: 0 18px;">
+                        <ng-container *ngIf="isError">
+                          <div class="alert alert-danger col-lg-12 col-sm-12 col-xs-12" role="alert">
+                            {{ errMsg }}
+                          </div>
+                        </ng-container>
+                        <ng-container *ngIf="!isError">
+                          <div class="agree-cont">
+                            <h2 *ngIf="role != 'TravelAgent'">Dear Customer,</h2>
+                            <h2 *ngIf="role == 'TravelAgent'">Dear Travel Partner,</h2>
+                            <h3 *ngIf="role != 'TravelAgent'">Your Booking Reference is <strong>{{ pnr }}</strong></h3>
+                            <h3 *ngIf="role == 'TravelAgent'">Your Booking has been confirmed and your reference number is <strong>{{ pnr
+                                }}</strong></h3>
+                    
+                            <h4 *ngIf="role != 'TravelAgent'">
+                              Thank you for choosing mehman.pk as your travel partner. Your booking has been confirmed and your e ticket
+                              will be
+                              emailed to you shortly. If you have already made payment, we will reconfirm payment and we will issue the
+                              ticket. If you
+                              haven’t made a payment, please do it as soon as possible. Otherwise, your booking will be cancelled within 30
+                              min.
+                            </h4>
+                            <h4 *ngIf="role == 'TravelAgent'">
+                              Click on My Trips button to open booking and raise a request to issue ticket or cancel the booking.
+                            </h4>
+                            <h4 *ngIf="role != 'TravelAgent'">Please remember, above booking confirmation is not your ticket. You must need
+                              to buy a ticket to fly. If you
+                              have
+                              provided your valid contact details, our customer service team may call you to discuss your booking.</h4>
+                            <h4 *ngIf="role == 'TravelAgent'">Keep in mind that unnecessory bookings, expired bookings and fake bookings may
+                              result in fine from the airlines.</h4>
+                            <h4 *ngIf="role != 'TravelAgent'">Safe Journey, </h4>
+                            <h3>Mehman Team </h3>
+                            <h4 *ngIf="role != 'TravelAgent'">Email :<a
+                                href="https://mail.google.com/mail/?view=cm&fs=1&tf=1&to=mehmanpk@gmail.com"
+                                target="_blank">mehmanpk@gmail.com</a></h4>
+                            <h4 *ngIf="role != 'TravelAgent'"><a href=\contact-us\>Contact us</a></h4>
+                          </div>                  
+                        </ng-container>
+                      </div>
+                </mat-card-content>
+                <mat-card-footer>
+                    <div class="book-submit-btn">
+                      <a href="javascript:window.open('','_self').close();">Close Window</a>
+                    </div>
+                  </mat-card-footer>
+            </mat-card>
+
+        </div>
+      </div>
+    </div>
+  </section>

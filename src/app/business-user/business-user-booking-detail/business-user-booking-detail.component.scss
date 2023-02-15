@@ -1,0 +1,66 @@
+.main-content {
+  margin: 0px 15px;
+}
+
+.grid {
+  border-left  : 1px solid #c8c8c8;
+  padding      : 20px;
+  border-bottom: 1px solid #c8c8c8;
+  border-top   : 1px solid #c8c8c8;
+}
+
+.flights-detail {
+  background-color: rgb(61, 61, 61);
+}
+
+.flights-detail p {
+  color    : #fff;
+  margin   : 12px;
+  font-size: 18px;
+}
+
+.page-content-panel-inner {
+  height     : auto !important;
+  background : #fdfdfd;
+  width      : calc(100% - 250px);
+  float      : right;
+  border-left: 1px solid #e8ecef !important;
+}
+
+.custom-sign-btn {
+  width           : 100%;
+  color           : #fff;
+  border          : 1px solid #57b957;
+  background-color: #57b957 !important;
+  box-shadow      : 0px 5px 10px rgba(87, 185, 87, 0.5);
+  font-size       : 16px !important;
+  text-align      : center !important;
+  text-decoration : none !important;
+  font-family     : "SFUIDisplay-Bold" !important;
+  letter-spacing  : 0.5px !important;
+  padding         : 8px 0 !important;
+  border-radius   : 8px !important;
+  transition      : 0.5s all ease !important;
+  max-width       : 330px;
+}
+
+.back-btn {
+  width           : 120px;
+  color           : #fff;
+  border          : 1px solid #57b957;
+  background-color: #57b957 !important;
+  box-shadow      : 0px 5px 10px rgba(87, 185, 87, 0.5);
+  font-size       : 14px !important;
+  text-align      : center !important;
+  text-decoration : none !important;
+  font-family     : "SFUIDisplay-Bold" !important;
+  letter-spacing  : 0.5px !important;
+  padding         : 2px 0 !important;
+  border-radius   : 8px !important;
+  transition      : 0.5s all ease !important;
+}
+
+.hero-header-user {
+  background: linear-gradient(180deg, rgba(24, 27, 49, 0.7) 0%, #181B31 100%);
+  padding   : 26px 0 !important;
+}

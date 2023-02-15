@@ -1,0 +1,15 @@
+.disable-link {
+    pointer-events: none;
+}
+
+.disable-radio {
+    pointer-events: none;
+    color: gray;
+}
+
+.btn-reset {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    z-index: 9999;
+}

@@ -1,0 +1,268 @@
+<!-- blog header -->
+<section class="hero-headermain">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 col-sm-12 col-xs-12">
+        <div class="header-title wow fadeInUp">
+          <h1>{{ blog?.title }}</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- article -->
+
+<section class="hero-contact hero-contact-2">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-9 col-sm-12 col-xs-12">
+        <div class="article-box">
+          <div class="article-banner wow fadeInUp">
+            <img src="{{
+                blog.mainImage
+                  ? getImage(blog.mainImage)
+                  : 'assets/images/article/image1.png'
+              }}" class="img-fluid" alt="" />
+          </div>
+          <div class="article-title wow fadeInUp">
+            <h2>{{ blog?.title }}</h2>
+            <ul>
+              <li>
+                <span><img src="assets/images/article/S.Banerjee.png" class="img-fluid" alt="" /></span>
+                {{ blog?.createdBy }}
+              </li>
+              <li>
+                <span><img src="assets/images/search/calender.png" class="img-fluid" alt="" /></span>
+                {{ blog?.createdOn | date: "MMM d, y" }}
+              </li>
+              <li>
+                <span><img src="assets/images/article/key.png" class="img-fluid" alt="" /></span>
+              </li>
+              <li>
+                <a href="javascript:void(0);">{{ blog?.categoryName }}</a>
+              </li>
+              <!-- <li><a href="javascript:void(0);">Internation Flights</a></li> -->
+            </ul>
+          </div>
+          <div style="margin-top: 5px;" >
+            <div [innerHTML]="content"></div>
+          </div>
+        </div>
+
+        <div class="article-nav-box wow fadeInUp">
+          <!-- <div class="article-nav">
+            <div class="article-nav-img">
+              <img
+                src="{{
+                  blog.thumbnailImage
+                    ? getImage(blog.thumbnailImage)
+                    : 'assets/images/article/back.png'
+                }}"
+                class="img-fluid"
+                alt=""
+              />
+            </div>
+            <a
+              href="javascript:void(0);"
+              class="arrow-back"
+              (click)="nextBlog(false)"
+            >
+              <div class="arrow">
+                <i class="fa fa-angle-left" aria-hidden="true"></i>
+              </div>
+              <div class="arrowcont">Back</div>
+            </a>
+          </div> -->
+
+          <!-- <div class="article-nav article-nav-2">
+            <div class="article-nav-img">
+              <img src="{{
+                  blog.thumbnailImage
+                    ? getImage(blog.thumbnailImage)
+                    : 'assets/images/article/back.png'
+                }}" class="img-fluid" alt="" />
+            </div>
+            <a href="javascript:void(0);" class="arrow-back" (click)="nextBlog(true)">
+              <div class="arrow">
+                <i class="fa fa-angle-right" aria-hidden="true"></i>
+              </div>
+              <div class="arrowcont">Next</div>
+            </a>
+          </div> -->
+        </div>
+
+        <!-- <div class="alisha-box wow fadeIn">
+                    <div class="alisha-img">
+                        <img src="assets/images/article/alisha.png" class="img-fluid" alt="">
+                    </div>
+                    <div class="alisha-cont">
+                        <h5>Alisha Michaels</h5>
+                        <p>Lorem ipsum dolor sit amet mas, consect adipisicing elit sed. Eiusmod etrent te mporincidi du nt ut labore et dolore magna aliqua. Ut enim.</p>
+                    </div>
+                </div> -->
+        <div class="comments-main-box">
+          <h1>Comments</h1>
+          <hr />
+          <div class="comments">
+            <ul *ngFor="let item of comments" class="comment">
+              <li>
+                <h3>{{ item?.firstName }} {{ item?.lastName }}</h3>
+              </li>
+              <li>
+                {{ item?.comment }}
+              </li>
+              <li class="comment-date">
+                {{ item?.createdOn | date: "medium" }}
+              </li>
+            </ul>
+            <div class="row" *ngIf="comments.length == 0">
+              <div class="col-md-12 not-avail-box">
+                <h4 class="not-avail-text">No Comments</h4>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="contact-box wow fadeInUp">
+          <div class="contact-header">
+            <h2>
+              Post a comment
+              <span class="note">(Note: Your email address will not be published)</span>
+            </h2>
+          </div>
+          <div class="comment-box">
+            <div class="comment-form">
+              <form [formGroup]="commentform" (ngSubmit)="onSubmit()">
+                <div class="row">
+                  <div class="form-group col-md-4">
+                    <input type="text" placeholder="First Name" formControlName="firstName" class="form-control"
+                      [ngClass]="{
+                        'is-invalid': submitted && f.firstName.errors
+                      }" />
+                    <div *ngIf="submitted && f.firstName.errors" class="invalid-feedback">
+                      <div *ngIf="f.firstName.errors.required">
+                        First Name is required
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group col-md-4">
+                    <input type="text" placeholder="Last Name" formControlName="lastName" class="form-control"
+                      [ngClass]="{
+                        'is-invalid': submitted && f.lastName.errors
+                      }" />
+                    <div *ngIf="submitted && f.lastName.errors" class="invalid-feedback">
+                      <div *ngIf="f.lastName.errors.required">
+                        Last Name is required
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group col-md-4">
+                    <input type="text" placeholder="Email" formControlName="email" class="form-control"
+                      [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+                    <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                      <div *ngIf="f.email.errors.required">
+                        Email Address is required
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row mb-2">
+                  <div class="col-md-12">
+                    <textarea class="form-control" rows="4" placeholder="Your Comments" formControlName="comment"
+                      [ngClass]="{
+                        'is-invalid': submitted && f.comment.errors
+                      }"></textarea>
+                    <div *ngIf="submitted && f.comment.errors" class="invalid-feedback">
+                      <div *ngIf="f.comment.errors.required">
+                        Comment is required
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="agree-box agree-box-2">
+                  <div class="agree-icon">
+                    <div class="tool-check fliht-check">
+                      <input type="checkbox" id="agree" class="tool-input" />
+                      <label for="agree"></label>
+                    </div>
+                  </div>
+                  <div class="agree-cont">
+                    <p>
+                      Save my name, email, and website in this browser for the
+                      next time I comment.
+                    </p>
+                  </div>
+                </div>
+                <div class="book-submit-btn">
+                  <button type="submit">Submit</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-sm-12 col-xs-12">
+        <div class="search-box wow fadeInUp">
+          <div class="search-title">
+            <h2>Search</h2>
+          </div>
+          <div class="serchbar">
+            <input type="text" class="search-input" placeholder="Search" />
+            <div class="search-icon">
+              <img src="assets/images/blog/search.png" class="img-fluid" alt="" />
+            </div>
+          </div>
+        </div>
+        <div class="contact-box">
+          <div class="contact-header wow fadeInUp">
+            <h2>Most Viewed</h2>
+          </div>
+          <!-- <div class="viewd-body" *ngFor="let blog of mostViewedBlogs">
+                        <div class="viewed-img wow fadeInUp">
+                            <img src="{{blog.image}}" class="img-fluid" alt="">
+                            <div class="viewed-cont">
+                                <h5>{{blog.content}}</h5>
+                                <p>S. Banerjee / {{blog.date}}</p>
+                            </div>
+                            <div class="blog-btn View-btn">
+                                <a href="javascript:void(0);">Read More</a>
+                            </div>
+                        </div>
+                    </div> -->
+          <div class="viewd-body" *ngFor="let blog of mostViewedblogsList">
+            <div class="viewed-img wow fadeInUp">
+              <img src="{{
+                  blog.thumbnailImage
+                    ? getImage(blog.thumbnailImage)
+                    : 'assets/images/blog/image1.png'
+                }}" class="img-fluid custom-most-viewed" alt="" />
+              <div class="viewed-cont">
+                <h5>{{ blog.title }}</h5>
+                <p>
+                  {{ blog.createdBy }} / {{ blog.createdOn | date: "MMM d, y" }}
+                </p>
+              </div>
+              <div class="blog-btn View-btn">
+                <a href="javascript:void(0);" (click)="loadMostViewed(blog.id)">Read More</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="contact-box categories-box wow fadeInUp">
+          <div class="contact-header">
+            <h2>Categories</h2>
+          </div>
+          <div class="categories">
+            <ul>
+              <li *ngFor="let category of categories">
+                <a href="javascript:void(0);" (click)="getBlogsByCategory(category.id)">{{ category.name }}</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

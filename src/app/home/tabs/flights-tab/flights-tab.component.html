@@ -1,0 +1,383 @@
+<div class="tab-pane fade show active" id="pills-Flights" role="tabpanel" aria-labelledby="pills-Flights-tab">
+    <div class="flight-select">
+        <div class="tool-check fliht-check">
+            <input type="radio" name="trip-type" class="tool-input" id="Round" [value]="tripTypeEnum.RoundTrip"
+                [(ngModel)]="tripType" (ngModelChange)="onTripTypeChanged()" />
+            <label for="Round"></label>
+            <span>Return</span>
+        </div>
+        <div class="tool-check fliht-check">
+            <input type="radio" name="trip-type" class="tool-input" id="Oneway" [value]="tripTypeEnum.OneWay"
+                [(ngModel)]="tripType" (ngModelChange)="onTripTypeChanged()" />
+            <label for="Oneway"></label>
+            <span>One-way</span>
+        </div>
+        <div class="tool-check fliht-check">
+            <input type="radio" name="trip-type" class="tool-input" id="Multicity" [value]="tripTypeEnum.MultiCity"
+                [(ngModel)]="tripType" (ngModelChange)="onTripTypeChanged()" />
+            <label for="Multicity"></label>
+            <span>Multi-city</span>
+        </div>
+        <div class="text-right">
+            <h1 style="font-size: 16px">Domestic and International Flights</h1>
+        </div>
+    </div>
+
+    <div class="book-box">
+        <ul>
+            <li id="liDeparture" data-trigger="manual" data-toggle="popover" data-placement="top"
+                data-content="<span><i class='fa fa-exclamation-triangle'></i> Enter valid From airport</span>">
+                <a (click)="departureClick()">
+                    <div class="book-details book-details1" [title]="departureTitle">
+                        <h5>From</h5>
+                        <input type="text" class="mehman-inputfiled" value="{{ departureCity }}" readonly />
+                        <p>{{ departureAirportName }}</p>
+                    </div>
+                </a>
+                <div class="exchange" (click)="swapLocations()" *ngIf="tripType != tripTypeEnum.MultiCity"
+                    style="cursor: pointer">
+                    <a><img src="assets/images/home/exchange.svg" class="img-fluid" alt="" /></a>
+                </div>
+                <div class="inputfiled-formboxes selectbox1">
+                    <div class="inputfiled-formbox">
+                        <div class="input-search">
+                            <input type="text" id="txtFrom" class="input-from" placeholder="From"
+                                (keyup)="searchDeparturePopup()" autofocus />
+                            <div class="seach-icon">
+                                <i class="fa fa-search" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                        <ul *ngIf="
+              popularCities &&
+              popularCities.length > 0 &&
+              isSuggest === true
+            ">
+                            <li>
+                                <p class="recent-tag">Popular Cities</p>
+                            </li>
+                            <li *ngFor="let airport of popularCities" role="option" (click)="selectedOrigin(airport)"
+                                style="cursor: pointer">
+                                <div class="hrtlCenter" (click)="hideDepartureAirportResults()">
+                                    <div class="recent-searches">
+                                        <p>
+                                            {{ airport.city }}, {{ airport.country }}
+                                        </p>
+                                        <p class="blackText">{{ airport.name }}</p>
+                                    </div>
+                                    <div class="searches-code">
+                                        <p>{{ airport.code }}</p>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                        <ul *ngIf="
+              departureAirportResults &&
+              departureAirportResults.length > 0
+            ">
+                            <li>
+                                <p class="recent-tag">SUGGESTIONS</p>
+                            </li>
+                            <li *ngFor="let airport of departureAirportResults" role="option"
+                                (click)="selectedOrigin(airport)" style="cursor: pointer">
+                                <div class="hrtlCenter" (click)="hideDepartureAirportResults()">
+                                    <div class="recent-searches">
+                                        <p>
+                                            {{ airport.city }}, {{ airport.country }}
+                                        </p>
+                                        <p class="blackText">{{ airport.name }}</p>
+                                    </div>
+                                    <div class="searches-code">
+                                        <p>{{ airport.code }}</p>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+            </li>
+            <li id="liArrival" data-trigger="focus" data-toggle="popover" data-placement="top"
+                [attr.data-content]="liArrivalErrMsg">
+                <a (click)="arrivalClick()">
+                    <div class="book-details book-details2" [title]="arrivalTitle">
+                        <h5>To</h5>
+                        <input type="text" class="mehman-inputfiled" value="{{ arrivalCity }}" readonly />
+                        <p>{{ arrivalAirportName }}</p>
+                    </div>
+                </a>
+                <div class="inputfiled-formboxes selectbox2">
+                    <div class="inputfiled-formbox">
+
+                        <div class="input-search">
+                            <input type="text" id="txtTo" class="input-from" placeholder="To"
+                                (keyup)="searchArrivalPopup()" autofocus />
+                            <div class="seach-icon">
+                                <i class="fa fa-search" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                        <ul class="arriveselect" *ngIf="
+              arrivalAirportResults &&
+              arrivalAirportResults.length > 0
+            ">
+                            <li>
+                                <p class="recent-tag">SUGGESTIONS</p>
+                            </li>
+                            <li *ngFor="let airport of arrivalAirportResults" role="option"
+                                (click)="selectedDestination(airport)" style="cursor: pointer">
+                                <div class="hrtlCenter" (click)="hideArrivalAirportResults()">
+                                    <div class="recent-searches">
+                                        <p>
+                                            {{ airport.city }}, {{ airport.country }}
+                                        </p>
+                                        <p class="blackText">{{ airport.name }}</p>
+                                    </div>
+                                    <div class="searches-code">
+                                        <p>{{ airport.code }}</p>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                        <ul class="arriveselect"
+                            *ngIf="popularCities && popularCities.length > 0 && isSuggest === true">
+                            <li>
+                                <p class="recent-tag">POPULAR CITIES</p>
+                            </li>
+                            <li *ngFor="let airport of popularCities" role="option"
+                                (click)="selectedDestination(airport)" style="cursor: pointer">
+                                <div class="hrtlCenter" (click)="hideArrivalAirportResults()">
+                                    <div class="recent-searches">
+                                        <p>
+                                            {{ airport.city }}, {{ airport.country }}
+                                        </p>
+                                        <p class="blackText">{{ airport.name }}</p>
+                                    </div>
+                                    <div class="searches-code">
+                                        <p>{{ airport.code }}</p>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </li>
+            <li class="dates" style="cursor: pointer" (click)="singleDatePicker()">
+                <div class="book-details">
+                    <h5>Departure</h5>
+                    <h2>{{ leaveDate | date: "d MMM yy" }}</h2>
+                    <p>{{ leaveDate | date: "EEEE" }}</p>
+                    <div class="date">
+                        <input type="text" name="daterange" id="dpLeaveDate" readonly />
+                    </div>
+                </div>
+            </li>
+            <li class="dates" style="cursor: pointer" (click)="rangeDatePicker()">
+                <div class="book-details">
+                    <h5>Return</h5>
+                    <div *ngIf="returnDate">
+                        <h2>{{ returnDate | date: "d MMM yy" }}</h2>
+                        <p>{{ returnDate | date: "EEEE" }}</p>
+                    </div>
+                    <div *ngIf="!returnDate" class="nodate">
+                        <p>Tap to add a return date from bigger discounts</p>
+                    </div>
+                    <div class="date">
+                        <input type="text" name="daterange" id="dpReturnDate" readonly />
+                    </div>
+                </div>
+            </li>
+            <li id="liTravellers" style="cursor: pointer" data-trigger="manual" data-toggle="popover"
+                data-placement="top"
+                data-content="<span><i class='fa fa-exclamation-triangle'></i> Upto 9 passengers allowed</span>">
+                <div id="adult-details" class="book-details adult-details">
+                    <h5>Travellers</h5>
+                    <ng-container *ngIf="Travellers == 1">
+                        <h2>{{ Travellers }} Traveller</h2>
+                    </ng-container>
+                    <ng-container *ngIf="Travellers > 1">
+                        <h2>{{ Travellers }} Travellers</h2>
+                    </ng-container>
+                    <p style="opacity: 0">18-28</p>
+                </div>
+                <div class="book-peron book-peron1">
+                    <div class="adult">
+                        <h5>ADULTS (12y +)</h5>
+                        <ul class="adults">
+                            <li>
+                                <input type="radio" name="adult" value="1" id="rbAdult1" class="Adult"
+                                    [(ngModel)]="adult" (ngModelChange)="validateTravellers()" />
+                                <label for="rbAdult1" [ngClass]="{ active: adult == 1 }">1</label>
+                            </li>
+                            <li>
+                                <input type="radio" name="adult" value="2" id="rbAdult2" class="Adult"
+                                    [(ngModel)]="adult" (ngModelChange)="validateTravellers()" />
+                                <label for="rbAdult2" [ngClass]="{ active: adult == 2 }">2</label>
+                            </li>
+                            <li>
+                                <input type="radio" name="adult" value="3" id="rbAdult3" class="Adult"
+                                    [(ngModel)]="adult" (ngModelChange)="validateTravellers()" />
+                                <label for="rbAdult3" [ngClass]="{ active: adult == 3 }">3</label>
+                            </li>
+                            <li>
+                                <input type="radio" name="adult" value="4" id="rbAdult4" class="Adult"
+                                    [(ngModel)]="adult" (ngModelChange)="validateTravellers()" />
+                                <label for="rbAdult4" [ngClass]="{ active: adult == 4 }">4</label>
+                            </li>
+                            <li>
+                                <input type="radio" name="adult" value="5" id="rbAdult5" class="Adult"
+                                    [(ngModel)]="adult" (ngModelChange)="validateTravellers()" />
+                                <label for="rbAdult5" [ngClass]="{ active: adult == 5 }">5</label>
+                            </li>
+                            <li>
+                                <input type="radio" name="adult" value="6" id="rbAdult6" class="Adult"
+                                    [(ngModel)]="adult" (ngModelChange)="validateTravellers()" />
+                                <label for="rbAdult6" [ngClass]="{ active: adult == 6 }">6</label>
+                            </li>
+                            <li>
+                                <input type="radio" name="adult" value="7" id="rbAdult7" class="Adult"
+                                    [(ngModel)]="adult" (ngModelChange)="validateTravellers()" />
+                                <label for="rbAdult7" [ngClass]="{ active: adult == 7 }">7</label>
+                            </li>
+                            <li>
+                                <input type="radio" name="adult" value="8" id="rbAdult8" class="Adult"
+                                    [(ngModel)]="adult" (ngModelChange)="validateTravellers()" />
+                                <label for="rbAdult8" [ngClass]="{ active: adult == 8 }">8</label>
+                            </li>
+                            <li>
+                                <input type="radio" name="adult" value="9" id="rbAdult9" class="Adult"
+                                    [(ngModel)]="adult" (ngModelChange)="validateTravellers()" />
+                                <label for="rbAdult9" [ngClass]="{ active: adult == 9 }">9</label>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="adult">
+                        <h5>CHILDREN (2y - 12y)</h5>
+                        <ul class="child">
+                            <li>
+                                <input type="radio" name="child" value="0" id="rbChild0" class="Adult"
+                                    [(ngModel)]="child" (ngModelChange)="validateTravellers()" />
+                                <label for="rbChild0" [ngClass]="{ active: child == 0 }">0</label>
+                            </li>
+                            <li>
+                                <input type="radio" name="child" value="1" id="rbChild1" class="Adult"
+                                    [(ngModel)]="child" (ngModelChange)="validateTravellers()" />
+                                <label for="rbChild1" [ngClass]="{ active: child == 1 }">1</label>
+                            </li>
+                            <li>
+                                <input type="radio" name="child" value="2" id="rbChild2" class="Adult"
+                                    [(ngModel)]="child" (ngModelChange)="validateTravellers()" />
+                                <label for="rbChild2" [ngClass]="{ active: child == 2 }">2</label>
+                            </li>
+                            <li>
+                                <input type="radio" name="child" value="3" id="rbChild3" class="Adult"
+                                    [(ngModel)]="child" (ngModelChange)="validateTravellers()" />
+                                <label for="rbChild3" [ngClass]="{ active: child == 3 }">3</label>
+                            </li>
+                            <li>
+                                <input type="radio" name="child" value="4" id="rbChild4" class="Adult"
+                                    [(ngModel)]="child" (ngModelChange)="validateTravellers()" />
+                                <label for="rbChild4" [ngClass]="{ active: child == 4 }">4</label>
+                            </li>
+                            <li>
+                                <input type="radio" name="child" value="5" id="rbChild5" class="Adult"
+                                    [(ngModel)]="child" (ngModelChange)="validateTravellers()" />
+                                <label for="rbChild5" [ngClass]="{ active: child == 5 }">5</label>
+                            </li>
+                            <li>
+                                <input type="radio" name="child" value="6" id="rbChild6" class="Adult"
+                                    [(ngModel)]="child" (ngModelChange)="validateTravellers()" />
+                                <label for="rbChild6" [ngClass]="{ active: child == 6 }">6</label>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="adult">
+                        <h5>INFANTS (below 2y)</h5>
+                        <ul class="infant">
+                            <li>
+                                <input type="radio" name="infant" value="0" id="rbInfant0" class="Adult"
+                                    [(ngModel)]="infant" (ngModelChange)="validateTravellers()" />
+                                <label for="rbInfant0" [ngClass]="{ active: infant == 0 }">0</label>
+                            </li>
+                            <li>
+                                <input type="radio" name="infant" value="1" id="rbInfant1" class="Adult"
+                                    [(ngModel)]="infant" (ngModelChange)="validateTravellers()" />
+                                <label for="rbInfant1" [ngClass]="{ active: infant == 1 }">1</label>
+                            </li>
+                            <li>
+                                <input type="radio" name="infant" value="2" id="rbInfant2" class="Adult"
+                                    [(ngModel)]="infant" (ngModelChange)="validateTravellers()" />
+                                <label for="rbInfant2" [ngClass]="{ active: infant == 2 }">2</label>
+                            </li>
+                            <li>
+                                <input type="radio" name="infant" value="3" id="rbInfant3" class="Adult"
+                                    [(ngModel)]="infant" (ngModelChange)="validateTravellers()" />
+                                <label for="rbInfant3" [ngClass]="{ active: infant == 3 }">3</label>
+                            </li>
+                            <li>
+                                <input type="radio" name="infant" value="4" id="rbInfant4" class="Adult"
+                                    [(ngModel)]="infant" (ngModelChange)="validateTravellers()" />
+                                <label for="rbInfant4" [ngClass]="{ active: infant == 4 }">4</label>
+                            </li>
+                            <li>
+                                <input type="radio" name="infant" value="5" id="rbInfant5" class="Adult"
+                                    [(ngModel)]="infant" (ngModelChange)="validateTravellers()" />
+                                <label for="rbInfant5" [ngClass]="{ active: infant == 5 }">5</label>
+                            </li>
+                            <li>
+                                <input type="radio" name="infant" value="6" id="rbInfant6" class="Adult"
+                                    [(ngModel)]="infant" (ngModelChange)="validateTravellers()" />
+                                <label for="rbInfant6" [ngClass]="{ active: infant == 6 }">6</label>
+                            </li>
+                        </ul>
+                        <a href="javascript:void(0);" class="book-btn apply-travellers"
+                            (click)="applyTravellers()">Apply</a>
+                    </div>
+                    <div class="adult">
+                        <span style="color: red" *ngIf="Travellers > 9">
+                            Upto 9 passengers allowed
+                        </span>
+                    </div>
+                </div>
+            </li>
+            <li style="cursor: pointer">
+                <div id="class-details" class="book-details class-details">
+                    <h5>CLASS</h5>
+                    <h2>{{ travelClassName }}</h2>
+                    <p style="opacity: 0">Economy</p>
+                </div>
+                <div id="bookperson" class="book-peron book-peron2">
+                    <div class="adult">
+                        <h5>CHOOSE TRAVEL CLASS</h5>
+                        <ul class="buisness">
+                            <li>
+                                <input type="radio" name="travel-class" value="Y" id="rbTravelClassEconomy"
+                                    class="Adult Business" [(ngModel)]="travelClass" (click)="getTravelClass()" />
+                                <label for="rbTravelClassEconomy" [ngClass]="{
+                  active: travelClassName == 'Economy'
+                }">Economy</label>
+                            </li>
+                            <li>
+                                <input type="radio" name="travel-class" id="rbTravelClassBusiness" value="C"
+                                    class="Adult Business" [(ngModel)]="travelClass" (click)="getTravelClass()" />
+                                <label for="rbTravelClassBusiness" [ngClass]="{
+                  active: travelClassName == 'Business'
+                }">Business</label>
+                            </li>
+                            <li>
+                                <input type="radio" name="travel-class" id="rbTravelClassFirst" value="F"
+                                    class="Adult Business" [(ngModel)]="travelClass" (click)="getTravelClass()" />
+                                <label for="rbTravelClassFirst" [ngClass]="{
+                  active: travelClassName == 'First'
+                }">First</label>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <app-shared-multicity *ngIf="tripType == tripTypeEnum.MultiCity" [showHomeSearch]="true">
+    </app-shared-multicity>
+    <div class="book-btn">
+        <a class="btn" (click)="searchResults()">Search Flights</a>
+    </div>
+</div>

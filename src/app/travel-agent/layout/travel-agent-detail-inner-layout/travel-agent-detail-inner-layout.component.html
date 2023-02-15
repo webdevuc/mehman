@@ -1,0 +1,21 @@
+<div id="sidenav" class="sidebar"  ngClass.lt-md="collapse">
+    <span class="logo" [routerLink]="['/travel-agfdgdgdfent/home']"> <img src="assets/images/home/logo.webp" class="img-fluid" alt="mehman.pk logo"></span>
+    <h3 class="text-center travel-agency mt-5">Agent Id : <span > {{ userAgentId }}</span></h3>
+    <h3 class="text-center travel-agency">Credit Limit : <span class="badge badge-light">{{userCreditLimit != null ? userCreditLimit: 0  }}</span></h3>
+    <h3 class="text-center travel-agency">Balance : <span class="badge badge-light"> {{userBalance != null? userBalance : 0}}</span></h3>
+    <hr style="background-color: #f1f1f1;">
+    <a [routerLinkActive]="['active']" (click)="setTitle('Search')" [routerLink]="['/travel-agent/search']">Search</a>
+    <a [routerLinkActive]="['active']" (click)="setTitle('Bookings')" [routerLink]="['/travel-agent/bookings']">Bookings</a>
+    <a [routerLinkActive]="['active']" (click)="setTitle('View Requests')" [routerLink]="['/travel-agent/view-requests']">View Requests</a>
+    <a [routerLinkActive]="['active']" (click)="setTitle('Import PNR')" [routerLink]="['/travel-agent/import-prn']">Import PNR</a>
+    <a href="https://1drv.ms/x/s!AgS8lY1PwbULjNs8g9LaSRzW9XEwNg?e=Q8BcJw" target="_blank">Comission Structure</a>
+    <a [routerLinkActive]="['active']" (click)="setTitle('Contact Us')" [routerLink]="['/contact-us']">Contact Us</a>
+    <a [routerLink]="['/travel-agent/auth/signin']" (click)="logout()">Log out</a>
+</div>
+<div class="page-content-panel-inner">
+    <app-travel-agent-inner-header>
+    </app-travel-agent-inner-header>
+
+    <router-outlet></router-outlet>
+</div>
+<!-- <app-footer class="footer_content"></app-footer> -->

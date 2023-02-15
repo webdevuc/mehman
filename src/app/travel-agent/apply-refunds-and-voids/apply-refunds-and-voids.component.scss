@@ -1,0 +1,29 @@
+::ng-deep li.p-ripple.p-element.p-dropdown-item {
+    display: flex !important;
+}
+
+::ng-deep span.p-calendar {
+    width: 100% !important;
+}
+.position-static
+{
+    position: sticky !important;
+}
+
+.contact-input {
+    line-height: 1.5rem;
+}
+
+.circle {
+    border-radius: 50%;
+    width: 34px;
+    height: 34px;
+    padding: 10px;
+    background: #fff;
+    border: 1px solid rgb(110, 110, 110);
+    color: #000;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

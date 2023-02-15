@@ -1,0 +1,19 @@
+.p-datatable .p-sortable-column:not(.p-highlight):hover {
+  background: #57be4f !important;
+  color: #ffffff;
+}
+
+::ng-deep {
+  .manage-table table td:first-child {
+    color          : black !important;
+    cursor         : default;
+    text-decoration: none;
+  }
+}
+
+.link {
+  color          : #57b957;
+  cursor         : pointer;
+  text-decoration: underline;
+}
+

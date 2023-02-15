@@ -1,0 +1,35 @@
+<section>
+  <div class="container card">
+    <div class="row">
+      <div class="col-lg-12 col-sm-12 col-xs-12 offer-padding">
+        <div class="offer-banner wow fadeInUp">
+          <img src="{{
+              offer.mainImage
+                ? getImage(offer.mainImage)
+                : 'assets/images/article/image1.png'
+            }}" class="img-fluid custom-offer-img" alt="Responsive image" />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- offer -->
+
+<section class="hero-contact hero-contact-2">
+  <div class="container card">
+    <div class="row">
+      <div class="col-lg-12 col-sm-12 col-xs-12">
+        <div class="article-box">
+          <div class="article-cont wow fadeInUp">
+            <div class="form-group">
+              <label for="termsAndConditions"><strong>Terms and Conditions</strong></label>
+              <section class="content" *ngIf="offer?.termsAndConditions" [innerHTML]="offer?.termsAndConditions">
+              </section>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,193 @@
+<!-- blog header -->
+<section class="hero-headermain">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 col-sm-12 col-xs-12">
+        <div class="header-title wow fadeInUp">
+          <h1>Blogs</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- blog -->
+
+<section class="hero-contact hero-blog">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-9 col-xs-12 col-sm-12">
+        <div class="row blog-main-box" *ngIf="blogsList.length > 0">
+          <!-- <div *ngFor="let blog of blogs">
+                        <div class="blog-img blog-small wow fadeInUp">
+                            <img src="{{blog.image}}" class="img-fluid custom-image" alt="">
+                            <div class="blog-cont">
+                                <h5>{{blog.content}}</h5>
+                                <p>{{blog.date}}</p>
+                            </div>
+                            <div class="blog-btn">
+                                <a href="javascript:void(0);">Read more..</a>
+                            </div>
+                        </div>
+                    </div> -->
+          <p-carousel
+            [value]="blogsList"
+            [numVisible]="3"
+            [numScroll]="3"
+            [circular]="false"
+            [responsiveOptions]="responsiveOptions" [showIndicators]="false"
+          >
+            <ng-template let-blog pTemplate="item">
+              <div class="product-item">
+                <div class="product-item-content">
+                  <div class="offer-img blog-small wow fadeInUp">
+                    <h4 class="p-mb-1">{{ blog.title }}</h4>
+                    <div>
+                      <img
+                        src="{{
+                          blog.thumbnailImage
+                            ? getImage(blog.thumbnailImage)
+                            : 'assets/images/home/super-offer-5.png'
+                        }}"
+                        class="product-image"
+                        alt=""
+                      />
+                    </div>
+                    <!-- <div>
+                      <div class="product-name">{{ blog.title }}</div>
+                      <div class="product-description">
+                        {{ blog.createdBy }} /
+                        {{ blog.createdOn | date: "MMM d, y" }}
+                      </div>
+                    </div> -->
+                    <div class="p-mt-5">
+                      <p-button
+                        label="Read More"
+                        pRipple
+                        class="p-button-success"
+                        (click)="openBlogDetail(blog)"
+                      >
+                      </p-button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </ng-template>
+          </p-carousel>
+          <!-- <div
+            *ngFor="
+              let blog of blogsList
+                | paginate: { itemsPerPage: 9, currentPage: p }
+            "
+          >
+            <div class="blog-img blog-small wow fadeInUp">
+              <img
+                src="{{
+                  blog.thumbnailImage
+                    ? getImage(blog.thumbnailImage)
+                    : 'assets/images/blog/image1.png'
+                }}"
+                class="img-fluid custom-image"
+                alt=""
+              />
+              <div class="blog-cont">
+                <h5>{{ blog.title }}</h5>
+                <p>{{ blog.createdOn | date: "MMM d, y" }}</p>
+              </div>
+              <div class="blog-btn">
+                <a
+                  href="javascript:void(0);"
+                  [routerLink]="['/blog-detail', blog.id]"
+                  >Read more..</a
+                >
+              </div>
+            </div>
+          </div> -->
+        </div>
+        <div class="row blog-main-box" *ngIf="blogsList.length == 0">
+          <div class="col-md-12 not-avail-box">
+            <h4 class="not-avail-text">Blogs are not available</h4>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-sm-12 col-xs-12">
+        <div class="search-box">
+          <div class="search-title wow fadeInUp">
+            <h2>Search</h2>
+          </div>
+          <div class="serchbar wow fadeInUp">
+            <input type="content" class="search-input" placeholder="Search" />
+            <div class="search-icon">
+              <img
+                src="assets/images/blog/search.png"
+                class="img-fluid"
+                alt=""
+              />
+            </div>
+          </div>
+        </div>
+        <div class="contact-box">
+          <div class="contact-header wow fadeInUp">
+            <h2>Most Viewed</h2>
+          </div>
+          <div class="viewd-body" *ngFor="let blog of mostViewedblogsList">
+            <div class="viewed-img wow fadeInUp">
+              <img
+                src="{{
+                  blog.thumbnailImage
+                    ? getImage(blog.thumbnailImage)
+                    : 'assets/images/blog/image1.png'
+                }}"
+                class="img-fluid custom-most-viewed"
+                alt=""
+              />
+              <div class="viewed-cont">
+                <!-- <h5>{{ blog.title }}</h5> -->
+                <!-- <p>
+                  {{ blog.createdBy }} / {{ blog.createdOn | date: "MMM d, y" }}
+                </p> -->
+              </div>
+              <div class="blog-btn View-btn">
+                <a href="javascript:void(0);" (click)="openBlogDetail(blog)"
+                  >Read More</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="contact-box categories-box wow fadeInUp">
+          <div class="contact-header">
+            <h2>Categories</h2>
+          </div>
+          <div class="categories">
+            <ul>
+              <li *ngFor="let category of categories">
+                <a
+                  href="javascript:void(0);"
+                  (click)="getBlogsByCategory(category.id)"
+                  >{{ category.name }}</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- <section class="hero-contact hero-blog2">
+  <div class="container">
+    <div class="row"></div>
+    <div class="row">
+      <div class="col-lg-12 col-sm-12 col-xs-12">
+        <div class="search-navigation wow fadeIn">
+          <pagination-controls
+            *ngIf="blogsList.length > 0"
+            (pageChange)="p = $event"
+          ></pagination-controls>
+        </div>
+      </div>
+    </div>
+  </div>
+</section> -->

@@ -1,0 +1,78 @@
+<div class="row mb-5">
+    <div class="col-lg-12 col-sm-12 col-xs-12">
+        <div class="manage-table">
+            <div class="booking-table">
+                <p-table [value]="refundVisas" [rowHover]="true" [responsive]="true" [rows]="10" responsiveLayout="scroll"
+                    [showCurrentPageReport]="true" [rowsPerPageOptions]="[5, 10,25,50]" [paginator]="true"
+                    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
+                    <!-- <ng-template pTemplate="caption">
+              Bookings
+            </ng-template> -->
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th pSortableColumn="createdOn">Submit Date<p-sortIcon field="createdOn"></p-sortIcon></th>
+                            <th pSortableColumn="requestType">Request Type <p-sortIcon field="requestType"></p-sortIcon>
+                            </th>
+                            <th pSortableColumn="airline">Airline<p-sortIcon field="airline"></p-sortIcon>
+                            </th>
+                            <th pSortableColumn="passengerTicketNumber">Ticket No <p-sortIcon
+                                    field="passengerTicketNumber"></p-sortIcon>
+                            </th>
+                            <th pSortableColumn="pnr">PNR <p-sortIcon field="pnr">
+                                </p-sortIcon>
+                            </th>
+                            <th pSortableColumn="passengerName">Passenger Name<p-sortIcon field="passengerName">
+                                </p-sortIcon>
+                            </th>
+                            <th pSortableColumn="travelDate">Travel Date <p-sortIcon field="travelDate">
+                                </p-sortIcon>
+                            </th>
+                            <th pSortableColumn="route">Route <p-sortIcon field="route">
+                                </p-sortIcon>
+                            </th>
+                            <th pSortableColumn="amount">Amount<p-sortIcon field="amount">
+                                </p-sortIcon>
+                            </th>
+                            <th pSortableColumn="status">Status<p-sortIcon field="status"></p-sortIcon>
+                            </th>
+                            <!-- <th pSortableColumn="action">Actions<p-sortIcon field="status"></p-sortIcon>
+                            </th> -->
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-refund>
+                        <tr>
+                            <td>{{refund.createdDate | date :'dd/MM/YYYY HH:MM:SS' }}</td>
+                            <td>{{refund.requestType | titlecase}}</td>
+                            <td>{{refund.airLine}}</td>
+                            <td>{{refund.passenger.passangerTicketNumber}}</td>
+                            <td>{{refund.pnr}}</td>
+                            <td>{{refund.passangerName}}</td>
+                            <td>{{refund.travelDate | date :'dd/MM/YYYY HH:MM:SS' }}</td>
+                            <td>{{refund.route}}</td>
+                            <td>{{refund.amount | currency:'PKR' :'symbol':'4.2-2' }}</td>
+                            <td>{{statuses[refund.status]}}</td>
+                            <!-- <td>
+
+                                <div class="d-flex w-100  justify-content-around">
+                                    <i (click)="openRoute('view',refund.refundId)" class="fa fa-eye pointer"
+                                        aria-hidden="true"></i>
+                                    <i (click)="openRoute('edit',refund.refundId)" class="fa fa-pencil pointer"
+                                        aria-hidden="true"></i>
+                                    <i class="fa fa-trash pointer" aria-hidden="true"></i>
+                                </div>
+
+                            </td> -->
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="emptymessage" let-user>
+                        <tr>
+                            <td colspan="10" class="text-center">
+                                No records found
+                            </td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+        </div>
+    </div>
+</div>

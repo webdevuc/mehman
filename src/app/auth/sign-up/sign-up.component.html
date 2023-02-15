@@ -1,0 +1,254 @@
+<section class="hero-signup">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 col-sm-12 col-xs-12">
+        <div class="signup-boxes">
+          <div class="signup-box">
+            <ng-container *ngIf="!isVerification">
+              <div class="signup-title">
+                <h2>Sign Up and Save</h2>
+                <p>Create an account now to access member only deals</p>
+              </div>
+              <div class="signup-form">
+                <form [formGroup]="registerForm">
+                  <div class="alert alert-danger" *ngIf="isError">
+                    {{ errorMsg }}
+                  </div>
+                  <div class="alert alert-success" *ngIf="isSuccess">
+                    {{ successMsg }}
+                  </div>
+                  <label>First Name</label>
+                  <input type="text"
+                         class="sign-input"
+                         placeholder="First Name"
+                         formControlName="firstName"
+                         #firstNameInput
+                         [ngClass]="{ 'is-invalid': (submitted || registerForm.get('firstName').touched) && registerForm.get('firstName').errors }"
+                         required>
+                  <div *ngIf="registerForm.get('firstName').errors && (submitted || registerForm.get('firstName').touched)" class="invalid-feedback">
+                    <div *ngIf="registerForm.get('firstName').errors.required">First Name is required.</div>
+                    <div *ngIf="registerForm.get('firstName').errors.maxlength">The First Name must be at max 50 characters long.</div>
+                  </div>
+                  <label>Last Name</label>
+                  <input type="text"
+                         class="sign-input"
+                         placeholder="Last Name"
+                         formControlName="lastName"
+                         [ngClass]="{ 'is-invalid': (submitted || registerForm.get('lastName').touched) && registerForm.get('lastName').errors }"
+                         required>
+                  <div *ngIf="registerForm.get('lastName').errors && (submitted || registerForm.get('lastName').touched)" class="invalid-feedback">
+                    <div *ngIf="registerForm.get('lastName').errors.required">Last Name is required.</div>
+                    <div *ngIf="registerForm.get('lastName').errors.maxlength">The Last Name must be at max 50 characters long.</div>
+                  </div>
+                  <label>Email</label>
+                  <input type="text"
+                         class="sign-input"
+                         placeholder="Email"
+                         formControlName="email"
+                         #emailInput
+                         [ngClass]="{ 'is-invalid': (submitted || registerForm.get('email').touched) && registerForm.get('email').errors }"
+                         required>
+                  <div *ngIf="registerForm.get('email').errors && (submitted || registerForm.get('email').touched)" class="invalid-feedback">
+                    <div *ngIf="registerForm.get('email').errors.required">Email is required.</div>
+                    <div *ngIf="registerForm.get('email').errors.email">Enter a valid email.</div>
+                  </div>
+                  <label>Password</label>
+                  <input type="password"
+                         class="sign-input"
+                         placeholder="Password"
+                         formControlName="password"
+                         [ngClass]="{ 'is-invalid': (submitted || registerForm.get('password').touched) && registerForm.get('password').errors }"
+                         required>
+                  <div *ngIf="registerForm.get('password').errors && (submitted || registerForm.get('password').touched)" class="invalid-feedback">
+                    <div *ngIf="registerForm.get('password').errors.required">Password is required.</div>
+                    <div *ngIf="registerForm.get('password').errors.minlength">Password must be at least 8 characters.</div>
+                    <div *ngIf="registerForm.get('password').errors.maxlength">Password must be at max 25 characters.</div>
+                  </div>
+                  <label>Confirm Password</label>
+                  <input type="password"
+                         class="sign-input"
+                         placeholder="Confirm Password"
+                         formControlName="passwordConfirm"
+                         [ngClass]="{ 'is-invalid': (submitted || registerForm.get('passwordConfirm').touched) && registerForm.get('passwordConfirm').errors }"
+                         required>
+                  <div *ngIf="registerForm.get('passwordConfirm').errors && (submitted || registerForm.get('passwordConfirm').touched)" class="invalid-feedback">
+                    <div *ngIf="registerForm.get('passwordConfirm').errors.required">Password is required.</div>
+                    <div *ngIf="registerForm.get('passwordConfirm').errors.passwordsNotMatching">Passwords must match.</div>
+                  </div>
+                  <label>Phone Number</label>
+                  <input type="text"
+                         class="sign-input"
+                         placeholder="Phone Number"
+                         formControlName="phoneNumber"
+                         #firstNameInput
+                         [ngClass]="{ 'is-invalid': (submitted || registerForm.get('phoneNumber').touched) && registerForm.get('phoneNumber').errors }"
+                         required>
+                  <div *ngIf="registerForm.get('phoneNumber').errors && (submitted || registerForm.get('phoneNumber').touched)" class="invalid-feedback">
+                    <div *ngIf="registerForm.get('phoneNumber').errors.required">Phone Number is required.</div>
+                  </div>
+
+                  <div class="agree-box">
+                    <div class="agree-icon">
+                      <div class="tool-check fliht-check">
+                        <input type="checkbox" id="agree" class="tool-input" [(ngModel)]="isAcceptedTermsAndConditions" [ngModelOptions]="{standalone: true}">
+                        <label for="agree"></label>
+                      </div>
+                    </div>
+                    <div class="agree-cont">
+                      <p>I understand and agree with the Fare Rules , the Visa Rules , the Privacy Policy , the User Agreement and Terms of Service of <a href="javascript:void(0);"> Mehman.pk</a></p>
+                    </div>
+                  </div>
+                  <div *ngIf="submitted && !isAcceptedTermsAndConditions" class="invalid-feedback">
+                    <div>Please accept terms & conditions.</div>
+                  </div>
+                  <button type="submit"
+                          class="custom-sign-btn btn"
+                          (click)="register()"
+                          [disabled]="(registerForm.invalid || !isAcceptedTermsAndConditions) && submitted">
+                    Sign Up
+                  </button>
+                </form>
+              </div>
+              <div class="have-account">
+                <div class="account-cont">
+                  <h5>Alreay have an account?</h5>
+                </div>
+                <div class="have-btn">
+                  <a [routerLink]="['/auth/signin']">Sign In</a>
+                </div>
+              </div>
+            </ng-container>
+            <ng-container *ngIf="isVerification">
+              <div class="signup-title">
+                <h2>Verify OTP</h2>
+                <p>Confirm your registered email address</p>
+              </div>
+              <div class="signup-form">
+                <form [formGroup]="verificationForm">
+                  <div class="alert alert-danger" *ngIf="isError">
+                    {{ errorMsg }}
+                  </div>
+                  <div class="alert alert-success" *ngIf="isSuccess">
+                    {{ successMsg }}
+                  </div>
+                  <!--<label>First Name</label>
+                  <input type="text"
+                         class="sign-input"
+                         placeholder="First Name"
+                         formControlName="firstName"
+                         #firstNameInput
+                         [ngClass]="{ 'is-invalid': (verifySubmitted || verificationForm.get('firstName').touched) && verificationForm.get('firstName').errors }"
+                         required>
+                  <div *ngIf="verificationForm.get('firstName').errors && (verifySubmitted || verificationForm.get('firstName').touched)" class="invalid-feedback">
+                    <div *ngIf="verificationForm.get('firstName').errors.required">First Name is required.</div>
+                    <div *ngIf="verificationForm.get('firstName').errors.maxlength">The First Name must be at max 50 characters long.</div>
+                  </div>
+                  <label>Last Name</label>
+                  <input type="text"
+                         class="sign-input"
+                         placeholder="Last Name"
+                         formControlName="lastName"
+                         [ngClass]="{ 'is-invalid': (verifySubmitted || verificationForm.get('lastName').touched) && verificationForm.get('lastName').errors }"
+                         required>
+                  <div *ngIf="verificationForm.get('lastName').errors && (verifySubmitted || verificationForm.get('lastName').touched)" class="invalid-feedback">
+                    <div *ngIf="verificationForm.get('lastName').errors.required">Last Name is required.</div>
+                    <div *ngIf="verificationForm.get('lastName').errors.maxlength">The Last Name must be at max 50 characters long.</div>
+                  </div>-->
+                  <label>Email</label>
+                  <input type="text"
+                         class="sign-input"
+                         placeholder="Email"
+                         formControlName="email"
+                         [ngClass]="{ 'is-invalid': (verifySubmitted || verificationForm.get('email').touched) && verificationForm.get('email').errors }"
+                         required>
+                  <div *ngIf="verificationForm.get('email').errors && (verifySubmitted || verificationForm.get('email').touched)" class="invalid-feedback">
+                    <div *ngIf="verificationForm.get('email').errors.required">Email is required.</div>
+                    <div *ngIf="verificationForm.get('email').errors.email">Enter a valid email.</div>
+                  </div>
+                  <!--<label>Password</label>
+                  <input type="password"
+                         class="sign-input"
+                         placeholder="Password"
+                         formControlName="password"
+                         [ngClass]="{ 'is-invalid': (verifySubmitted || verificationForm.get('password').touched) && verificationForm.get('password').errors }"
+                         required>
+                  <div *ngIf="verificationForm.get('password').errors && (verifySubmitted || verificationForm.get('password').touched)" class="invalid-feedback">
+                    <div *ngIf="verificationForm.get('password').errors.required">Password is required.</div>
+                    <div *ngIf="verificationForm.get('password').errors.minlength">Password must be at least 8 characters.</div>
+                    <div *ngIf="verificationForm.get('password').errors.maxlength">Password must be at max 25 characters.</div>
+                  </div>
+                  <label>Phone Number</label>
+                  <input type="text"
+                         class="sign-input"
+                         placeholder="Phone Number"
+                         formControlName="phoneNumber"
+                         #firstNameInput
+                         [ngClass]="{ 'is-invalid': (verifySubmitted || verificationForm.get('phoneNumber').touched) && verificationForm.get('phoneNumber').errors }"
+                         required>
+                  <div *ngIf="verificationForm.get('phoneNumber').errors && (verifySubmitted || verificationForm.get('phoneNumber').touched)" class="invalid-feedback">
+                    <div *ngIf="verificationForm.get('phoneNumber').errors.required">Phone Number is required.</div>
+                  </div>-->
+                  <label>OTP (check your mail)</label>
+                  <input type="text"
+                         class="sign-input"
+                         placeholder="OTP (check your mail)"
+                         formControlName="code"
+                         #codeInput
+                         [ngClass]="{ 'is-invalid': (verifySubmitted || verificationForm.get('code').touched) && verificationForm.get('code').errors }"
+                         required>
+                  <div *ngIf="verificationForm.get('code').errors && (verifySubmitted || verificationForm.get('code').touched)" class="invalid-feedback">
+                    <div *ngIf="verificationForm.get('code').errors.required">OTP (from Mail) is required.</div>
+                  </div>
+                  <button type="submit"
+                          class="custom-sign-btn btn mt-4"
+                          (click)="verifyCode()"
+                          [disabled]="verificationForm.invalid && verifySubmitted">
+                    Verify OTP
+                  </button>
+                  <button type="submit"
+                          class="custom-sign-btn btn mt-3"
+                          (click)="register(true)"
+                          *ngIf="isResendOtp">
+                    Resend OTP
+                  </button>
+                </form>
+              </div>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+
+<!-- mail confirmation pop up -->
+<!--<div class="modal mail-confirmation fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="main-box">
+          <div class="mail-content">
+            <h1>Confirm your email</h1>
+            <p>
+              Please check your inbox for confirmation.
+              Click on the link on the email to confirm your email address
+            </p>
+          </div>
+          <div class="mail-btn">
+            <a href="javascript(0);">Continue</a>
+            <a href="javascript(0);" class="cancel">Resend Verification mail</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>-->

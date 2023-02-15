@@ -1,0 +1,107 @@
+<section class="my-5 pb-md-4">
+    <div class="container">
+        <form [formGroup]="paymentForm">
+            <div class="card shadow-sm mb-2 border-0">
+                <div class="card-header bg-primary p-2">
+                    <h3 class="mb-0 text-white">Basic</h3>
+                </div>
+                <div class="card-body">
+                    <div class="d-flex flex-wrap w-100 justify-content-between">
+                        <div class="col-lg-3 col-md-4  col-sm-12 mb-2">
+                            <label for="" class="d-flex text-primary">Mode Of Payment <span class="text-danger">
+                                    *</span>
+                            </label>
+                            <p-dropdown [options]="paymentMethods" [formControlName]="'paymentMode'" optionLabel="name"
+                                optionValue="id" placeholder="Select Payment Type" required></p-dropdown>
+                            <p class="text-danger d-flex mt-2"
+                                *ngIf="(isSubmmited && paymentForm.get('paymentMode').hasError('required')) || (paymentForm.get('paymentMode').touched && paymentForm.get('paymentMode').invalid)">
+                                Select paymnet mode
+                            </p>
+                        </div>
+                        <div class="col-lg-3 col-md-4 col-sm-12  mb-2">
+                            <label for="" class="d-flex text-primary">Mehman Accounts <span class="text-danger">
+                                    *</span>
+                            </label>
+                            <p-dropdown [options]="mehmanAccounts" [formControlName]="'mehmanAccount'" 
+                                optionLabel="name" optionValue="accountNumber" placeholder="Select Bank Account"
+                                required></p-dropdown>
+                            <p class="text-danger d-flex mt-2"
+                                *ngIf="(isSubmmited && paymentForm.get('mehmanAccount').hasError('required')) || (paymentForm.get('mehmanAccount').touched && paymentForm.get('mehmanAccount').invalid)">
+                                Select Mehman account
+                            </p>
+                        </div>
+                        <div class="col-lg-3 col-md-4 col-sm-12  mb-2">
+                            <label for="" class="d-flex text-primary">Payment Date <span
+                                    class="text-danger">*</span></label>
+                            <p-calendar class="w-100" [formControlName]="'paymentDate'" dateFormat="dd M yy" [showIcon]="true"
+                                required></p-calendar>
+                            <p class="text-danger d-flex mt-2"
+                                *ngIf="(isSubmmited && paymentForm.get('paymentDate').hasError('required')) || (paymentForm.get('paymentDate').touched && paymentForm.get('paymentDate').invalid)">
+                                Select payment Date
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card shadow-sm mb-2 border-0">
+                <div class="card-header bg-primary p-2">
+                    <h3 class="mb-0 text-white">Payment</h3>
+                </div>
+                <div class="card-body">
+                    <div class="d-flex flex-wrap w-100">
+                        <div class="col-lg-3 col-md-6 d-flex align-items-center">
+                            <label for="" class="d-flex text-primary">Amount (PKR) <span
+                                    class="text-danger">*</span></label>
+                        </div>
+                        <div class="col-lg-3 col-md-6">
+                            <p-inputNumber [formControlName]="'amount'" mode="currency" inputId="currency-pkr" currency="PKR" currencyDisplay="code" locale="en-PK">
+                            </p-inputNumber>
+                            <p class="text-danger d-flex mt-2"
+                                *ngIf="(isSubmmited && paymentForm.get('amount').hasError('required')) || (paymentForm.get('amount').touched && paymentForm.get('amount').invalid)">
+                                Enter amount
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="card shadow-sm mb-2 border-0">
+                <div class="card-header bg-primary p-2">
+                    <h3 class="mb-0 text-white">Attachments</h3>
+                </div>
+                <div class="card-body">
+                    <div class="d-flex flex-wrap w-100">
+                        <div class="col-lg-3 col-md-6 d-flex align-items-center">
+                            <label for="" class="d-flex text-primary">Add Attachment (PDFs, PNG, JPEG, JPG)<span
+                                    class="text-danger">*</span></label>
+                        </div>
+                        <div class="col-lg-4 col-md-6">
+                            <input type="file" #attachmentFile accept=".png,.jpg, .jpeg, .pdf"
+                                (change)="onFileSelected($event)" hidden multiple max="5" />
+                            <button class="btn btn-success rounded-pill w-50"
+                                (click)="attachmentFile.click()">Upload</button>
+                        </div>
+
+                    </div>
+                    <p class="text-danger d-flex mt-2" *ngIf="(isSubmmited && selectedFiles.length<=0)">
+                        Add minimum one attachment
+                    </p>
+                    <div class="d-flex flex-wrap w-100" *ngIf="selectedFiles.length">
+                        <ng-container *ngFor="let item of selectedFiles">
+                            <p class="d-flex w-100">{{item.name}}</p>
+                        </ng-container>
+                    </div>
+                </div>
+            </div>
+
+            <div class="d-flx justify-content-center w-100 my-4">
+                <div class="col-md-8 mx-auto">
+                    <div class="d-flex justify-content-around w-100 flex-wrap">
+                        <button class="btn btn-outline-success rounded-pill m-2 w-25 px-2">Cancel</button>
+                        <button class="btn btn-success rounded-pill m-2 w-25 px-2" (click)="addPayment()">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</section>

@@ -1,0 +1,15 @@
+:host ::ng-deep button {
+    height: fit-content;
+}
+@media  (min-width:426px){
+    .display-small{
+        display: flex;
+    }
+
+    
+}
+@media  (min-width:320px) and (max-width:375px){
+    .margin-small{
+    margin: 10px 2px !important;
+}
+}
