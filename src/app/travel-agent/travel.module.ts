@@ -41,6 +41,7 @@ import { TabViewModule } from 'primeng/tabview';
 import { InputTextModule } from 'primeng/inputtext';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatButtonModule} from '@angular/material/button';
+import { TravelAgentVoidsComponent } from './travel-agent-voids/travel-agent-voids.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 
@@ -66,6 +67,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     FlightsComponent,
     VisasComponent,
     TravelAgentViewLedgerComponent,
+    TravelAgentVoidsComponent,
   ],
   imports: [
     CommonModule,

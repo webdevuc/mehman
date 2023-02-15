@@ -13,7 +13,6 @@ export class TravelAgentInnerLayoutComponent implements OnInit, OnDestroy {
   isBack: boolean;
   bookings: any[];
   pageTitle: string;
-  isShow =true;
   timerSubscription: Subscription; 
   footerComponent: Promise<Type<FooterComponent>>;
   menus: Array<any> = [];
@@ -24,7 +23,6 @@ export class TravelAgentInnerLayoutComponent implements OnInit, OnDestroy {
     }
 
   ngOnInit(): void {
-    this.isShow= true
     window.scrollTo(0, 0);
     this.setTitle(localStorage.getItem('pageTitle') || 'Search');
     this.menus = this.getMenus();
@@ -39,12 +37,14 @@ export class TravelAgentInnerLayoutComponent implements OnInit, OnDestroy {
   }
 
   setTitle(value) {
+    debugger
     let title: string;
+    if(value == 'undefined' || value == 'Search')
+    {
+    title = value;
+    }
     if (typeof (value) == 'object') {
       title = value.name
-     this.isShow = false;
-     console.log(document.getElementById('sidenav'))
-     console.log(document.getElementById('sidenav').classList)
       if (value.key == 'log-out') {
         this.logout();
       }
@@ -99,6 +99,7 @@ export class TravelAgentInnerLayoutComponent implements OnInit, OnDestroy {
       { key: 'search', name: 'Search', url: '/travel-agent/search' },
       { key: 'bookings', name: 'Bookings', url: '/travel-agent/bookings' },      
       { key: 'view-requests', name: 'Apply Refund', url: '/travel-agent/view-requests' },
+      // { key: 'view-voids', name: 'Apply Void', url: '/travel-agent/view-voids' },
       { key: 'import-prn', name: 'Import PNR', url: '/travel-agent/import-prn' },
       { key: 'comission-structure', name: 'Comission Structure', url: 'https://1drv.ms/x/s!AgS8lY1PwbULjNs8g9LaSRzW9XEwNg?e=Q8BcJw' },
       { key: 'visas', name: 'Visas', url: '/visas' },

@@ -18,6 +18,7 @@ import { TravelAgentViewRequestComponent } from './travel-agent-view-request/tra
 import { ApplyRefundsAndVoidsComponent } from './apply-refunds-and-voids/apply-refunds-and-voids.component';
 import { TravelAgentAddPaymentComponent } from './travel-agent-add-payment/travel-agent-add-payment.component';
 import { TravelAgentViewLedgerComponent } from './travel-agent-view-ledger/travel-agent-view-ledger.component';
+import { TravelAgentVoidsComponent } from './travel-agent-voids/travel-agent-voids.component';
 
 const routes: Routes = [
   {
@@ -42,6 +43,7 @@ const routes: Routes = [
       { path: 'apply-refunds-and-voids', component: ApplyRefundsAndVoidsComponent },
       { path: 'apply-refunds-and-voids/:type/:id', component: ApplyRefundsAndVoidsComponent },
       { path: 'view-requests', component: TravelAgentViewRequestComponent },
+      { path: 'view-voids', component: TravelAgentVoidsComponent },
       { path: 'add-payment', component: TravelAgentAddPaymentComponent },
       { path: 'view-ledger', component: TravelAgentViewLedgerComponent },
     ],

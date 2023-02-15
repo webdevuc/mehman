@@ -144,7 +144,7 @@ ul {
 }
 
 .right-navbar .dropdown-menu {
-  padding: 5px 20px;
+  padding: 4px 28px;
 }
 
 .right-navbar-second li a {
@@ -5637,4 +5637,10 @@ booking details
 
 .pointer {
   cursor        : pointer;
+}
+
+@media print{
+  #sidenav{
+      display: none;
+  }
 }

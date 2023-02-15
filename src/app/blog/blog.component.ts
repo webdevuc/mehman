@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { PrimeNGConfig } from 'primeng/api';
 import { BlogsService } from '../services/blogs.service ';
 import { ToasterService } from '../services/toastr-service';
 
@@ -124,10 +125,19 @@ export class BlogComponent implements OnInit {
     { id: 4, name: 'Visa' },
   ];
 
+  
+  sortOptions: Array<any>=[];
+
+  sortOrder: number;
+
+  sortField: string;
+
+
   constructor(
     private blogsService: BlogsService,
     private router: Router,
-    private toasterService: ToasterService
+    private toasterService: ToasterService,
+    private primengConfig: PrimeNGConfig
   ) {
     this.responsiveOptions = [
       {
@@ -152,6 +162,7 @@ export class BlogComponent implements OnInit {
     window.scrollTo(0, 0);
     this.getBlogs();
     this.getMostViewedBlogs();
+    this.primengConfig.ripple = true;
   }
 
   getBlogs() {
@@ -220,4 +231,16 @@ export class BlogComponent implements OnInit {
   getImage(photo: any) {
     return 'data:image/png;base64,' + photo;
   }
+  onSortChange(event) {
+    let value = event.value;
+
+    if (value.indexOf('!') === 0) {
+        this.sortOrder = -1;
+        this.sortField = value.substring(1, value.length);
+    }
+    else {
+        this.sortOrder = 1;
+        this.sortField = value;
+    }
+}
 }

@@ -1,6 +1,7 @@
 .dropdown-menu {
     left: auto;
-    right: 0!important;
+    //right: 0!important;
+    min-width: 0px !important;
 }
 @media (min-width:319px) and (max-width:820px) {
     .navbar-collapse{
@@ -12,5 +13,7 @@
         width:154px;
         margin: 0px;
     }
-
+    .navbar{
+        flex-wrap: inherit !important;
+    }
 }

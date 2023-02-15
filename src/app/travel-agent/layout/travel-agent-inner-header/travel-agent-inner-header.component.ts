@@ -30,14 +30,11 @@ export class TravelAgentInnerHeaderComponent implements OnInit {
   }
 
   openNav() {
-  debugger
     document.getElementById('mySidenav').style.width = '250px';
 
   }
 
   closeNav() {
-    debugger
-   
     document.getElementById('mySidenav').style.width = '0';
   }
 

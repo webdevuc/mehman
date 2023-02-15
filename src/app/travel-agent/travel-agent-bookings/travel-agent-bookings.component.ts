@@ -57,7 +57,6 @@ export class TravelAgentBookingsComponent implements OnInit {
           if (response.data) {
             this.bookings = response.data;
             this.loading = false;
-            console.log('bookings', response.data);
           }
         } else {
           if (response.message) {
@@ -89,7 +88,6 @@ export class TravelAgentBookingsComponent implements OnInit {
   }
 
   bookingDetails(id: any) {
-    console.log(id);
     this.router.navigate(['/travel-agent/booking-detail', id]);
   }
 

@@ -2,13 +2,11 @@
   <div class="container">
     <!-- <button  type="button">Modify</button> -->
     <div
-      class="modifyButton"
-      style="color: white"
-      class="d-flex justify-content-between"
-      *ngIf="this.isShow"
-    >    
+      class="modifyButton text-white d-flex justify-content-between"
+      *ngIf="isShow"
+     >    
      
-      <div class="modifyButton" *ngIf="this.locationResult">
+      <div class="modifyButton d-lg-none" *ngIf="locationResult">
         {{ originLocation }}
         <a
           ><img
@@ -16,11 +14,11 @@
             class="img-fluid mx-2"
             alt="" /></a
         >{{ destinationLocation }}
-        <a style="color: white; background-color: green;" class="mx-1 py-2">{{
+        <a class="mx-1 py-2 text-white bg-success px-2 rounded">{{
           leaveDate | date : "MMMM d, y"
         }}</a>
       </div>
-      <div class="modifyButton" (click)="showSearch()">
+      <div class="modifyButton d-flex justify-content-end d-lg-none" (click)="showSearch()" *ngIf="!isdisplayed">
         <a>Modify</a>
         <svg 
           xmlns="http://www.w3.org/2000/svg"
@@ -43,13 +41,12 @@
             <li class="trip_type">
               <div class="dropdown">
                 <a
-                  class="dropdown-toggle"
+                  class="dropdown-toggle pointer"
                   role="button"
                   id="dropdownMenuLink"
                   data-toggle="dropdown"
                   aria-haspopup="true"
                   aria-expanded="true"
-                  style="cursor: pointer"
                 >
                   <div class="result-cont trip_type">
                     <p>Trip Type</p>
@@ -58,27 +55,24 @@
                 </a>
                 <div class="dropdown-menu">
                   <a
-                    class="dropdown-item"
+                    class="dropdown-item pointer"
                     (click)="onTripTypeChanged(tripTypeEnum.OneWay)"
-                    style="cursor: pointer"
                   >
                     <div class="result-cont">
                       <h5>One Way</h5>
                     </div>
                   </a>
                   <a
-                    class="dropdown-item"
+                    class="dropdown-item pointer"
                     (click)="onTripTypeChanged(tripTypeEnum.RoundTrip)"
-                    style="cursor: pointer"
                   >
                     <div class="result-cont">
                       <h5>Round Trip</h5>
                     </div>
                   </a>
                   <a
-                    class="dropdown-item"
+                    class="dropdown-item pointer"
                     (click)="onTripTypeChanged(tripTypeEnum.MultiCity)"
-                    style="cursor: pointer"
                   >
                     <div class="result-cont">
                       <h5>Multicity</h5>
@@ -898,7 +892,7 @@
                     alt=""
                 /></a>
               </div>
-              <div class="inputfiled-formboxes selectbox1">
+              <div id="selectCity1" class="inputfiled-formboxes selectbox1">
                 <div class="inputfiled-formbox">
                   <div class="input-search">
                     <input
@@ -994,7 +988,7 @@
                   />
                 </div>
               </a>
-              <div class="inputfiled-formboxes selectbox2">
+              <div id="selectCity" class="inputfiled-formboxes selectbox2">
                 <div class="inputfiled-formbox">
                   <div class="input-search">
                     <input
@@ -1105,7 +1099,7 @@
                   <input
                     type="text"
                     name="daterange"
-                    id="dpLeaveDate"
+                    id="dpLeaveDate1"
                     
                   />
                 </div>
@@ -1129,7 +1123,7 @@
                   <input
                     type="text"
                     name="daterange"
-                    id="dpReturnDate"
+                    id="dpReturnDate1"
                     
                   />
                 </div>

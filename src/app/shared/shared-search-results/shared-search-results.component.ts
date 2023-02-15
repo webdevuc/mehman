@@ -256,13 +256,11 @@ export class SharedSearchResultsComponent
       }
     }
     else {
-      console.log(this.searchfilters);
       this.loadFilters();
     }
 
 
     $(document).ready(() => {
-      debugger
       $('[data-toggle="popover"]').popover({ html: true });
       $('.book-details1').click(function () {
         $('.selectbox1').addClass('select1');
@@ -280,7 +278,10 @@ export class SharedSearchResultsComponent
   }
 
   departureClick() {
-    debugger
+    if(this.isdisplayed == true)
+    {     
+      document.getElementById('selectCity1').classList.add('select1');
+    }
     if (
       this.tripType === TripType.MultiCity &&
       this.sharedMulticityData.multicityData !== undefined
@@ -294,6 +295,10 @@ export class SharedSearchResultsComponent
   }
 
   arrivalClick() {
+    if(this.isdisplayed == true)
+    {   
+      document.getElementById('selectCity').classList.add('select2')  
+    }
     if (
       this.tripType === TripType.MultiCity &&
       this.sharedMulticityData.multicityData !== undefined
@@ -323,7 +328,6 @@ export class SharedSearchResultsComponent
   }
 
   getAirports() {
-    debugger;
     this.airports = new Array<AirportEntity>();
     this.homeService.getPopularAirports().subscribe((response) => {
       if (response) {
@@ -706,19 +710,19 @@ export class SharedSearchResultsComponent
       this.returnDate = null;
     }
 
-    this.singlePicker = new Lightpick({
-      field: document.getElementById('dpLeaveDate'),
-      numberOfMonths: 2,
-      startDate: new Date(this.leaveDate),
-      minDate: moment().toDate(),
-      onSelect: (date) => {
-        this.leaveDate = date;
-        this.returnDate =
-          this.tripType === TripType.RoundTrip
-            ? moment(this.leaveDate).add(1, 'days').toDate()
-            : null;
-      },
-    });
+  this.singlePicker = new Lightpick({
+    field: this.isdisplayed ==true? document.getElementById('dpLeaveDate1'):document.getElementById('dpLeaveDate'),
+    numberOfMonths: 2,
+    startDate: new Date(this.leaveDate),
+    minDate: moment().toDate(),
+    onSelect: (date) => {
+      this.leaveDate = date;
+      this.returnDate =
+        this.tripType === TripType.RoundTrip
+          ? moment(this.leaveDate).add(1, 'days').toDate()
+          : null;
+    },
+  });
 
     if (!isInitial) {
       this.singlePicker.show();
@@ -745,9 +749,10 @@ export class SharedSearchResultsComponent
     if (!this.returnDate) {
       this.returnDate = moment(this.leaveDate).add(1, 'days').toDate();
     }
+  
     this.rangePicker = new Lightpick({
-      field: document.getElementById('dpLeaveDate'),
-      secondField: document.getElementById('dpReturnDate'),
+      field: this.isdisplayed== true? document.getElementById('dpLeaveDate1'): document.getElementById('dpLeaveDate'),
+      secondField:this.isdisplayed== true? document.getElementById('dpReturnDate1'):document.getElementById('dpReturnDate'),
       // singleDate: true,
       repick: true,
       singleDate: true,
@@ -926,12 +931,7 @@ export class SharedSearchResultsComponent
 
   showSearch()
   {
-    debugger
-    this.isdisplayed=true;
-    console.log(document.getElementsByClassName('inputfiled-formboxes'))
-    document.getElementById('book-details1').classList.add('select1')
-    
-   
+    this.isdisplayed=true;   
   }
   closeSearch()
   {
@@ -939,13 +939,11 @@ export class SharedSearchResultsComponent
   }
   public showDiv:boolean = true
   searchResults(date?: any) {
-
-    this.isShow=true;
+  
     this.showDiv = false;
     if(this.showDiv == false){
       //document.getElementById('search-div').classList.add('display-n');
       document.getElementById('search-div').setAttribute('style', 'display:none');
-      console.log(document.getElementById('search-div'))
     }
     //this.isShowed= false
     this.isdisplayed = false
@@ -1057,12 +1055,12 @@ export class SharedSearchResultsComponent
       if (response) {
         if (response.status === 'success') {
           this.showDiv = true;
+          this.isShow=true;
           document.getElementById('search-div').classList.add('d-lg-block')
           //document.getElementById('search-div').setAttribute('style', 'display:none');
           if (response.data) {
             //localStorage.setItem('flightResult', response.data);
             this.locationResult = response.data.bestFlight;
-            console.log("orignalLocation", this.locationResult)
             this.searchResultEvent.emit(response.data);
             this.searchResult = JSON.parse(JSON.stringify(response.data));
             this.flightResult = JSON.parse(JSON.stringify(response.data));
@@ -1247,7 +1245,6 @@ export class SharedSearchResultsComponent
 
   reviewBooking(flight: any, fareIndex: any) {
     if (fareIndex >= 0) {
-      console.log(flight.farePrices[fareIndex]);
       flight.fareDetails.farePrices = Object.assign({}, flight.farePrices[fareIndex])
       if (flight.airlineType == 'LCC' && flight.flightSegments) {
         flight.flightSegments[0].baggage.familyDescription = flight.fareDetails.farePrices.familyDescription;

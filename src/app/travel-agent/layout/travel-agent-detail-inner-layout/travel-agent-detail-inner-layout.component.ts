@@ -12,7 +12,6 @@ export class TravelAgentDetailInnerLayoutComponent implements OnInit {
   isBack: boolean;
   bookings: any[];
   pageTitle: string;
-  isShow =true;
 
   constructor(private authService: AuthService, private router: Router) {
     
@@ -26,15 +25,12 @@ export class TravelAgentDetailInnerLayoutComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.isShow = true;
     window.scrollTo(0, 0);
     //this.isShow= true
   }
 
   setTitle(title) {
-    console.log('title =>', title);
     this.pageTitle = title;
-    this.isShow = false;
     document.getElementById('sidenav').classList.remove('show');
   }
 
@@ -54,5 +50,4 @@ export class TravelAgentDetailInnerLayoutComponent implements OnInit {
   logout() {
     this.authService.setTravelAgentLoggedOut();
   }
-
 }

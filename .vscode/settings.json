@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/21018e07-159a-4d25-8cdf-e069b20b1c49/resourceGroups/appsvc_linux_centralus/providers/Microsoft.Web/sites/mehman",
+    "appService.deploySubpath": "dist\\mehman-booking-engine"
+}

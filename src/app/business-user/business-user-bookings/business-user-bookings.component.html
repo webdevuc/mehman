@@ -11,7 +11,7 @@
   <div class="col-lg-12 col-sm-12 col-xs-12">
     <div class="manage-table">
       <div class="booking-table">
-        <p-table [value]="bookings" [rowHover]="true" [responsive]="true" [rows]="10" [showCurrentPageReport]="true"
+        <p-table [value]="bookings" [rowHover]="true" [responsive]="true" [rows]="10" [showCurrentPageReport]="true" responsiveLayout="scroll"
           [rowsPerPageOptions]="[5, 10,25,50]" [paginator]="true"
           currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
           <!-- <ng-template pTemplate="caption">

@@ -56,7 +56,6 @@ export class FooterComponent implements OnInit, OnDestroy {
   }
 
   submit() {
-    debugger;
     this.clear();
     this.submitted = true;
     if (this.newsLetterSubscriptionForm.invalid) {
