@@ -2,41 +2,41 @@
 @import "./assets/css/loading.scss";
 @import "./assets/css/style.scss";
 @import "./assets/css/responsive.scss";
-@import '~ngx-print-element/styles.css';
+@import "~ngx-print-element/styles.css";
 html,
 body {
   height: 100%;
 }
 
 body {
-  margin     : 0;
+  margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
 .manage-table .booking-table .dx-datagrid-headers td,
 .manage-table .booking-table .dx-header-row td,
 .manage-table .booking-table .dx-datagrid-headers .dx-header-row td {
-  border          : none;
-  text-align      : left;
-  font-size       : 16px;
-  line-height     : 30px;
-  font-family     : "SFUIDisplay-Semibold";
-  color           : #fff !important;
-  letter-spacing  : 0.5px;
+  border: none;
+  text-align: left;
+  font-size: 16px;
+  line-height: 30px;
+  font-family: "SFUIDisplay-Semibold";
+  color: #fff !important;
+  letter-spacing: 0.5px;
   background-color: #57be4f !important;
 }
 
 .loading:not(:required):after {
-  content          : "";
-  display          : block;
-  font-size        : 10px;
-  width            : 1em;
-  height           : 1em;
-  margin-top       : -0.5em;
+  content: "";
+  display: block;
+  font-size: 10px;
+  width: 1em;
+  height: 1em;
+  margin-top: -0.5em;
   -webkit-animation: spinner 1500ms infinite linear;
-  animation        : spinner 1500ms infinite linear;
-  border-radius    : 0.5em;
-  box-shadow       : rgba(87, 190, 79, 0.75) 1.5em 0 0 0,
+  animation: spinner 1500ms infinite linear;
+  border-radius: 0.5em;
+  box-shadow: rgba(87, 190, 79, 0.75) 1.5em 0 0 0,
     rgba(87, 190, 79, 0.75) 1.1em 1.1em 0 0, rgba(87, 190, 79, 0.75) 0 1.5em 0 0,
     rgba(87, 190, 79, 0.75) -1.1em 1.1em 0 0,
     rgba(87, 190, 79, 0.75) -1.5em 0 0 0,
@@ -46,17 +46,17 @@ body {
 }
 
 .ngx-pagination .current {
-  padding   : 0.1875rem 0.625rem;
+  padding: 0.1875rem 0.625rem;
   background: #57b957 !important;
-  color     : #fefefe;
-  cursor    : default;
+  color: #fefefe;
+  cursor: default;
 }
 
 .popular-blogs .owl-carousel .owl-item img,
 .top-offers .owl-carousel .owl-item img {
-  display   : block;
-  width     : 400px !important;
-  height    : 400px !important;
+  display: block;
+  width: 400px !important;
+  height: 400px !important;
   object-fit: contain;
 }
 
@@ -64,7 +64,7 @@ body {
 .p-datatable .p-sortable-column.p-highlight,
 .p-datatable .p-sortable-column {
   background: #57be4f !important;
-  color     : #ffffff !important;
+  color: #ffffff !important;
 }
 
 .p-datatable .p-sortable-column.p-highlight .p-sortable-column-icon,
@@ -83,7 +83,7 @@ body {
 
 .p-radiobutton .p-radiobutton-box.p-highlight {
   border-color: #57b957 !important;
-  background  : #57b957 !important;
+  background: #57b957 !important;
 }
 
 .p-radiobutton .p-radiobutton-box:not(.p-disabled):not(.p-highlight):hover {
@@ -107,25 +107,24 @@ body {
 }
 
 .sidenav {
-  height     : 100%;
-  position   : relative;
-  z-index    : 1;
-  top        : 0;
-  left       : 0;
-  overflow-x : hidden;
-  transition : 0.5s;
+  height: 100%;
+  position: relative;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  overflow-x: hidden;
+  transition: 0.5s;
   padding-top: 0px;
-
 }
 
 .sidenav a {
-  padding        : 8px 8px 8px 32px;
+  padding: 8px 8px 8px 32px;
   text-decoration: none;
-  font-size      : 18px;
-  font-family    : "SFUIDisplay-Semibold";
-  color          : #181B31;
-  display        : block;
-  transition     : 0.3s;
+  font-size: 18px;
+  font-family: "SFUIDisplay-Semibold";
+  color: #181b31;
+  display: block;
+  transition: 0.3s;
 }
 
 .sidenav a:hover {
@@ -164,13 +163,13 @@ body {
 
 .product-item {
   .product-item-content {
-    margin    : .3rem;
+    margin: 0.3rem;
     text-align: center;
-    padding   : 1rem 0;
+    padding: 1rem 0;
   }
 
   .product-name {
-    font-size  : 1.0rem;
+    font-size: 1rem;
     font-weight: 700;
   }
 
@@ -179,14 +178,23 @@ body {
   }
 
   .product-image {
-    width     : 70%;
+    width: 70%;
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-    margin    : 0 0 1rem 0;
+    margin: 0 0 1rem 0;
   }
 }
 
 .p-tabview .p-tabview-nav li.p-highlight .p-tabview-nav-link {
-    background: #4CAF50;
-    border-color: #4CAF50;
-    color: white;
+  background: #4caf50;
+  border-color: #4caf50;
+  color: white;
+}
+
+@media print {
+  #sidenav {
+    width: 0 !important;
+    height: 0 !important;
+    overflow: hidden !important;
+    display: none !important;
+  }
 }
