@@ -19,15 +19,15 @@ export const environment = {
   // commonApiUrl: 'http://51.104.32.212:8081/api',
   // Dev
   
-  adminApiUrl: 'http://localhost:49563/api',
-  searchApiUrl: 'http://localhost:49562/api',
-  bookingApiUrl: 'http://localhost:49564/api',
-  commonApiUrl: 'http://localhost:49561/api',
+  // adminApiUrl: 'http://localhost:49563/api',
+  // searchApiUrl: 'http://localhost:49562/api',
+  // bookingApiUrl: 'http://localhost:49564/api',
+  // commonApiUrl: 'http://localhost:49561/api',
 
-  // adminApiUrl: 'https://admin-bookingengine.azurewebsites.net/api',
-   //searchApiUrl: 'https://flightsearchengine.azurewebsites.net/api',
-  // bookingApiUrl: 'https://bookings-engine.azurewebsites.net/api',
-  // commonApiUrl: 'https://common-bookingengine.azurewebsites.net/api',
+  adminApiUrl: 'https://admin-bookingengine.azurewebsites.net/api',
+   searchApiUrl: 'https://flightsearchengine.azurewebsites.net/api',
+  bookingApiUrl: 'https://bookings-engine.azurewebsites.net/api',
+  commonApiUrl: 'https://common-bookingengine.azurewebsites.net/api',
 };
 
 /*
